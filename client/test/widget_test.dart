@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:social_media_with_chatgpt/main.dart';
+import 'package:social_media_with_chatgpt/screens/my_app_screen/my_app_screen.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
