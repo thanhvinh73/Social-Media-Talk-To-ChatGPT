@@ -72,6 +72,9 @@ dependencies:
   # For Permission
   permission_handler: ^11.0.1
 
+  # For Onboarding
+  introduction_screen: ^3.1.12
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
