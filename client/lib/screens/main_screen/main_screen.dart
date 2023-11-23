@@ -70,7 +70,7 @@ class _MainScreenState extends State<MainScreen> {
               builder: (context, state) {
                 return AppLayout(
                   title: context.read<MainScreenCubit>().state.currentTab.label,
-                  showLeading: false,
+                  // showLeading: false,
                   bottomNavigationBar: BottomNavigationBar(
                     currentIndex: state.currentTab.index,
                     unselectedItemColor: AppColors.bodyText,

@@ -106,11 +106,22 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [emptyConversation];
 }
 
+class $AssetsTranslationsGen {
+  const $AssetsTranslationsGen();
+
+  /// File path: assets/translations/vi.json
+  String get vi => 'assets/translations/vi.json';
+
+  /// List of all assets
+  List<String> get values => [vi];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }
 
 class AssetGenImage {

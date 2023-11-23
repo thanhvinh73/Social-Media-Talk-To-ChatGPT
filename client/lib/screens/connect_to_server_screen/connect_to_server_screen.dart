@@ -77,7 +77,7 @@ class ConnectToServerScreen extends StatelessWidget {
               ConnectToServerScreenState>(
             builder: (context, state) {
               return AppLayout(
-                showLeading: false,
+                // showLeading: false,
                 resizeToAvoidBottomInset: true,
                 title: "Kết nối đến hệ thống".toUpperCase(),
                 child: Padding(
