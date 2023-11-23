@@ -127,16 +127,6 @@ class $AssetsTranslationsGen {
   List<String> get values => [vi];
 }
 
-class $AssetsTranslationsGen {
-  const $AssetsTranslationsGen();
-
-  /// File path: assets/translations/vi.json
-  String get vi => 'assets/translations/vi.json';
-
-  /// List of all assets
-  List<String> get values => [vi];
-}
-
 class Assets {
   Assets._();
 
