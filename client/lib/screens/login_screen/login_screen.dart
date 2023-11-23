@@ -6,6 +6,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: SafeArea(
@@ -16,7 +17,7 @@ class LoginScreen extends StatelessWidget {
               Image(
                   width: 170,
                   height: 170,
-                  image: AssetImage("images/logo.png")),
+                  image: AssetImage("assets/images/logo.png")),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
                 child: Text(
@@ -102,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                             icon: Image(
                               width: 30,
                               height: 30,
-                              image: AssetImage('images/google.png'),
+                              image: AssetImage('assets/images/google.png'),
                             ),
                             label: Text(
                               'Google',
@@ -117,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                             icon: Image(
                               width: 30,
                               height: 30,
-                              image: AssetImage('images/microsoft.png'),
+                              image: AssetImage('assets/images/microsoft.png'),
                             ),
                             label: Text(
                               'Microsoft',

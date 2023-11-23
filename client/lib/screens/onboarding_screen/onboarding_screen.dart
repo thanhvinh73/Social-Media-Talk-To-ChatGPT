@@ -158,7 +158,7 @@ class LoginButton extends StatelessWidget {
     // );
     return AppButton(
       title: "Đăng Nhập",
-      onPressed: () => Get.toNamed(Routes.register),
+      onPressed: () => Get.toNamed(Routes.login),
       color: AppColors.darkgreen,
     );
   }
