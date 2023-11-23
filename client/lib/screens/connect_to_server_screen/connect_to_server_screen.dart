@@ -107,9 +107,12 @@ class ConnectToServerScreen extends StatelessWidget {
                         AppButton(
                             width: MediaQuery.of(context).size.width,
                             title: "Xác nhận",
-                            onPressed: context
-                                .read<ConnectToServerScreenCubit>()
-                                .confirmBaseUrl)
+                            onPressed: () => Get.toNamed(Routes.welcome)
+                            
+                            // context
+                            //     .read<ConnectToServerScreenCubit>()
+                            //     .confirmBaseUrl)
+                        )
                       ],
                     ),
                   ),

@@ -102,8 +102,29 @@ class $AssetsImagesGen {
   AssetGenImage get emptyConversation =>
       const AssetGenImage('assets/images/empty_conversation.png');
 
+  /// File path: assets/images/google.png
+  AssetGenImage get google => const AssetGenImage('assets/images/google.png');
+
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/microsoft.png
+  AssetGenImage get microsoft =>
+      const AssetGenImage('assets/images/microsoft.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [emptyConversation];
+  List<AssetGenImage> get values =>
+      [emptyConversation, google, logo, microsoft];
+}
+
+class $AssetsTranslationsGen {
+  const $AssetsTranslationsGen();
+
+  /// File path: assets/translations/vi.json
+  String get vi => 'assets/translations/vi.json';
+
+  /// List of all assets
+  List<String> get values => [vi];
 }
 
 class $AssetsTranslationsGen {
