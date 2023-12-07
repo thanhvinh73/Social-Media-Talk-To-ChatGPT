@@ -12,6 +12,7 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: IntroductionScreen(
+        freeze: false,
         pages: [
           PageViewModel(
             title: kTitle1,

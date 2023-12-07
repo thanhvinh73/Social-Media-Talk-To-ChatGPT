@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                           style: ButtonStyle(
                             backgroundColor: MaterialStatePropertyAll(Colors.green),
                           ),
-                          onPressed: () => {},
+                          onPressed: () => {Get.toNamed(Routes.home)},
                           child: Text("Login",style: TextStyle(color: Colors.white),)),
                     ),
                     SizedBox(
