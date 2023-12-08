@@ -46,6 +46,8 @@ public class UserEntity implements UserDetails {
     private int createAt;
 
     private String password;
+    private String firstname;
+    private String lastname;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
