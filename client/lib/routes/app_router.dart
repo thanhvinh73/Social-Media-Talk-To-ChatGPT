@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_media_with_chatgpt/screens/home_screen/home_screen.dart';
 import 'package:social_media_with_chatgpt/screens/login_screen/login_screen.dart';
 import 'package:social_media_with_chatgpt/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:social_media_with_chatgpt/screens/register_screen/register_screen.dart';
@@ -15,7 +16,8 @@ class Routes {
   static String login = "/login";
   static String register = "/register";
   static String welcome = "/wecome";
-  static String chatBotScreen = "/chat-bot-screen";
+  static String chatBot = "/chat-bot";
+  static String home = "/home";
 
   static final Map<String, Widget Function(BuildContext)> routes = {
     splash: (context) => SplashScreen(),
@@ -24,6 +26,7 @@ class Routes {
     login: (context) => const LoginScreen(),
     register: (context) => const RegisterScreen(),
     welcome: (context) => OnboardingScreen(),
-    chatBotScreen: (context) => AppContainer()
+    chatBot: (context) => const AppContainer(),
+    home: (context) => const HomeScreen()
   };
 }
