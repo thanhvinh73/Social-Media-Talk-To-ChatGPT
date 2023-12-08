@@ -77,9 +77,9 @@ class ConnectToServerScreen extends StatelessWidget {
               ConnectToServerScreenState>(
             builder: (context, state) {
               return AppLayout(
-                // showLeading: false,
+                leading: const SizedBox.shrink(),
                 resizeToAvoidBottomInset: true,
-                title: "Kết nối đến hệ thống".toUpperCase(),
+                title: "Connect to server".toUpperCase(),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: SingleChildScrollView(
@@ -91,13 +91,13 @@ class ConnectToServerScreen extends StatelessWidget {
                         Assets.icons.pcFetchApi
                             .svg(width: MediaQuery.of(context).size.width),
                         AppText(
-                          "Vì sản phẩm đang trong giai đoạn phát triển. Để có thể sử dụng các dịch vụ, vui lòng nhập địa chỉ liên kết đến máy chủ ở bên dưới.",
+                          "Because the product is in the development stage. To be able to use the services, please enter the server link address below.",
                           textAlign: TextAlign.justify,
                           color: AppColors.titleText,
                           fontSize: 16,
                         ),
                         AppTextField(
-                          placeholder: "Nhập địa chỉ url của bạn tại đây",
+                          placeholder: "Enter your url...",
                           controller: _textController,
                           initValue: "http://10.0.2.2:8080",
                           onChanged: context
@@ -106,13 +106,13 @@ class ConnectToServerScreen extends StatelessWidget {
                         ),
                         AppButton(
                             width: MediaQuery.of(context).size.width,
-                            title: "Xác nhận",
-                            onPressed: () => Get.toNamed(Routes.welcome)
-                            
-                            // context
-                            //     .read<ConnectToServerScreenCubit>()
-                            //     .confirmBaseUrl)
-                        )
+                            title: "Confirm",
+                            onPressed: () {
+                              Get.toNamed(Routes.welcome);
+                              // context
+                              //     .read<ConnectToServerScreenCubit>()
+                              //     .confirmBaseUrl)
+                            })
                       ],
                     ),
                   ),

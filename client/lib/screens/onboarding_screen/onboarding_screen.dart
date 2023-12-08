@@ -40,17 +40,6 @@ class OnboardingScreen extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                SizedBox(
-                  width: 180,
-                  child: LoginButton(),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: 180,
-                  child: RegistrationButton(),
-                )
               ],
             ),
             image: kImageLogo,

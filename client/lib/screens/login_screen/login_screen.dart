@@ -18,8 +18,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                child: Image(
-                    image: AssetImage("assets/images/logo.png")),
+                child: Image(image: AssetImage("assets/images/logo.png")),
               ),
               Expanded(
                 flex: 3,
@@ -31,7 +30,8 @@ class LoginScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                       child: Text(
                         "Sign in",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
                     TextField(
@@ -59,10 +59,16 @@ class LoginScreen extends StatelessWidget {
                       height: 40.0,
                       child: ElevatedButton(
                           style: ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(Colors.green),
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.green),
                           ),
-                          onPressed: () => {Get.toNamed(Routes.home)},
-                          child: Text("Login",style: TextStyle(color: Colors.white),)),
+                          onPressed: () {
+                            Get.toNamed(Routes.main);
+                          },
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white),
+                          )),
                     ),
                     SizedBox(
                       height: 10,
@@ -129,7 +135,8 @@ class LoginScreen extends StatelessWidget {
                               icon: Image(
                                 width: 30,
                                 height: 30,
-                                image: AssetImage('assets/images/microsoft.png'),
+                                image:
+                                    AssetImage('assets/images/microsoft.png'),
                               ),
                               label: Text(
                                 'Microsoft',

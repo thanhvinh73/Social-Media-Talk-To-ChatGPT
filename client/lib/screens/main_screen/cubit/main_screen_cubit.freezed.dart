@@ -18,25 +18,25 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MainScreenState {
   String? get errorMessage => throw _privateConstructorUsedError;
   ScreenStatus get status => throw _privateConstructorUsedError;
-  BottomTabs get currentTab => throw _privateConstructorUsedError;
+  MainTabs get currentTab => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String? errorMessage, ScreenStatus status, BottomTabs currentTab)
+            String? errorMessage, ScreenStatus status, MainTabs currentTab)
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String? errorMessage, ScreenStatus status, BottomTabs currentTab)?
+            String? errorMessage, ScreenStatus status, MainTabs currentTab)?
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String? errorMessage, ScreenStatus status, BottomTabs currentTab)?
+            String? errorMessage, ScreenStatus status, MainTabs currentTab)?
         initial,
     required TResult orElse(),
   }) =>
@@ -69,7 +69,7 @@ abstract class $MainScreenStateCopyWith<$Res> {
           MainScreenState value, $Res Function(MainScreenState) then) =
       _$MainScreenStateCopyWithImpl<$Res, MainScreenState>;
   @useResult
-  $Res call({String? errorMessage, ScreenStatus status, BottomTabs currentTab});
+  $Res call({String? errorMessage, ScreenStatus status, MainTabs currentTab});
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class _$MainScreenStateCopyWithImpl<$Res, $Val extends MainScreenState>
       currentTab: null == currentTab
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
-              as BottomTabs,
+              as MainTabs,
     ) as $Val);
   }
 }
@@ -114,7 +114,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, ScreenStatus status, BottomTabs currentTab});
+  $Res call({String? errorMessage, ScreenStatus status, MainTabs currentTab});
 }
 
 /// @nodoc
@@ -144,7 +144,7 @@ class __$$InitialImplCopyWithImpl<$Res>
       currentTab: null == currentTab
           ? _value.currentTab
           : currentTab // ignore: cast_nullable_to_non_nullable
-              as BottomTabs,
+              as MainTabs,
     ));
   }
 }
@@ -155,7 +155,7 @@ class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {this.errorMessage,
       this.status = ScreenStatus.init,
-      this.currentTab = BottomTabs.Home});
+      this.currentTab = MainTabs.home});
 
   @override
   final String? errorMessage;
@@ -164,7 +164,7 @@ class _$InitialImpl implements _Initial {
   final ScreenStatus status;
   @override
   @JsonKey()
-  final BottomTabs currentTab;
+  final MainTabs currentTab;
 
   @override
   String toString() {
@@ -197,7 +197,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String? errorMessage, ScreenStatus status, BottomTabs currentTab)
+            String? errorMessage, ScreenStatus status, MainTabs currentTab)
         initial,
   }) {
     return initial(errorMessage, status, currentTab);
@@ -207,7 +207,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            String? errorMessage, ScreenStatus status, BottomTabs currentTab)?
+            String? errorMessage, ScreenStatus status, MainTabs currentTab)?
         initial,
   }) {
     return initial?.call(errorMessage, status, currentTab);
@@ -217,7 +217,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            String? errorMessage, ScreenStatus status, BottomTabs currentTab)?
+            String? errorMessage, ScreenStatus status, MainTabs currentTab)?
         initial,
     required TResult orElse(),
   }) {
@@ -260,14 +260,14 @@ abstract class _Initial implements MainScreenState {
   const factory _Initial(
       {final String? errorMessage,
       final ScreenStatus status,
-      final BottomTabs currentTab}) = _$InitialImpl;
+      final MainTabs currentTab}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
   @override
   ScreenStatus get status;
   @override
-  BottomTabs get currentTab;
+  MainTabs get currentTab;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
