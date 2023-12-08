@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:retrofit/retrofit.dart';
 import 'package:social_media_with_chatgpt/routes/app_router.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -19,8 +18,7 @@ class RegisterScreen extends StatelessWidget {
             children: [
               Expanded(
                 flex: 1,
-                child: Image(
-                    image: AssetImage("assets/images/logo.png")),
+                child: Image(image: AssetImage("assets/images/logo.png")),
               ),
               Expanded(
                 flex: 3,
@@ -31,7 +29,8 @@ class RegisterScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 15.0),
                       child: Text(
                         "Sign up",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
                     TextField(
@@ -80,10 +79,14 @@ class RegisterScreen extends StatelessWidget {
                       height: 40.0,
                       child: ElevatedButton(
                           style: ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(Colors.green),
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.green),
                           ),
                           onPressed: () => {},
-                          child: Text("Join us now",style: TextStyle(color: Colors.white),)),
+                          child: Text(
+                            "Join us now",
+                            style: TextStyle(color: Colors.white),
+                          )),
                     ),
                   ],
                 ),
@@ -103,9 +106,9 @@ class RegisterScreen extends StatelessWidget {
                         children: [
                           Expanded(
                               child: Divider(
-                                color: Colors.black,
-                                thickness: 1,
-                              )),
+                            color: Colors.black,
+                            thickness: 1,
+                          )),
                           SizedBox(
                             width: 7,
                           ),
@@ -115,9 +118,9 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           Expanded(
                               child: Divider(
-                                color: Colors.black,
-                                thickness: 1,
-                              )),
+                            color: Colors.black,
+                            thickness: 1,
+                          )),
                         ],
                       ),
                       Row(
@@ -127,7 +130,7 @@ class RegisterScreen extends StatelessWidget {
                               onPressed: () => {},
                               style: ButtonStyle(
                                   backgroundColor:
-                                  MaterialStatePropertyAll(Colors.white)),
+                                      MaterialStatePropertyAll(Colors.white)),
                               icon: Image(
                                 width: 30,
                                 height: 30,
@@ -141,12 +144,13 @@ class RegisterScreen extends StatelessWidget {
                               onPressed: () => {},
                               style: ButtonStyle(
                                 backgroundColor:
-                                MaterialStatePropertyAll(Colors.white),
+                                    MaterialStatePropertyAll(Colors.white),
                               ),
                               icon: Image(
                                 width: 30,
                                 height: 30,
-                                image: AssetImage('assets/images/microsoft.png'),
+                                image:
+                                    AssetImage('assets/images/microsoft.png'),
                               ),
                               label: Text(
                                 'Microsoft',

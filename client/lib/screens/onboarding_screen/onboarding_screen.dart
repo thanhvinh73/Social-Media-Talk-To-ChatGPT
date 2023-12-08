@@ -12,6 +12,7 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: IntroductionScreen(
+        freeze: false,
         pages: [
           PageViewModel(
             title: kTitle1,
@@ -39,17 +40,6 @@ class OnboardingScreen extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                SizedBox(
-                  width: 180,
-                  child: LoginButton(),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: 180,
-                  child: RegistrationButton(),
-                )
               ],
             ),
             image: kImageLogo,

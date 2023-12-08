@@ -15,20 +15,21 @@ class AppButton extends StatelessWidget {
   final bool? hasGradient;
   final Color? color;
   final double borderRadius;
-  const AppButton(
-      {super.key,
-      required this.title,
-      required this.onPressed,
-      this.shadowColor,
-      this.titleColor,
-      this.borderColor,
-      this.style,
-      this.height = 48,
-      this.width,
-      this.gradient,
-      this.hasGradient = true,
-      this.color,
-      this.borderRadius = 50});
+  const AppButton({
+    super.key,
+    required this.title,
+    required this.onPressed,
+    this.shadowColor,
+    this.titleColor,
+    this.borderColor,
+    this.style,
+    this.height = 48,
+    this.width,
+    this.gradient,
+    this.hasGradient = true,
+    this.color,
+    this.borderRadius = 50,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +48,9 @@ class AppButton extends StatelessWidget {
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
                         colors: [
-                            AppColors.darkPurple,
-                            AppColors.primaryColor,
-                            AppColors.lightPurple
+                            AppColors.darkgreen,
+                            AppColors.green,
+                            AppColors.accept
                           ]),
             border:
                 Border.all(width: 1, color: borderColor ?? Colors.transparent),

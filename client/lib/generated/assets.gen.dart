@@ -27,6 +27,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_chat.svg
   SvgGenImage get icChat => const SvgGenImage('assets/icons/ic_chat.svg');
 
+  /// File path: assets/icons/ic_chatBot.svg
+  SvgGenImage get icChatBot => const SvgGenImage('assets/icons/ic_chatBot.svg');
+
+  /// File path: assets/icons/ic_copy.svg
+  SvgGenImage get icCopy => const SvgGenImage('assets/icons/ic_copy.svg');
+
   /// File path: assets/icons/ic_error_warning_fill.svg
   SvgGenImage get icErrorWarningFill =>
       const SvgGenImage('assets/icons/ic_error_warning_fill.svg');
@@ -58,6 +64,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_logout.svg
   SvgGenImage get icLogout => const SvgGenImage('assets/icons/ic_logout.svg');
 
+  /// File path: assets/icons/ic_mic.svg
+  SvgGenImage get icMic => const SvgGenImage('assets/icons/ic_mic.svg');
+
   /// File path: assets/icons/ic_notification.svg
   SvgGenImage get icNotification =>
       const SvgGenImage('assets/icons/ic_notification.svg');
@@ -79,6 +88,8 @@ class $AssetsIconsGen {
         icAlarm,
         icCalendar,
         icChat,
+        icChatBot,
+        icCopy,
         icErrorWarningFill,
         icEye,
         icEyeOff,
@@ -88,6 +99,7 @@ class $AssetsIconsGen {
         icInstagram,
         icLock,
         icLogout,
+        icMic,
         icNotification,
         icNotificationsNone,
         icSetting,
@@ -112,9 +124,16 @@ class $AssetsImagesGen {
   AssetGenImage get microsoft =>
       const AssetGenImage('assets/images/microsoft.png');
 
+  /// File path: assets/images/voice-no-background.png
+  AssetGenImage get voiceNoBackground =>
+      const AssetGenImage('assets/images/voice-no-background.png');
+
+  /// File path: assets/images/voice.png
+  AssetGenImage get voice => const AssetGenImage('assets/images/voice.png');
+
   /// List of all assets
   List<AssetGenImage> get values =>
-      [emptyConversation, google, logo, microsoft];
+      [emptyConversation, google, logo, microsoft, voiceNoBackground, voice];
 }
 
 class $AssetsTranslationsGen {
