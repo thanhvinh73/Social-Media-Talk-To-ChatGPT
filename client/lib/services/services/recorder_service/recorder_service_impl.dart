@@ -24,7 +24,7 @@ class RecorderServiceImpl implements IRecorderService {
     if (Platform.isAndroid) {
       var status = await Permission.microphone.request();
       if (status != PermissionStatus.granted) {
-        throw Exception("アプリケーションはマイクにアクセスできません");
+        throw Exception("Application cannot access microphone");
       }
     }
 

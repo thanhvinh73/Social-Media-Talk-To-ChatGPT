@@ -1,6 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:social_media_with_chatgpt/generated/assets.gen.dart';
+import 'package:social_media_with_chatgpt/routes/app_router.dart';
 import 'package:social_media_with_chatgpt/screens/account_screen/cubit/account_screent_cubit.dart';
 import 'package:social_media_with_chatgpt/screens/conversation_screen/cubit/conversation_screen_cubit.dart';
 import 'package:social_media_with_chatgpt/screens/notification_screen/cubit/notification_screen_cubit.dart';
@@ -80,6 +84,18 @@ class _MainScreenState extends State<MainScreen> {
                 title: context.read<MainScreenCubit>().state.currentTab.label,
                 leading: const SizedBox.shrink(),
                 showAppBar: false,
+                floatingActionButton: FloatingActionButton(
+                  backgroundColor: AppColors.white,
+                  elevation: 3,
+                  onPressed: () {
+                    Get.toNamed(Routes.chatBot);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child:
+                        Assets.icons.icChatBot.svg(color: AppColors.darkgreen),
+                  ),
+                ),
                 bottomNavigationBar: BottomNavigationBar(
                   currentIndex: state.currentTab.index,
                   unselectedItemColor: AppColors.bodyText,

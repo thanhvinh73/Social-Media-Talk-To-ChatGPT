@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:social_media_with_chatgpt/shared/utils/shared_preference.dart';
 
 import '../../generated/assets.gen.dart';
 import '../../generated/translations.g.dart';
@@ -108,7 +109,16 @@ class ConnectToServerScreen extends StatelessWidget {
                             width: MediaQuery.of(context).size.width,
                             title: "Confirm",
                             onPressed: () {
-                              Get.toNamed(Routes.welcome);
+                              if (sp.loggedBefore) {
+                                Get.toNamed(Routes.login);
+                                return;
+                              }
+                              sp.prefs
+                                  .setBool("logged_before", true)
+                                  .then((value) {
+                                Get.toNamed(Routes.welcome);
+                              });
+
                               // context
                               //     .read<ConnectToServerScreenCubit>()
                               //     .confirmBaseUrl)

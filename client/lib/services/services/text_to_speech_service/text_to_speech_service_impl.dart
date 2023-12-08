@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:flutter_tts/flutter_tts_web.dart';
 
 import 'i_text_to_speech_service.dart';
 
@@ -18,12 +17,12 @@ class TextToSpeechServiceImpl implements ITextToSpeechService {
   double _volume = 0.5;
   double _pitch = 0.5;
   double _rate = 0.5;
-  TtsState _ttsState = TtsState.stopped;
+  // TtsState _ttsState = TtsState.stopped;
 
-  get isPlaying => _ttsState == TtsState.playing;
-  get isStopped => _ttsState == TtsState.stopped;
-  get isPaused => _ttsState == TtsState.paused;
-  get isContinued => _ttsState == TtsState.continued;
+  // get isPlaying => _ttsState == TtsState.playing;
+  // get isStopped => _ttsState == TtsState.stopped;
+  // get isPaused => _ttsState == TtsState.paused;
+  // get isContinued => _ttsState == TtsState.continued;
 
   bool get isIOS => !kIsWeb && Platform.isIOS;
   bool get isAndroid => !kIsWeb && Platform.isAndroid;
@@ -95,29 +94,29 @@ class TextToSpeechServiceImpl implements ITextToSpeechService {
       _flutterTts.setInitHandler(() {});
     }
 
-    _flutterTts.setStartHandler(() {
-      _ttsState = TtsState.playing;
-    });
+    // _flutterTts.setStartHandler(() {
+    //   _ttsState = TtsState.playing;
+    // });
 
-    _flutterTts.setCompletionHandler(() {
-      _ttsState = TtsState.stopped;
-    });
+    // _flutterTts.setCompletionHandler(() {
+    //   _ttsState = TtsState.stopped;
+    // });
 
-    _flutterTts.setCancelHandler(() {
-      _ttsState = TtsState.stopped;
-    });
+    // _flutterTts.setCancelHandler(() {
+    //   _ttsState = TtsState.stopped;
+    // });
 
-    _flutterTts.setPauseHandler(() {
-      _ttsState = TtsState.paused;
-    });
+    // _flutterTts.setPauseHandler(() {
+    //   _ttsState = TtsState.paused;
+    // });
 
-    _flutterTts.setContinueHandler(() {
-      _ttsState = TtsState.continued;
-    });
+    // _flutterTts.setContinueHandler(() {
+    //   _ttsState = TtsState.continued;
+    // });
 
-    _flutterTts.setErrorHandler((msg) {
-      _ttsState = TtsState.stopped;
-    });
+    // _flutterTts.setErrorHandler((msg) {
+    //   _ttsState = TtsState.stopped;
+    // });
   }
 
   void _setAwaitOptions() async {

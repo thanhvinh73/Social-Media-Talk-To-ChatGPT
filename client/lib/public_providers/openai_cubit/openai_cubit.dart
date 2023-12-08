@@ -31,10 +31,9 @@ class OpenaiCubit extends Cubit<OpenaiState> {
         emit(state.copyWith(
             currentOpenAiText: "",
             isGenerating: false,
-            errorMessage: "エラーが発生しました"));
+            errorMessage: "Something was wrong!"));
       } on RequestFailedException {
-        emit(state.copyWith(
-            isGenerating: false, errorMessage: "使用したリクエストが多すぎます"));
+        emit(state.copyWith(isGenerating: false, errorMessage: "Many Request"));
       }
     }
   }

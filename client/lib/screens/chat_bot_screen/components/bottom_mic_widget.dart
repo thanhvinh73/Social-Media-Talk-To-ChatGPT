@@ -85,6 +85,7 @@ class BottomMicWidget extends StatelessWidget {
                       ],
                       shape: BoxShape.circle,
                       color: backgroundColor ?? const Color(0xFF68B984)),
+                  alignment: Alignment.center,
                   child: (recorderState.isListening != true &&
                           mainChatScreenState.currentAskAmount <
                               mainChatScreenState.maxLengthAskList)
@@ -92,7 +93,7 @@ class BottomMicWidget extends StatelessWidget {
                           icon: Icon(
                             iconMic ?? Icons.mic_none_outlined,
                             color: iconColor ?? Colors.white,
-                            size: 55,
+                            // size: 40,
                           ),
                           onPressed: onMic,
                         )
@@ -103,14 +104,14 @@ class BottomMicWidget extends StatelessWidget {
                               child: Icon(
                                 iconOffMic ?? Icons.mic_off_outlined,
                                 color: iconColor ?? Colors.white,
-                                size: 55,
+                                // size: 40,
                               ),
                             )
                           : IconButton(
                               icon: Icon(
                                 iconStop ?? Icons.stop,
                                 color: iconColor ?? Colors.white,
-                                size: 55,
+                                // size: 40,
                               ),
                               onPressed: onStop,
                             ),
