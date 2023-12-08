@@ -48,9 +48,9 @@ class AppButton extends StatelessWidget {
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
                         colors: [
-                            AppColors.darkPurple,
-                            AppColors.primaryColor,
-                            AppColors.lightPurple
+                            AppColors.darkgreen,
+                            AppColors.green,
+                            AppColors.accept
                           ]),
             border:
                 Border.all(width: 1, color: borderColor ?? Colors.transparent),
