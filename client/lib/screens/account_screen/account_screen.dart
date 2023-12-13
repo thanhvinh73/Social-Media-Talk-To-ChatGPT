@@ -17,7 +17,7 @@ class AccountScreen extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             buildTop(maxWidth, maxHeight),
-            buildContent(),
+            buildContent(maxWidth),
           ],
         ),
 
@@ -26,11 +26,12 @@ class AccountScreen extends StatelessWidget {
     ;
   }
 
-  Widget buildContent() {
+  Widget buildContent(double width) {
     return
       Padding(
-        padding: const EdgeInsets.fromLTRB(16, 55, 16,0),
+        padding: const EdgeInsets.fromLTRB(16, 67, 16,0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start ,
           children: [
             AppText(
               "Username",
@@ -41,99 +42,63 @@ class AccountScreen extends StatelessWidget {
             Text(
                 "Capybara Photographer"
             ),
-            const SizedBox(height: 16),
-            AppContainer(
-              padding: const EdgeInsets.all(16),
-              border: Border.all(color: AppColors.gray),
+            Container(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 70,
-                    child: Column(
-                      children: [
-                        AppText(
-                          "5",
-                          fontSize: 24,
-                          color: AppColors.green,
-                        ),
-                        Text(
-                            "Post"
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 4),
-                  Container(
-                    width: 70,
-                    child: Column(
-                      children: [
-                        AppText(
-                          "280",
-                          fontSize: 24,
-                          color: AppColors.green,
-                        ),
-                        Text(
-                            "Friend"
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 4),
-                  Container(
-                    width: 70,
-                    child: Column(
-                      children: [
-                        AppText(
-                          "10k",
-                          fontSize: 24,
-                          color: AppColors.green,
-                        ),
-                        Text(
-                            "Follower"
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 4),
-                  Container(
-                    width: 70,
-                    child: Column(
-                      children: [
-                        AppText(
-                          "87",
-                          fontSize: 24,
-                          color: AppColors.green,
-                        ),
-                        Text(
-                            "Following"
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 16),
-            AppContainer(
-              padding: const EdgeInsets.all(16),
-              border: Border.all(color: AppColors.gray),
-              child: Column(
                 children: [
                   AppText(
-                    "About me",
-                    fontSize: 20,
-                    color: AppColors.darkgreen,
+                    "280 ",
+                    fontSize: 15,
+                    color: AppColors.green,
+                  ),
+                  Text(
+                      "Friend"
                   )
-
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                children: [
+                  AppText(
+                    "10,000 ",
+                    fontSize: 15,
+                    color: AppColors.green,
+                  ),
+                  Text(
+                      "Follower"
+                  )
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                children: [
+                  AppText(
+                    "87 ",
+                    fontSize: 15,
+                    color: AppColors.green,
+                  ),
+                  Text(
+                      "Following"
+                  )
                 ],
               ),
             ),
             SizedBox(height: 16),
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(width: 4, color: Colors.black26),
+                ),
+                color: Colors.white,
+              ),
+              child: Row(
+
+              ),
+            ),
             Column(
               children: [1,2,3,4,5].map((e) => _buildPostContainer()).toList(),
             )
-
           ],
         ),
       );
@@ -190,13 +155,16 @@ class AccountScreen extends StatelessWidget {
   Widget buildTop(double maxWidth, double maxHeight) {
     return
       Stack(
-        alignment: Alignment.topCenter,
+        alignment: Alignment.topLeft,
         clipBehavior: Clip.none,
         children: [
           buildCoverImg(maxWidth, maxHeight),
           Positioned(
-              top: maxHeight/4,
-              child: buildProfileImg()),
+              top: (maxWidth/3)-67,
+              child: Container(
+                  padding: EdgeInsets.all(8),
+                  child: buildProfileImg()
+              )),
         ],
       );
   }
@@ -204,9 +172,9 @@ class AccountScreen extends StatelessWidget {
   Widget buildCoverImg(double width , double height) => Container(
       color: Colors.grey,
       child: Image.network(
-        'https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg',
+        'https://www.pbs.org/wnet/nature/files/2023/07/pexels-pixabay-160583-scaled-e1689259491194.jpg',
         width:width,
-        height: height/3,
+        height: width/3,
         fit: BoxFit.cover,
 
       ));
