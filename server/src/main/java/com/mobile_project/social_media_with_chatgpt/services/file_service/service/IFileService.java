@@ -11,8 +11,8 @@ import com.mobile_project.social_media_with_chatgpt.services.ICrudService;
 import com.mobile_project.social_media_with_chatgpt.services.file_service.models.FileResponse;
 
 public interface IFileService extends ICrudService<FileResponse, UUID> {
-    Optional<String> uploadFile(MultipartFile multipartFile) throws IOException;
+    Optional<FileResponse> uploadFile(MultipartFile multipartFile) throws IOException;
 
-    List<String> uploadMultiFile(List<MultipartFile> multipartFiles) throws IOException;
+    List<FileResponse> uploadMultiFile(List<MultipartFile> multipartFiles) throws IOException;
 
 }

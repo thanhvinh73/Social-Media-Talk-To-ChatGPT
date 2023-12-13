@@ -25,7 +25,9 @@ public class FileResponse extends AppResponse<FileResponse, FileEntity> {
     private String mimeType;
     private Long createAt;
 
-    public static FileResponse emptyInstance = new FileResponse();
+    public static FileResponse emptyInstance() {
+        return new FileResponse();
+    };
 
     @Override
     public FileResponse fromEntity(FileEntity entity) {

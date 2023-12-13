@@ -25,7 +25,9 @@ public class UserResponse extends AppResponse<UserResponse, UserEntity> {
     private UserRole role;
     private Long createAt;
 
-    public static UserResponse emptyInstance = new UserResponse();
+    public static UserResponse emptyInstance() {
+        return new UserResponse();
+    }
 
     @Override
     public UserResponse fromEntity(UserEntity entity) {
@@ -40,7 +42,6 @@ public class UserResponse extends AppResponse<UserResponse, UserEntity> {
 
     @Override
     public UserEntity toUpdatedEntity(UserEntity entity) {
-        entity.setEmail(email);
         entity.setFirstname(firstname);
         entity.setLastname(lastname);
         entity.setRole(role);

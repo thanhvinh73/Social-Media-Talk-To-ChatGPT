@@ -10,7 +10,7 @@ public interface ICrudService<T, U> {
 
     Optional<T> insertData(T data);
 
-    Optional<T> updateData(T data);
+    Optional<T> updateData(U id, T data);
 
     void deleteData(U id);
 }

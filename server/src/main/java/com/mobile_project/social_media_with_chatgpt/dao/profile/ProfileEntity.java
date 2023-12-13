@@ -2,6 +2,7 @@ package com.mobile_project.social_media_with_chatgpt.dao.profile;
 
 import java.util.UUID;
 
+import com.mobile_project.social_media_with_chatgpt.dao.file.FileEntity;
 import com.mobile_project.social_media_with_chatgpt.dao.user.UserEntity;
 import com.mobile_project.social_media_with_chatgpt.shared.enums.ProfileStatus;
 import com.mobile_project.social_media_with_chatgpt.shared.enums.UserGender;
@@ -51,8 +52,10 @@ public class ProfileEntity implements AppEntity {
     @Enumerated(EnumType.STRING)
     protected UserGender gender;
 
-    protected String avatarUrl;
-    protected String coverPhotoUrl;
+    @OneToOne(cascade = CascadeType.ALL)
+    protected FileEntity avatar;
+    @OneToOne(cascade = CascadeType.ALL)
+    protected FileEntity coverPhoto;
 
     @Enumerated(EnumType.STRING)
     @Builder.Default

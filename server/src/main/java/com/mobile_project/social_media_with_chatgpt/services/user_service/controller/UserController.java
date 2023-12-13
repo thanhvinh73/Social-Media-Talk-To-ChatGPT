@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.mobile_project.social_media_with_chatgpt.services.user_service.models.ProfileRequest;
+import com.mobile_project.social_media_with_chatgpt.services.user_service.models.ProfileResponse;
 import com.mobile_project.social_media_with_chatgpt.services.user_service.service.IUserService;
 import com.mobile_project.social_media_with_chatgpt.shared.public_data.ApiResponse;
 import com.mobile_project.social_media_with_chatgpt.shared.public_data.ErrorResponse;
@@ -81,9 +83,30 @@ public class UserController {
 
     @PatchMapping("/profile")
     public ResponseEntity<ApiResponse<Object>> updateProfile(@RequestHeader("Authorization") String token,
-            @RequestBody ProfileRequest body) {
+            @RequestBody ProfileResponse body) {
         try {
-            return ResponseEntity.ok(new ApiResponse<Object>(userService.updateProfile(token, body).get(), "200"));
+            return ResponseEntity.ok(
+                    new ApiResponse<Object>(userService.updateProfile(token, body).get(), "200"));
+        } catch (ExpiredJwtException e) {
+            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.AUTH002", "Token is expired!"), "403"),
+                    HttpStatus.FORBIDDEN);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(
+                    new ApiResponse<>(new ErrorResponse("ERR.USER003", "Profile is not found!"), "400"),
+                    HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.COM001", e.toString()), "400"),
+                    HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PatchMapping("/profile-image")
+    public ResponseEntity<ApiResponse<Object>> updateProfileImage(@RequestHeader("Authorization") String token,
+            @RequestParam(name = "avatar", required = false) MultipartFile avatar,
+            @RequestParam(name = "cover_photo", required = false) MultipartFile coverPhoto) {
+        try {
+            return ResponseEntity.ok(
+                    new ApiResponse<Object>(userService.updateProfileImage(token, avatar, coverPhoto).get(), "200"));
         } catch (ExpiredJwtException e) {
             return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.AUTH002", "Token is expired!"), "403"),
                     HttpStatus.FORBIDDEN);
