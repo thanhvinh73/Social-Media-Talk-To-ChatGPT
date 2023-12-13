@@ -4,7 +4,6 @@ import 'package:social_media_with_chatgpt/shared/widgets/app_dismiss_keyboard.da
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return AppDismissKeyboard(
@@ -16,16 +15,8 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image(
-                        image: AssetImage("assets/images/logo.png"),
-                        height: 60,
-                      ),
-                      Icon(Icons.search, size: 30),
-                    ],
-                  ),
+                  _BuildHeader(),
+                  SizedBox(height: 10),
                   Container(
                     padding: const EdgeInsets.all(24.0),
                     decoration: BoxDecoration(
@@ -36,69 +27,35 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Container(
-                          color: Colors.white,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Avatar.big(
-                                      imageUrl:
-                                          "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/eb21ff53-8d0a-4075-ac78-bf86e017f211/width=450/00455-3080383954.jpeg",
-                                    ),
-                                  ),
-                                  SizedBox(width: 10),
-                                  Expanded(
-                                    flex: 3,
-                                    child: TextField(
-                                      keyboardType: TextInputType.multiline,
-                                      maxLines: null,
-                                      decoration: InputDecoration(
-                                        hintText: 'Enter your text here...',
-                                        border: OutlineInputBorder(),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  _buildIconWithText(Icons.image, "Image"),
-                                  _buildIconWithText(
-                                      Icons.video_collection, "Video"),
-                                  _buildIconWithText(Icons.file_copy, "File"),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                        _PostingContainer(
+                            "https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/plus-512.png"),
                       ],
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _buildStoryCircle(
-                          "https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/plus-512.png",
-                          "Add"),
-                      _buildStoryCircle(
-                          "https://images.theconversation.com/files/232705/original/file-20180820-30593-1nxanpj.jpg?ixlib=rb-1.1.0&q=20&auto=format&w=320&fit=clip&dpr=2&usm=12&cs=strip",
-                          "Duy Minh Truong"),
-                      _buildStoryCircle(
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7wtRL1f_19R_ctRH1udYnDWzZLp-Ad8K6_g&usqp=CAU",
-                          "kaka123"),
-                      _buildStoryCircle(
-                          "https://cdn.pixabay.com/photo/2021/03/13/14/29/capybara-6091872_1280.jpg",
-                          "hello mom"),
-                    ],
+                  Container(
+                    height: 80,
+                    alignment: Alignment.centerLeft,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0), // Add horizontal padding
+                      itemExtent: 100, // Set a fixed width for each child
+                      children: [
+                        _buildStoryCircle(
+                            "https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/plus-512.png",
+                            "Add"),
+                        _buildStoryCircle(
+                            "https://images.theconversation.com/files/232705/original/file-20180820-30593-1nxanpj.jpg?ixlib=rb-1.1.0&q=20&auto=format&w=320&fit=clip&dpr=2&usm=12&cs=strip",
+                            "Duy Minh Truong"),
+                        _buildStoryCircle(
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7wtRL1f_19R_ctRH1udYnDWzZLp-Ad8K6_g&usqp=CAU",
+                            "kaka123"),
+                        _buildStoryCircle(
+                            "https://cdn.pixabay.com/photo/2021/03/13/14/29/capybara-6091872_1280.jpg",
+                            "hello mom"),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 10,
@@ -118,6 +75,63 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Row _BuildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Image(
+          image: AssetImage("assets/images/logo.png"),
+          height: 60,
+        ),
+        Icon(Icons.search, size: 30),
+      ],
+    );
+  }
+
+  Container _PostingContainer(String url) {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Avatar.big(
+                  imageUrl: url != ""
+                      ? url
+                      : "https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/plus-512.png",
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                flex: 3,
+                child: TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your text here...',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildIconWithText(Icons.image, "Image"),
+              _buildIconWithText(Icons.video_collection, "Video"),
+              _buildIconWithText(Icons.file_copy, "File"),
+            ],
+          ),
+        ],
       ),
     );
   }
