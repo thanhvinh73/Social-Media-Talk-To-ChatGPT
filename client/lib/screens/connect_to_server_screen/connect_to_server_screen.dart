@@ -78,7 +78,7 @@ class ConnectToServerScreen extends StatelessWidget {
               ConnectToServerScreenState>(
             builder: (context, state) {
               return AppLayout(
-                leading: const SizedBox.shrink(),
+                leading: null,
                 resizeToAvoidBottomInset: true,
                 title: "Connect to server".toUpperCase(),
                 child: Padding(

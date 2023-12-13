@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.mobile_project.social_media_with_chatgpt.shared.enums.UserRole;
+import com.mobile_project.social_media_with_chatgpt.shared.public_data.AppEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +32,7 @@ import lombok.Setter;
 @Builder
 @Entity
 @Table(name = "users")
-public class UserEntity implements UserDetails {
+public class UserEntity implements UserDetails, AppEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Setter(AccessLevel.PRIVATE)
@@ -43,7 +44,7 @@ public class UserEntity implements UserDetails {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
-    private int createAt;
+    private Long createAt;
 
     private String password;
     private String firstname;
@@ -56,7 +57,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return id.toString();
     }
 
     @Override

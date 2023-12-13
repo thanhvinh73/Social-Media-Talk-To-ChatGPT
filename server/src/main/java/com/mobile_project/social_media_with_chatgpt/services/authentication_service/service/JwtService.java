@@ -3,6 +3,7 @@ package com.mobile_project.social_media_with_chatgpt.services.authentication_ser
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 import javax.crypto.SecretKey;
@@ -20,7 +21,7 @@ public class JwtService {
 
     private static final String SECRET_KEY = "YAOmGqqMFI2T2SJqIw7WV1h+V5miq9zS7uF8f/kBBqx55YqAwWhJTCLxLaxwKsRg";
 
-    public String extractUsername(String token) {
+    public String extractUserId(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -37,16 +38,19 @@ public class JwtService {
             Map<String, Object> extraClaims,
             UserDetails userdetails) {
 
-        return Jwts.builder().claims(extraClaims).subject(userdetails.getUsername())
+        return Jwts.builder()
+                .claims(extraClaims)
+                .subject(userdetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 120))
+                .id(UUID.randomUUID().toString())
                 .signWith(getSignInKey(), Jwts.SIG.HS256).compact();
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
+        final String userId = extractUserId(token);
         final boolean isTokenExpired = extractClaim(token, Claims::getExpiration).before(new Date());
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired;
+        return (userId.equals(userDetails.getUsername())) && !isTokenExpired;
     }
 
     private Claims extractAllClaims(String token) {
