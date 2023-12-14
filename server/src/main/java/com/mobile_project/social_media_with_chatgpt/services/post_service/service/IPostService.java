@@ -17,4 +17,9 @@ public interface IPostService extends ICrudService<PostResponse, UUID> {
     Optional<PostResponse> createPost(String token, PostResponse post, List<MultipartFile> files) throws IOException;
 
     Optional<PostResponse> getById(String token, UUID id);
+
+    void deleteById(String token, UUID id);
+
+    Optional<PostResponse> updateById(String token, UUID id, PostResponse post) throws IOException;
+
 }

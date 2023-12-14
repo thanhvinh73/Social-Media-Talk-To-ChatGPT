@@ -52,16 +52,16 @@ public class ProfileEntity implements AppEntity {
     @Enumerated(EnumType.STRING)
     protected UserGender gender;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     protected FileEntity avatar;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     protected FileEntity coverPhoto;
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
     protected ProfileStatus status = ProfileStatus.ACTIVE;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     protected UserEntity user;
 
     public ProfileEntity(UserEntity entity) {

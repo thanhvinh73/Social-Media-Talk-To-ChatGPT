@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.mobile_project.social_media_with_chatgpt.dao.file.FileEntity;
 import com.mobile_project.social_media_with_chatgpt.dao.post.PostEntity;
+import com.mobile_project.social_media_with_chatgpt.dao.user.UserEntity;
 import com.mobile_project.social_media_with_chatgpt.shared.enums.CommentStatus;
 import com.mobile_project.social_media_with_chatgpt.shared.public_data.AppEntity;
 
@@ -16,8 +17,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,10 +40,10 @@ public class CommentEntity implements AppEntity {
     @Setter(AccessLevel.PRIVATE)
     private UUID commentId;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<FileEntity> images;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     private PostEntity post;
 
     @Enumerated(EnumType.STRING)
@@ -55,5 +56,8 @@ public class CommentEntity implements AppEntity {
     @Column(name = "update_at")
     private Long updateAt;
     private String content;
+
+    @ManyToOne()
+    private UserEntity user;
 
 }

@@ -52,6 +52,7 @@ public class UserResponse extends AppResponse<UserResponse, UserEntity> {
     @Override
     public UserEntity toEntity() {
         return UserEntity.builder()
+                .id(id)
                 .email(email)
                 .firstname(firstname)
                 .lastname(lastname)

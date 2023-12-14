@@ -8,9 +8,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.mobile_project.social_media_with_chatgpt.dao.post.PostEntity;
+import com.mobile_project.social_media_with_chatgpt.dao.profile.ProfileEntity;
 import com.mobile_project.social_media_with_chatgpt.shared.enums.UserRole;
 import com.mobile_project.social_media_with_chatgpt.shared.public_data.AppEntity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,6 +21,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -49,6 +54,11 @@ public class UserEntity implements UserDetails, AppEntity {
     private String password;
     private String firstname;
     private String lastname;
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<PostEntity> posts;
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private ProfileEntity profile;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -36,13 +36,13 @@ public class MessageEntity implements AppEntity {
     @Setter(AccessLevel.PRIVATE)
     private UUID messageId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     private UserEntity sender;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<FileEntity> files;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     private ConversationEntity conversation;
 
     @Builder.Default

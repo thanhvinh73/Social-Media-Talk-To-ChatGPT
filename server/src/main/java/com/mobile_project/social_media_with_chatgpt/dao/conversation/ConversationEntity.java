@@ -16,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -42,11 +43,14 @@ public class ConversationEntity implements AppEntity {
     @Builder.Default
     private ConversationStatus status = ConversationStatus.ACTIVE;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     private MessageEntity lastMessage;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany()
     private List<UserEntity> users;
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<MessageEntity> messages;
 
     private String receiverName;
     private String receiverAvatarUrl;

@@ -53,6 +53,7 @@ public class FileResponse extends AppResponse<FileResponse, FileEntity> {
     @Override
     public FileEntity toEntity() {
         return FileEntity.builder()
+                .fileId(fileId)
                 .name(name)
                 .url(url)
                 .size(size)

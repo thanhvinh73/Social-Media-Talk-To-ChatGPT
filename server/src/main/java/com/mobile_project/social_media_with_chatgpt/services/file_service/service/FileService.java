@@ -40,7 +40,7 @@ public class FileService implements IFileService {
                 .url(savePath)
                 .mimeType(multipartFile.getContentType())
                 .build();
-        fileRepository.save(fileEntity);
+        fileEntity = fileRepository.save(fileEntity);
         return Optional.of(FileResponse.emptyInstance().fromEntity(fileEntity));
     }
 
@@ -59,7 +59,7 @@ public class FileService implements IFileService {
                     .url(savePaths.get(i))
                     .mimeType(multipartFile.getContentType())
                     .build();
-            fileRepository.save(fileEntity);
+            fileEntity = fileRepository.save(fileEntity);
             results.add(FileResponse.emptyInstance().fromEntity(fileEntity));
         }
         return results;

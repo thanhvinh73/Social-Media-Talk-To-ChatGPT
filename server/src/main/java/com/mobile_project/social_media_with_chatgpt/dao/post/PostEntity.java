@@ -3,6 +3,7 @@ package com.mobile_project.social_media_with_chatgpt.dao.post;
 import java.util.List;
 import java.util.UUID;
 
+import com.mobile_project.social_media_with_chatgpt.dao.comment.CommentEntity;
 import com.mobile_project.social_media_with_chatgpt.dao.file.FileEntity;
 import com.mobile_project.social_media_with_chatgpt.dao.user.UserEntity;
 import com.mobile_project.social_media_with_chatgpt.shared.enums.PostStatus;
@@ -40,13 +41,13 @@ public class PostEntity implements AppEntity {
     @Setter(AccessLevel.PRIVATE)
     private UUID postId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     private UserEntity authorUser;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     private List<UserEntity> sharedUser;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<FileEntity> images;
 
     @Enumerated(EnumType.STRING)
@@ -60,5 +61,8 @@ public class PostEntity implements AppEntity {
     private Long createAt;
 
     private Boolean updated;
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<CommentEntity> comments;
 
 }

@@ -19,6 +19,7 @@ import com.mobile_project.social_media_with_chatgpt.services.authentication_serv
 import com.mobile_project.social_media_with_chatgpt.services.file_service.models.FileResponse;
 import com.mobile_project.social_media_with_chatgpt.services.file_service.service.IFileService;
 import com.mobile_project.social_media_with_chatgpt.services.post_service.models.PostResponse;
+import com.mobile_project.social_media_with_chatgpt.shared.enums.PostStatus;
 import com.mobile_project.social_media_with_chatgpt.shared.exceptions.NoPermissionToAccessException;
 import com.mobile_project.social_media_with_chatgpt.shared.utils.StringUtil;
 
@@ -33,6 +34,30 @@ public class PostService implements IPostService {
     private IFileService fileService;
     @Autowired
     private JwtService jwtService;
+
+    @Override
+    public Optional<PostResponse> updateById(String token, UUID id, PostResponse post)
+            throws IOException, NoPermissionToAccessException {
+        String userId = jwtService.extractUserId(StringUtil.getToken(token));
+        PostEntity postEntity = postRepository.findById(id).orElseThrow();
+        if (userId.compareTo(postEntity.getAuthorUser().getId().toString()) != 0) {
+            throw new NoPermissionToAccessException("You don't have permisstion to access");
+        }
+
+        postEntity = post.toUpdatedEntity(postEntity);
+        postRepository.save(postEntity);
+        return Optional.of(PostResponse.emptyInstance().fromEntity(postEntity));
+    }
+
+    @Override
+    public void deleteById(String token, UUID id) throws IllegalArgumentException, NoPermissionToAccessException {
+        String userId = jwtService.extractUserId(StringUtil.getToken(token));
+        PostResponse postResponse = getDataById(id).orElseThrow();
+        if (userId.compareTo(postResponse.getAuthorUser().getId().toString()) != 0) {
+            throw new NoPermissionToAccessException("You don't have permisstion to access");
+        }
+        deleteData(id);
+    }
 
     @Override
     public Optional<PostResponse> getById(String token, UUID id)
@@ -59,7 +84,17 @@ public class PostService implements IPostService {
             }
         }
         postEntity.setAuthorUser(userEntity);
-        postRepository.save(postEntity);
+        postEntity.setCreateAt(System.currentTimeMillis());
+        postEntity.setUpdated(false);
+        postEntity.setStatus(PostStatus.ACTIVE);
+        postEntity = postRepository.save(postEntity);
+
+        List<PostEntity> userPosts = (userEntity.getPosts() == null || userEntity.getPosts().isEmpty())
+                ? new ArrayList<>()
+                : userEntity.getPosts();
+        userPosts.add(postEntity);
+        userEntity.setPosts(userPosts);
+        userRepository.save(userEntity);
         return Optional.of(PostResponse.emptyInstance().fromEntity(postEntity));
     }
 
@@ -87,7 +122,11 @@ public class PostService implements IPostService {
 
     @Override
     public Optional<PostResponse> insertData(PostResponse data) {
-        return Optional.of(PostResponse.emptyInstance().fromEntity(postRepository.save(data.toEntity())));
+        PostEntity postEntity = data.toEntity();
+        postEntity.setCreateAt(System.currentTimeMillis());
+        postEntity.setUpdated(false);
+
+        return Optional.of(PostResponse.emptyInstance().fromEntity(postRepository.save(postEntity)));
     }
 
     @Override

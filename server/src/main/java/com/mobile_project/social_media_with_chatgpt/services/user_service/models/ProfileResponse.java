@@ -72,6 +72,7 @@ public class ProfileResponse extends AppResponse<ProfileResponse, ProfileEntity>
     @Override
     public ProfileEntity toEntity() {
         return ProfileEntity.builder()
+                .id(id)
                 .firstname(firstname)
                 .lastname(lastname)
                 .phone(phone)

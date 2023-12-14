@@ -39,8 +39,8 @@ public class AuthenticationService implements IAuthenticationService {
                                 .role(UserRole.USER)
                                 .createAt(System.currentTimeMillis())
                                 .build();
+                user.setProfile(profileRepository.save(new ProfileEntity(user)));
                 repository.save(user);
-                profileRepository.save(new ProfileEntity(user));
                 String jwtToken = jwtService.generateToken(user);
                 return AuthenticationResponse.builder()
                                 .token(jwtToken)
