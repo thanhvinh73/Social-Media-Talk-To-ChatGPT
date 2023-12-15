@@ -12,6 +12,6 @@ import lombok.Setter;
 @Getter
 @Builder
 public class ErrorResponse {
-    private String errorCode;
+    private String code;
     private String message;
 }

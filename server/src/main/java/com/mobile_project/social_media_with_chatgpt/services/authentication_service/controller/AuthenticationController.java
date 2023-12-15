@@ -37,11 +37,11 @@ public class AuthenticationController {
             return ResponseEntity.ok(ApiResponse.success(service.register(request)));
         } catch (EmailExistedException e) {
             return ResponseEntity.badRequest().body(ApiResponse.fail(ErrorResponse.builder()
-                    .errorCode("ERR.AUTH003")
+                    .code("ERR.AUTH002")
                     .message("Email was be used")
                     .build()));
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.COM001", e.toString()), 400),
+            return new ResponseEntity<>(ApiResponse.fail(new ErrorResponse("ERR.COM001", e.toString())),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -50,21 +50,21 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<Object>> login(@RequestBody AuthenticationRequest request) {
         try {
-            return ResponseEntity.ok(new ApiResponse<>(service.login(request), 200));
+            return ResponseEntity.ok(ApiResponse.success(service.login(request)));
         } catch (NoSuchElementException e) {
             return ResponseEntity.badRequest().body(
-                    new ApiResponse<>(new ErrorResponse("ERR.AUTH005", "User is not found!"), 400));
+                    ApiResponse.fail(new ErrorResponse("ERR.USER001", "User is not found!")));
         } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().body(
-                    new ApiResponse<>(new ErrorResponse("ERR.AUTH004", "Email or password is not correct!"), 400));
+                    ApiResponse.fail(new ErrorResponse("ERR.AUTH003", "Email or password is not correct!")));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ApiResponse<>(e.toString(), 400));
+            return ResponseEntity.badRequest().body(ApiResponse.fail(new ErrorResponse("ERR.COM001", e.toString())));
         }
     }
 
     @GetMapping("/check-connection")
     public ResponseEntity<ApiResponse<String>> checkConnection() {
-        return ResponseEntity.ok(new ApiResponse<String>("Connect to server successfully!", 200));
+        return ResponseEntity.ok(ApiResponse.success("Connect to server successfully!"));
     }
 
 }

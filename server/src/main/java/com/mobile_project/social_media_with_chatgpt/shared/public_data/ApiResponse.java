@@ -14,12 +14,13 @@ import lombok.Setter;
 public class ApiResponse<T> {
     private T data;
     private Integer status;
+    private ErrorResponse error;
 
     public static <T> ApiResponse<T> success(T data) {
-        return new ApiResponse<T>(data, 200);
+        return new ApiResponse<T>(data, 200, null);
     }
 
-    public static <T> ApiResponse<T> fail(T data) {
-        return new ApiResponse<T>(data, 400);
+    public static <T> ApiResponse<T> fail(ErrorResponse errorResponse) {
+        return new ApiResponse<T>(null, 400, errorResponse);
     }
 }
