@@ -6,4 +6,7 @@ part 'home_screen_cubit.freezed.dart';
 
 class HomeScreenCubit extends Cubit<HomeScreenState> {
   HomeScreenCubit() : super(HomeScreenState.initial());
+
+  updateState(HomeScreenState Function(HomeScreenState) onUpdate) =>
+      emit(onUpdate(state));
 }

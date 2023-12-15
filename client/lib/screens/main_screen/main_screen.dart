@@ -81,6 +81,8 @@ class _MainScreenState extends State<MainScreen> {
                 previous.currentTab != current.currentTab,
             builder: (context, state) {
               return AppLayout(
+                statusBarColor:
+                    context.read<MainScreenCubit>().state.currentTab.statusBar,
                 title: context.read<MainScreenCubit>().state.currentTab.label,
                 leading: const SizedBox.shrink(),
                 showAppBar: false,

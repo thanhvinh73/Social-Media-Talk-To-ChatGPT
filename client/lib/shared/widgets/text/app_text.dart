@@ -15,6 +15,8 @@ class AppText extends StatelessWidget {
   final int? maxLines;
   final TextOverflow? overflow;
   final bool? softWrap;
+  final EdgeInsets padding;
+
   const AppText(this.content,
       {super.key,
       this.fontSize = 14,
@@ -26,23 +28,28 @@ class AppText extends StatelessWidget {
       this.textAlign = TextAlign.left,
       this.maxLines,
       this.overflow,
-      this.softWrap = true});
+      this.softWrap = true,
+      this.padding = EdgeInsets.zero
+      });
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      content ?? '',
-      textAlign: textAlign,
-      maxLines: maxLines,
-      overflow: overflow,
-      softWrap: softWrap,
-      style: GoogleFonts.notoSans(
-          fontSize: fontSize,
-          color: color,
-          fontWeight: fontWeight,
-          fontStyle: fontStyle,
-          height: height,
-          decoration: decoration),
+    return Padding(
+      padding: padding,
+      child: Text(
+        content ?? '',
+        textAlign: textAlign,
+        maxLines: maxLines,
+        overflow: overflow,
+        softWrap: softWrap,
+        style: GoogleFonts.notoSans(
+            fontSize: fontSize,
+            color: color,
+            fontWeight: fontWeight,
+            fontStyle: fontStyle,
+            height: height,
+            decoration: decoration),
+      ),
     );
   }
 }

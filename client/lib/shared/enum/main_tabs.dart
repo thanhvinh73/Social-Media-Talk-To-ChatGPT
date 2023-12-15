@@ -5,6 +5,7 @@ import 'package:social_media_with_chatgpt/screens/account_screen/account_screen.
 import 'package:social_media_with_chatgpt/screens/conversation_screen/conversation_screen.dart';
 import 'package:social_media_with_chatgpt/screens/home_screen/home_screen.dart';
 import 'package:social_media_with_chatgpt/screens/notification_screen/notification_screen.dart';
+import 'package:social_media_with_chatgpt/shared/utils/app_colors.dart';
 
 import '../../generated/translations.g.dart';
 
@@ -40,4 +41,11 @@ extension MainTabsExt on MainTabs {
       MainTabs.account: null,
     }[this];
   }
+
+  Color get statusBar => {
+        MainTabs.home: AppColors.white,
+        MainTabs.chat: AppColors.white,
+        MainTabs.account: AppColors.white,
+        MainTabs.notification: AppColors.white,
+      }[this]!;
 }

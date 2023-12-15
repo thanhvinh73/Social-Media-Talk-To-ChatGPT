@@ -35,4 +35,5 @@ class AppColors {
   static const Color bgError = Color(0xFFFFF1F0);
   static const Color gray = Color(0xffD9D9D9);
   static const Color basicGrey = Color(0xffD9D9D9);
+  static const Color background = Color(0xfff2f2f2);
 }
