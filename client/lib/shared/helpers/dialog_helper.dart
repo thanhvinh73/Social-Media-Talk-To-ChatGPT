@@ -5,6 +5,21 @@ import '../../generated/translations.g.dart';
 import '../utils/app_colors.dart';
 import '../widgets/app_button.dart';
 
+Future<dynamic> showFeaturePending(BuildContext context) => showDialog(
+      context: context,
+      builder: (context) {
+        return Material(
+          color: Colors.transparent,
+          child: Center(
+            child: SuccessDialogWidget(
+                title: "Thông báo",
+                content:
+                    "Vì tính năng này đang được hệ thống cập nhật nên bây giờ bạn không thể sử dụng được!"),
+          ),
+        );
+      },
+    );
+
 Future<dynamic> showErrorDialog(BuildContext context,
         {String? title, String? content}) =>
     showDialog(

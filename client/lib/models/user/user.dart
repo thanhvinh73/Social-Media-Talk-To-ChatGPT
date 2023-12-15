@@ -2,7 +2,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:social_media_with_chatgpt/shared/enum/role.dart';
-import 'package:social_media_with_chatgpt/models/file/file.dart';
+import 'package:social_media_with_chatgpt/models/file/file_model.dart';
 import 'package:social_media_with_chatgpt/shared/extensions/string_ext.dart';
 
 part 'user.freezed.dart';
@@ -17,7 +17,7 @@ class User with _$User {
     String? lastname,
     @Default(Roles.USER) Roles role,
     int? createAt,
-    File? avatar,
+    FileModel? avatar,
     @JsonKey(includeFromJson: false, includeToJson: false) String? password,
     @JsonKey(includeFromJson: false, includeToJson: false)
     String? confirmPassword,

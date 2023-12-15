@@ -21,4 +21,7 @@ class AppUserCubit extends Cubit<AppUserState> {
       e.printError();
     }
   }
+
+  updateState(AppUserState Function(AppUserState) onUpdate) =>
+      emit(onUpdate(state));
 }

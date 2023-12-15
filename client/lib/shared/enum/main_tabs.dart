@@ -23,7 +23,7 @@ extension MainTabsExt on MainTabs {
         MainTabs.home: tr(LocaleKeys.App_Home),
         MainTabs.chat: "Chat",
         MainTabs.notification: "Notification",
-        MainTabs.account: "Account",
+        MainTabs.account: tr(LocaleKeys.App_Account),
       }[this]!;
 
   Widget get widget => {

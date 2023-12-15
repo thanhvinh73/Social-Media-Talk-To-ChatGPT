@@ -1,6 +1,25 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:social_media_with_chatgpt/components/avatar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:social_media_with_chatgpt/generated/translations.g.dart';
+import 'package:social_media_with_chatgpt/models/file/file_model.dart';
+import 'package:social_media_with_chatgpt/models/user/user.dart';
+import 'package:social_media_with_chatgpt/public_providers/app_user_cubit/app_user_cubit.dart';
+import 'package:social_media_with_chatgpt/screens/account_screen/components/account_container.dart';
+import 'package:social_media_with_chatgpt/screens/account_screen/components/account_profile_row_item.dart';
+import 'package:social_media_with_chatgpt/screens/account_screen/cubit/account_screent_cubit.dart';
+import 'package:social_media_with_chatgpt/shared/enum/gender.dart';
+import 'package:social_media_with_chatgpt/shared/enum/screen_status.dart';
+import 'package:social_media_with_chatgpt/shared/extensions/date_ext.dart';
+import 'package:social_media_with_chatgpt/shared/helpers/bot_toast_helper.dart';
+import 'package:social_media_with_chatgpt/shared/helpers/dialog_helper.dart';
 import 'package:social_media_with_chatgpt/shared/utils/app_colors.dart';
+import 'package:social_media_with_chatgpt/shared/utils/image_picker.dart';
+import 'package:social_media_with_chatgpt/shared/widgets/app_button.dart';
+import 'package:social_media_with_chatgpt/shared/widgets/app_container.dart';
+import 'package:social_media_with_chatgpt/shared/widgets/app_layout.dart';
+import 'package:social_media_with_chatgpt/shared/widgets/app_network_image.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/text/app_text.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -9,161 +28,262 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double maxWidth = MediaQuery.of(context).size.width;
-    double maxHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          buildTop(maxWidth, maxHeight),
-          buildContent(maxWidth),
+    return BlocProvider(
+      create: (context) => AccountScreentCubit(),
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<AccountScreentCubit, AccountScreentState>(
+            listenWhen: (previous, current) =>
+                previous.errorMessage != current.errorMessage &&
+                current.errorMessage != null,
+            listener: (context, state) {
+              showErrorDialog(context, content: state.errorMessage)
+                  .then((value) {
+                context
+                    .read<AccountScreentCubit>()
+                    .updateState((p0) => p0.copyWith(errorMessage: null));
+              });
+            },
+          ),
+          BlocListener<AccountScreentCubit, AccountScreentState>(
+            listenWhen: (previous, current) =>
+                previous.status != current.status,
+            listener: (context, state) {
+              if (state.status == ScreenStatus.success) {
+                context
+                    .read<AppUserCubit>()
+                    .updateState((p0) => p0.copyWith(profile: state.profile));
+                showSuccessDialog(context,
+                        title: tr(LocaleKeys.Profile_UpdateProfile),
+                        content:
+                            tr(LocaleKeys.Profile_UpdateProfileSuccessfully))
+                    .then((value) {
+                  context.read<AccountScreentCubit>().updateCurrentProfile(
+                      (p0) =>
+                          p0.copyWith(avatarFile: null, coverPhotoFile: null));
+                  context.read<AccountScreentCubit>().updateState(
+                      (p0) => p0.copyWith(status: ScreenStatus.loading));
+                });
+              }
+            },
+          ),
         ],
-      ),
-    );
-  }
-
-  Widget buildContent(double width) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 67, 16, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppText(
-            "Username",
-            fontSize: 20,
-            color: AppColors.darkgreen,
-            fontWeight: FontWeight.bold,
-          ),
-          Text("Capybara Photographer"),
-          Container(
-            child: Row(
-              children: [
-                AppText(
-                  "280 ",
-                  fontSize: 15,
-                  color: AppColors.green,
-                ),
-                Text("Friend")
-              ],
-            ),
-          ),
-          Container(
-            child: Row(
-              children: [
-                AppText(
-                  "10,000 ",
-                  fontSize: 15,
-                  color: AppColors.green,
-                ),
-                Text("Follower")
-              ],
-            ),
-          ),
-          Container(
-            child: Row(
-              children: [
-                AppText(
-                  "87 ",
-                  fontSize: 15,
-                  color: AppColors.green,
-                ),
-                Text("Following")
-              ],
-            ),
-          ),
-          SizedBox(height: 16),
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(width: 4, color: Colors.black26),
-              ),
-              color: Colors.white,
-            ),
-            child: Row(),
-          ),
-          Column(
-            children:
-                [1, 2, 3, 4, 5].map((e) => _buildPostContainer()).toList(),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPostContainer() {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Avatar.medium(
-                imageUrl:
-                    "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg", // Replace with the actual avatar URL
-              ),
-              SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "ilovecat123", // Replace with the actual user name
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+        child: BlocBuilder<AppUserCubit, AppUserState>(
+          builder: (context, state) {
+            return AppLayout(
+              showAppBar: false,
+              backgroundColor: AppColors.white,
+              useSafeArea: true,
+              child: LayoutBuilder(
+                builder: (context, constraints) => ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    Stack(
+                      alignment: Alignment.topLeft,
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                            color: Colors.grey,
+                            child: AppNetworkImage(
+                              url: state.profile?.coverPhoto?.getFileUrl,
+                              width: maxWidth,
+                              height: maxWidth / 2.3,
+                              fit: BoxFit.cover,
+                            )),
+                        Positioned(
+                          bottom: 8,
+                          right: 8,
+                          child: GestureDetector(
+                            onTap: () {
+                              showImagePickerDialog(
+                                  onSelectOption1: () {
+                                    ImagePickerUtils.selectPhoto(
+                                            context, ImageSource.camera)
+                                        .then((value) {
+                                      if (value != null) {
+                                        context
+                                            .read<AccountScreentCubit>()
+                                            .updateCurrentProfile((p0) =>
+                                                p0.copyWith(
+                                                    coverPhotoFile: value));
+                                        context
+                                            .read<AccountScreentCubit>()
+                                            .updateImage();
+                                      }
+                                    });
+                                  },
+                                  onSelectOption2: () {
+                                    ImagePickerUtils.selectPhoto(
+                                            context, ImageSource.gallery)
+                                        .then((value) {
+                                      if (value != null) {
+                                        context
+                                            .read<AccountScreentCubit>()
+                                            .updateCurrentProfile((p0) =>
+                                                p0.copyWith(
+                                                    coverPhotoFile: value));
+                                        context
+                                            .read<AccountScreentCubit>()
+                                            .updateImage();
+                                      }
+                                    });
+                                  },
+                                  option1Label: "Chụp ảnh",
+                                  option2Label: "Chọn ảnh từ thư viện");
+                            },
+                            child: AppContainer(
+                                color: AppColors.background,
+                                padding: const EdgeInsets.all(4),
+                                borderRadius: BorderRadius.circular(100),
+                                child: Icon(Icons.camera_alt,
+                                    size: 28, color: AppColors.green)),
+                          ),
+                        ),
+                        Positioned(
+                            top: (maxWidth / 2.3) - 67,
+                            child: InkWell(
+                              onTap: () {
+                                showImagePickerDialog(
+                                    onSelectOption1: () {
+                                      ImagePickerUtils.selectPhoto(
+                                              context, ImageSource.camera)
+                                          .then((value) {
+                                        if (value != null) {
+                                          context
+                                              .read<AccountScreentCubit>()
+                                              .updateCurrentProfile((p0) => p0
+                                                  .copyWith(avatarFile: value));
+                                          context
+                                              .read<AccountScreentCubit>()
+                                              .updateImage();
+                                        }
+                                      });
+                                    },
+                                    onSelectOption2: () {
+                                      ImagePickerUtils.selectPhoto(
+                                              context, ImageSource.gallery)
+                                          .then((value) {
+                                        if (value != null) {
+                                          context
+                                              .read<AccountScreentCubit>()
+                                              .updateCurrentProfile((p0) => p0
+                                                  .copyWith(avatarFile: value));
+                                          context
+                                              .read<AccountScreentCubit>()
+                                              .updateImage();
+                                        }
+                                      });
+                                    },
+                                    option1Label: "Chụp ảnh",
+                                    option2Label: "Chọn ảnh từ thư viện");
+                              },
+                              child: AppContainer(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  child: Stack(
+                                    children: [
+                                      AppNetworkImage(
+                                        url: state.profile?.avatar?.getFileUrl,
+                                        height: 120,
+                                        width: 120,
+                                        fit: BoxFit.cover,
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                      Positioned(
+                                          bottom: 0,
+                                          right: 0,
+                                          child: AppContainer(
+                                              color: AppColors.background,
+                                              padding: const EdgeInsets.all(4),
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: Icon(Icons.camera_alt,
+                                                  size: 28,
+                                                  color: AppColors.green)))
+                                    ],
+                                  )),
+                            )),
+                      ],
                     ),
-                  ),
-                  Text(
-                    "11:26PM 12/7/2003", // Replace with the actual date and time
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 67),
+                      child: AppContainer(
+                        color: AppColors.background,
+                        child: Wrap(
+                          runSpacing: 12,
+                          children: [
+                            AccountContainer(
+                              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                              child: Wrap(
+                                runSpacing: 16,
+                                children: [
+                                  AppText(
+                                    state.user.fullname,
+                                    fontSize: 25,
+                                    color: AppColors.titleText,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  AppButton(
+                                      title: "Cập nhật hồ sơ",
+                                      width: maxWidth,
+                                      borderRadius: 4,
+                                      onPressed: () {}),
+                                ],
+                              ),
+                            ),
+                            AccountContainer(
+                                child: Wrap(
+                              runSpacing: 8,
+                              children: [
+                                AppText(
+                                  "Hồ sơ",
+                                  fontSize: 20,
+                                  color: AppColors.titleText,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                AccountProfileRowItem(
+                                  icon: Icons.phone,
+                                  text: state.profile?.phone,
+                                ),
+                                AccountProfileRowItem(
+                                  icon: Icons.email,
+                                  text: state.profile?.email,
+                                ),
+                                AccountProfileRowItem(
+                                  icon: Icons.cake,
+                                  text: DateTime.fromMillisecondsSinceEpoch(
+                                          state.profile?.dateOfBirth ?? 0)
+                                      .toDayMonthYear,
+                                ),
+                                AccountProfileRowItem(
+                                  icon: state.profile?.gender.icon ??
+                                      Icons.person,
+                                  text: state.profile?.gender.label,
+                                )
+                              ],
+                            )),
+                            AccountContainer(
+                                child: Wrap(runSpacing: 8, children: [
+                              AppText(
+                                "Bài đăng",
+                                fontSize: 20,
+                                color: AppColors.titleText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              Row()
+                            ]))
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(
-            "Post content goes here. This can be a long text, an image, or any other content.",
-          ),
-          Image(
-              image: NetworkImage(
-                  "https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg"))
-          // Add any other widgets for post content (e.g., images)
-        ],
+            );
+          },
+        ),
       ),
     );
   }
-
-  Widget buildTop(double maxWidth, double maxHeight) {
-    return Stack(
-      alignment: Alignment.topLeft,
-      clipBehavior: Clip.none,
-      children: [
-        buildCoverImg(maxWidth, maxHeight),
-        Positioned(
-            top: (maxWidth / 3) - 67,
-            child: Container(
-                padding: EdgeInsets.all(8), child: buildProfileImg())),
-      ],
-    );
-  }
-
-  Widget buildCoverImg(double width, double height) => Container(
-      color: Colors.grey,
-      child: Image.network(
-        'https://www.pbs.org/wnet/nature/files/2023/07/pexels-pixabay-160583-scaled-e1689259491194.jpg',
-        width: width,
-        height: width / 3,
-        fit: BoxFit.cover,
-      ));
-  Widget buildProfileImg() => Container(
-        child: Avatar.huge(
-            imageUrl:
-                'https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg'),
-      );
 }

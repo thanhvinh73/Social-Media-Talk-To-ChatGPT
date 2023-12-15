@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'file.dart';
+part of 'file_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-File _$FileFromJson(Map<String, dynamic> json) {
-  return _File.fromJson(json);
+FileModel _$FileModelFromJson(Map<String, dynamic> json) {
+  return _FileModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$File {
+mixin _$FileModel {
   String? get fileId => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
@@ -29,13 +29,14 @@ mixin _$File {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $FileCopyWith<File> get copyWith => throw _privateConstructorUsedError;
+  $FileModelCopyWith<FileModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FileCopyWith<$Res> {
-  factory $FileCopyWith(File value, $Res Function(File) then) =
-      _$FileCopyWithImpl<$Res, File>;
+abstract class $FileModelCopyWith<$Res> {
+  factory $FileModelCopyWith(FileModel value, $Res Function(FileModel) then) =
+      _$FileModelCopyWithImpl<$Res, FileModel>;
   @useResult
   $Res call(
       {String? fileId,
@@ -47,9 +48,9 @@ abstract class $FileCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FileCopyWithImpl<$Res, $Val extends File>
-    implements $FileCopyWith<$Res> {
-  _$FileCopyWithImpl(this._value, this._then);
+class _$FileModelCopyWithImpl<$Res, $Val extends FileModel>
+    implements $FileModelCopyWith<$Res> {
+  _$FileModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -96,10 +97,11 @@ class _$FileCopyWithImpl<$Res, $Val extends File>
 }
 
 /// @nodoc
-abstract class _$$FileImplCopyWith<$Res> implements $FileCopyWith<$Res> {
-  factory _$$FileImplCopyWith(
-          _$FileImpl value, $Res Function(_$FileImpl) then) =
-      __$$FileImplCopyWithImpl<$Res>;
+abstract class _$$FileModelImplCopyWith<$Res>
+    implements $FileModelCopyWith<$Res> {
+  factory _$$FileModelImplCopyWith(
+          _$FileModelImpl value, $Res Function(_$FileModelImpl) then) =
+      __$$FileModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -112,10 +114,11 @@ abstract class _$$FileImplCopyWith<$Res> implements $FileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$FileImplCopyWithImpl<$Res>
-    extends _$FileCopyWithImpl<$Res, _$FileImpl>
-    implements _$$FileImplCopyWith<$Res> {
-  __$$FileImplCopyWithImpl(_$FileImpl _value, $Res Function(_$FileImpl) _then)
+class __$$FileModelImplCopyWithImpl<$Res>
+    extends _$FileModelCopyWithImpl<$Res, _$FileModelImpl>
+    implements _$$FileModelImplCopyWith<$Res> {
+  __$$FileModelImplCopyWithImpl(
+      _$FileModelImpl _value, $Res Function(_$FileModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -128,7 +131,7 @@ class __$$FileImplCopyWithImpl<$Res>
     Object? mimeType = freezed,
     Object? createAt = freezed,
   }) {
-    return _then(_$FileImpl(
+    return _then(_$FileModelImpl(
       fileId: freezed == fileId
           ? _value.fileId
           : fileId // ignore: cast_nullable_to_non_nullable
@@ -159,8 +162,8 @@ class __$$FileImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FileImpl implements _File {
-  const _$FileImpl(
+class _$FileModelImpl implements _FileModel {
+  const _$FileModelImpl(
       {this.fileId,
       this.name,
       this.url,
@@ -168,8 +171,8 @@ class _$FileImpl implements _File {
       this.mimeType,
       this.createAt});
 
-  factory _$FileImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FileImplFromJson(json);
+  factory _$FileModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FileModelImplFromJson(json);
 
   @override
   final String? fileId;
@@ -186,14 +189,14 @@ class _$FileImpl implements _File {
 
   @override
   String toString() {
-    return 'File(fileId: $fileId, name: $name, url: $url, size: $size, mimeType: $mimeType, createAt: $createAt)';
+    return 'FileModel(fileId: $fileId, name: $name, url: $url, size: $size, mimeType: $mimeType, createAt: $createAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FileImpl &&
+            other is _$FileModelImpl &&
             (identical(other.fileId, fileId) || other.fileId == fileId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.url, url) || other.url == url) &&
@@ -212,27 +215,28 @@ class _$FileImpl implements _File {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FileImplCopyWith<_$FileImpl> get copyWith =>
-      __$$FileImplCopyWithImpl<_$FileImpl>(this, _$identity);
+  _$$FileModelImplCopyWith<_$FileModelImpl> get copyWith =>
+      __$$FileModelImplCopyWithImpl<_$FileModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FileImplToJson(
+    return _$$FileModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _File implements File {
-  const factory _File(
+abstract class _FileModel implements FileModel {
+  const factory _FileModel(
       {final String? fileId,
       final String? name,
       final String? url,
       final int? size,
       final String? mimeType,
-      final int? createAt}) = _$FileImpl;
+      final int? createAt}) = _$FileModelImpl;
 
-  factory _File.fromJson(Map<String, dynamic> json) = _$FileImpl.fromJson;
+  factory _FileModel.fromJson(Map<String, dynamic> json) =
+      _$FileModelImpl.fromJson;
 
   @override
   String? get fileId;
@@ -248,6 +252,6 @@ abstract class _File implements File {
   int? get createAt;
   @override
   @JsonKey(ignore: true)
-  _$$FileImplCopyWith<_$FileImpl> get copyWith =>
+  _$$FileModelImplCopyWith<_$FileModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

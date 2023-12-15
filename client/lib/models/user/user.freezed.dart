@@ -26,7 +26,7 @@ mixin _$User {
   String? get lastname => throw _privateConstructorUsedError;
   Roles get role => throw _privateConstructorUsedError;
   int? get createAt => throw _privateConstructorUsedError;
-  File? get avatar => throw _privateConstructorUsedError;
+  FileModel? get avatar => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? get password => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,12 +49,12 @@ abstract class $UserCopyWith<$Res> {
       String? lastname,
       Roles role,
       int? createAt,
-      File? avatar,
+      FileModel? avatar,
       @JsonKey(includeFromJson: false, includeToJson: false) String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
       String? confirmPassword});
 
-  $FileCopyWith<$Res>? get avatar;
+  $FileModelCopyWith<$Res>? get avatar;
 }
 
 /// @nodoc
@@ -108,7 +108,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as File?,
+              as FileModel?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -122,12 +122,12 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 
   @override
   @pragma('vm:prefer-inline')
-  $FileCopyWith<$Res>? get avatar {
+  $FileModelCopyWith<$Res>? get avatar {
     if (_value.avatar == null) {
       return null;
     }
 
-    return $FileCopyWith<$Res>(_value.avatar!, (value) {
+    return $FileModelCopyWith<$Res>(_value.avatar!, (value) {
       return _then(_value.copyWith(avatar: value) as $Val);
     });
   }
@@ -147,13 +147,13 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? lastname,
       Roles role,
       int? createAt,
-      File? avatar,
+      FileModel? avatar,
       @JsonKey(includeFromJson: false, includeToJson: false) String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
       String? confirmPassword});
 
   @override
-  $FileCopyWith<$Res>? get avatar;
+  $FileModelCopyWith<$Res>? get avatar;
 }
 
 /// @nodoc
@@ -204,7 +204,7 @@ class __$$UserImplCopyWithImpl<$Res>
       avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as File?,
+              as FileModel?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -249,7 +249,7 @@ class _$UserImpl implements _User {
   @override
   final int? createAt;
   @override
-  final File? avatar;
+  final FileModel? avatar;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   final String? password;
@@ -310,7 +310,7 @@ abstract class _User implements User {
       final String? lastname,
       final Roles role,
       final int? createAt,
-      final File? avatar,
+      final FileModel? avatar,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -331,7 +331,7 @@ abstract class _User implements User {
   @override
   int? get createAt;
   @override
-  File? get avatar;
+  FileModel? get avatar;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? get password;

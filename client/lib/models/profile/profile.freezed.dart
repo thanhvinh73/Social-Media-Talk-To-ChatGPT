@@ -27,9 +27,13 @@ mixin _$Profile {
   String? get email => throw _privateConstructorUsedError;
   int? get dateOfBirth => throw _privateConstructorUsedError;
   Gender? get gender => throw _privateConstructorUsedError;
-  File? get avatar => throw _privateConstructorUsedError;
-  File? get coverPhoto => throw _privateConstructorUsedError;
+  FileModel? get avatar => throw _privateConstructorUsedError;
+  FileModel? get coverPhoto => throw _privateConstructorUsedError;
   ProfileStatus? get status => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  File? get avatarFile => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  File? get coverPhotoFile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,12 +53,15 @@ abstract class $ProfileCopyWith<$Res> {
       String? email,
       int? dateOfBirth,
       Gender? gender,
-      File? avatar,
-      File? coverPhoto,
-      ProfileStatus? status});
+      FileModel? avatar,
+      FileModel? coverPhoto,
+      ProfileStatus? status,
+      @JsonKey(includeFromJson: false, includeToJson: false) File? avatarFile,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      File? coverPhotoFile});
 
-  $FileCopyWith<$Res>? get avatar;
-  $FileCopyWith<$Res>? get coverPhoto;
+  $FileModelCopyWith<$Res>? get avatar;
+  $FileModelCopyWith<$Res>? get coverPhoto;
 }
 
 /// @nodoc
@@ -80,6 +87,8 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     Object? avatar = freezed,
     Object? coverPhoto = freezed,
     Object? status = freezed,
+    Object? avatarFile = freezed,
+    Object? coverPhotoFile = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -113,38 +122,46 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
       avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as File?,
+              as FileModel?,
       coverPhoto: freezed == coverPhoto
           ? _value.coverPhoto
           : coverPhoto // ignore: cast_nullable_to_non_nullable
-              as File?,
+              as FileModel?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ProfileStatus?,
+      avatarFile: freezed == avatarFile
+          ? _value.avatarFile
+          : avatarFile // ignore: cast_nullable_to_non_nullable
+              as File?,
+      coverPhotoFile: freezed == coverPhotoFile
+          ? _value.coverPhotoFile
+          : coverPhotoFile // ignore: cast_nullable_to_non_nullable
+              as File?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $FileCopyWith<$Res>? get avatar {
+  $FileModelCopyWith<$Res>? get avatar {
     if (_value.avatar == null) {
       return null;
     }
 
-    return $FileCopyWith<$Res>(_value.avatar!, (value) {
+    return $FileModelCopyWith<$Res>(_value.avatar!, (value) {
       return _then(_value.copyWith(avatar: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $FileCopyWith<$Res>? get coverPhoto {
+  $FileModelCopyWith<$Res>? get coverPhoto {
     if (_value.coverPhoto == null) {
       return null;
     }
 
-    return $FileCopyWith<$Res>(_value.coverPhoto!, (value) {
+    return $FileModelCopyWith<$Res>(_value.coverPhoto!, (value) {
       return _then(_value.copyWith(coverPhoto: value) as $Val);
     });
   }
@@ -165,14 +182,17 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       String? email,
       int? dateOfBirth,
       Gender? gender,
-      File? avatar,
-      File? coverPhoto,
-      ProfileStatus? status});
+      FileModel? avatar,
+      FileModel? coverPhoto,
+      ProfileStatus? status,
+      @JsonKey(includeFromJson: false, includeToJson: false) File? avatarFile,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      File? coverPhotoFile});
 
   @override
-  $FileCopyWith<$Res>? get avatar;
+  $FileModelCopyWith<$Res>? get avatar;
   @override
-  $FileCopyWith<$Res>? get coverPhoto;
+  $FileModelCopyWith<$Res>? get coverPhoto;
 }
 
 /// @nodoc
@@ -196,6 +216,8 @@ class __$$ProfileImplCopyWithImpl<$Res>
     Object? avatar = freezed,
     Object? coverPhoto = freezed,
     Object? status = freezed,
+    Object? avatarFile = freezed,
+    Object? coverPhotoFile = freezed,
   }) {
     return _then(_$ProfileImpl(
       id: freezed == id
@@ -229,15 +251,23 @@ class __$$ProfileImplCopyWithImpl<$Res>
       avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as File?,
+              as FileModel?,
       coverPhoto: freezed == coverPhoto
           ? _value.coverPhoto
           : coverPhoto // ignore: cast_nullable_to_non_nullable
-              as File?,
+              as FileModel?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ProfileStatus?,
+      avatarFile: freezed == avatarFile
+          ? _value.avatarFile
+          : avatarFile // ignore: cast_nullable_to_non_nullable
+              as File?,
+      coverPhotoFile: freezed == coverPhotoFile
+          ? _value.coverPhotoFile
+          : coverPhotoFile // ignore: cast_nullable_to_non_nullable
+              as File?,
     ));
   }
 }
@@ -255,7 +285,10 @@ class _$ProfileImpl implements _Profile {
       this.gender,
       this.avatar,
       this.coverPhoto,
-      this.status});
+      this.status,
+      @JsonKey(includeFromJson: false, includeToJson: false) this.avatarFile,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      this.coverPhotoFile});
 
   factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileImplFromJson(json);
@@ -275,15 +308,21 @@ class _$ProfileImpl implements _Profile {
   @override
   final Gender? gender;
   @override
-  final File? avatar;
+  final FileModel? avatar;
   @override
-  final File? coverPhoto;
+  final FileModel? coverPhoto;
   @override
   final ProfileStatus? status;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final File? avatarFile;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final File? coverPhotoFile;
 
   @override
   String toString() {
-    return 'Profile(id: $id, firstname: $firstname, lastname: $lastname, phone: $phone, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, avatar: $avatar, coverPhoto: $coverPhoto, status: $status)';
+    return 'Profile(id: $id, firstname: $firstname, lastname: $lastname, phone: $phone, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, avatar: $avatar, coverPhoto: $coverPhoto, status: $status, avatarFile: $avatarFile, coverPhotoFile: $coverPhotoFile)';
   }
 
   @override
@@ -304,13 +343,29 @@ class _$ProfileImpl implements _Profile {
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.coverPhoto, coverPhoto) ||
                 other.coverPhoto == coverPhoto) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.avatarFile, avatarFile) ||
+                other.avatarFile == avatarFile) &&
+            (identical(other.coverPhotoFile, coverPhotoFile) ||
+                other.coverPhotoFile == coverPhotoFile));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, firstname, lastname, phone,
-      email, dateOfBirth, gender, avatar, coverPhoto, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      firstname,
+      lastname,
+      phone,
+      email,
+      dateOfBirth,
+      gender,
+      avatar,
+      coverPhoto,
+      status,
+      avatarFile,
+      coverPhotoFile);
 
   @JsonKey(ignore: true)
   @override
@@ -335,9 +390,13 @@ abstract class _Profile implements Profile {
       final String? email,
       final int? dateOfBirth,
       final Gender? gender,
-      final File? avatar,
-      final File? coverPhoto,
-      final ProfileStatus? status}) = _$ProfileImpl;
+      final FileModel? avatar,
+      final FileModel? coverPhoto,
+      final ProfileStatus? status,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final File? avatarFile,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final File? coverPhotoFile}) = _$ProfileImpl;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
 
@@ -356,11 +415,17 @@ abstract class _Profile implements Profile {
   @override
   Gender? get gender;
   @override
-  File? get avatar;
+  FileModel? get avatar;
   @override
-  File? get coverPhoto;
+  FileModel? get coverPhoto;
   @override
   ProfileStatus? get status;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  File? get avatarFile;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  File? get coverPhotoFile;
   @override
   @JsonKey(ignore: true)
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>

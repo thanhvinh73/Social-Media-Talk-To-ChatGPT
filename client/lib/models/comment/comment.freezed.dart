@@ -21,7 +21,7 @@ Comment _$CommentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Comment {
   String? get commentId => throw _privateConstructorUsedError;
-  List<File> get images => throw _privateConstructorUsedError;
+  List<FileModel> get images => throw _privateConstructorUsedError;
   Post? get post => throw _privateConstructorUsedError;
   CommentStatus? get status => throw _privateConstructorUsedError;
   int? get createAt => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $CommentCopyWith<$Res> {
   @useResult
   $Res call(
       {String? commentId,
-      List<File> images,
+      List<FileModel> images,
       Post? post,
       CommentStatus? status,
       int? createAt,
@@ -79,7 +79,7 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<File>,
+              as List<FileModel>,
       post: freezed == post
           ? _value.post
           : post // ignore: cast_nullable_to_non_nullable
@@ -125,7 +125,7 @@ abstract class _$$CommentImplCopyWith<$Res> implements $CommentCopyWith<$Res> {
   @useResult
   $Res call(
       {String? commentId,
-      List<File> images,
+      List<FileModel> images,
       Post? post,
       CommentStatus? status,
       int? createAt,
@@ -163,7 +163,7 @@ class __$$CommentImplCopyWithImpl<$Res>
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<File>,
+              as List<FileModel>,
       post: freezed == post
           ? _value.post
           : post // ignore: cast_nullable_to_non_nullable
@@ -193,7 +193,7 @@ class __$$CommentImplCopyWithImpl<$Res>
 class _$CommentImpl implements _Comment {
   const _$CommentImpl(
       {this.commentId,
-      final List<File> images = const [],
+      final List<FileModel> images = const [],
       this.post,
       this.status,
       this.createAt,
@@ -206,10 +206,10 @@ class _$CommentImpl implements _Comment {
 
   @override
   final String? commentId;
-  final List<File> _images;
+  final List<FileModel> _images;
   @override
   @JsonKey()
-  List<File> get images {
+  List<FileModel> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -277,7 +277,7 @@ class _$CommentImpl implements _Comment {
 abstract class _Comment implements Comment {
   const factory _Comment(
       {final String? commentId,
-      final List<File> images,
+      final List<FileModel> images,
       final Post? post,
       final CommentStatus? status,
       final int? createAt,
@@ -289,7 +289,7 @@ abstract class _Comment implements Comment {
   @override
   String? get commentId;
   @override
-  List<File> get images;
+  List<FileModel> get images;
   @override
   Post? get post;
   @override

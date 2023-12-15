@@ -10,7 +10,7 @@ _$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
     _$CommentImpl(
       commentId: json['commentId'] as String?,
       images: (json['images'] as List<dynamic>?)
-              ?.map((e) => File.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => FileModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       post: json['post'] == null

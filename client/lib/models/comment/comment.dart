@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:social_media_with_chatgpt/models/file/file.dart';
+import 'package:social_media_with_chatgpt/models/file/file_model.dart';
 import 'package:social_media_with_chatgpt/models/post/post.dart';
 import 'package:social_media_with_chatgpt/shared/enum/comment_status.dart';
 
@@ -10,7 +10,7 @@ part 'comment.g.dart';
 class Comment with _$Comment {
   const factory Comment({
     String? commentId,
-    @Default([]) List<File> images,
+    @Default([]) List<FileModel> images,
     Post? post,
     CommentStatus? status,
     int? createAt,

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mobile_project.social_media_with_chatgpt.dao.file.FileEntity;
 import com.mobile_project.social_media_with_chatgpt.dao.profile.ProfileEntity;
 import com.mobile_project.social_media_with_chatgpt.dao.profile.ProfileRepository;
 import com.mobile_project.social_media_with_chatgpt.dao.user.UserEntity;
@@ -99,10 +100,13 @@ public class UserService implements IUserService {
         if (avatar != null) {
             try {
                 FileResponse avatarResponse = fileService.uploadFile(avatar).orElse(null);
-                if (profileEntity.getAvatar() != null)
-                    fileService.deleteData(profileEntity.getAvatar().getFileId());
-                if (avatarResponse != null)
+                FileEntity file = profileEntity.getAvatar();
+                if (avatarResponse != null) {
                     profileEntity.setAvatar(avatarResponse.toEntity());
+                    profileEntity = profileRepository.save(profileEntity);
+                }
+                if (file != null)
+                    fileService.deleteData(file.getFileId());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -110,15 +114,17 @@ public class UserService implements IUserService {
         if (coverPhoto != null) {
             try {
                 FileResponse coverResponse = fileService.uploadFile(coverPhoto).orElse(null);
-                if (profileEntity.getCoverPhoto() != null)
-                    fileService.deleteData(profileEntity.getCoverPhoto().getFileId());
-                if (coverResponse != null)
+                FileEntity file = profileEntity.getCoverPhoto();
+                if (coverResponse != null) {
                     profileEntity.setCoverPhoto(coverResponse.toEntity());
+                    profileEntity = profileRepository.save(profileEntity);
+                }
+                if (file != null)
+                    fileService.deleteData(file.getFileId());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        profileRepository.save(profileEntity);
         return Optional.of(ProfileResponse.emptyInstance().fromEntity(profileEntity));
     }
 

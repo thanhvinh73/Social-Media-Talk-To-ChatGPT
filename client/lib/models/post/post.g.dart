@@ -16,7 +16,7 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
               .toList() ??
           const [],
       images: (json['images'] as List<dynamic>?)
-              ?.map((e) => File.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => FileModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       status: $enumDecodeNullable(_$PostStatusEnumMap, json['status']),

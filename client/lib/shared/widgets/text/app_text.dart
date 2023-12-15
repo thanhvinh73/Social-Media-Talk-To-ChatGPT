@@ -21,7 +21,7 @@ class AppText extends StatelessWidget {
       {super.key,
       this.fontSize = 14,
       this.fontWeight = FontWeight.w400,
-      this.color = AppColors.textPrimaryColor,
+      this.color = AppColors.bodyText,
       this.height,
       this.decoration = TextDecoration.none,
       this.fontStyle,
@@ -29,8 +29,7 @@ class AppText extends StatelessWidget {
       this.maxLines,
       this.overflow,
       this.softWrap = true,
-      this.padding = EdgeInsets.zero
-      });
+      this.padding = EdgeInsets.zero});
 
   @override
   Widget build(BuildContext context) {

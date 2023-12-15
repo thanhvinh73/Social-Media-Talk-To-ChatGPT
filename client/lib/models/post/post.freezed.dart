@@ -23,7 +23,7 @@ mixin _$Post {
   String? get postId => throw _privateConstructorUsedError;
   User? get authorUser => throw _privateConstructorUsedError;
   List<User> get sharedUser => throw _privateConstructorUsedError;
-  List<File> get images => throw _privateConstructorUsedError;
+  List<FileModel> get images => throw _privateConstructorUsedError;
   PostStatus? get status => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $PostCopyWith<$Res> {
       {String? postId,
       User? authorUser,
       List<User> sharedUser,
-      List<File> images,
+      List<FileModel> images,
       PostStatus? status,
       String? title,
       String? description,
@@ -93,7 +93,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<File>,
+              as List<FileModel>,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -141,7 +141,7 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       {String? postId,
       User? authorUser,
       List<User> sharedUser,
-      List<File> images,
+      List<FileModel> images,
       PostStatus? status,
       String? title,
       String? description,
@@ -188,7 +188,7 @@ class __$$PostImplCopyWithImpl<$Res>
       images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<File>,
+              as List<FileModel>,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -220,7 +220,7 @@ class _$PostImpl implements _Post {
       {this.postId,
       this.authorUser,
       final List<User> sharedUser = const [],
-      final List<File> images = const [],
+      final List<FileModel> images = const [],
       this.status,
       this.title,
       this.description,
@@ -245,10 +245,10 @@ class _$PostImpl implements _Post {
     return EqualUnmodifiableListView(_sharedUser);
   }
 
-  final List<File> _images;
+  final List<FileModel> _images;
   @override
   @JsonKey()
-  List<File> get images {
+  List<FileModel> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -323,7 +323,7 @@ abstract class _Post implements Post {
       {final String? postId,
       final User? authorUser,
       final List<User> sharedUser,
-      final List<File> images,
+      final List<FileModel> images,
       final PostStatus? status,
       final String? title,
       final String? description,
@@ -339,7 +339,7 @@ abstract class _Post implements Post {
   @override
   List<User> get sharedUser;
   @override
-  List<File> get images;
+  List<FileModel> get images;
   @override
   PostStatus? get status;
   @override

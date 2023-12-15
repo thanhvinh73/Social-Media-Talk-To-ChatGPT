@@ -17,8 +17,8 @@ class RegisterScreenCubit extends Cubit<RegisterScreenState> {
   final _authRepository = AuthRepository(apis: PublicApi.apis);
 
   Future<void> register() async {
-    final cancel = showLoading();
     if (state.currentUser == null) return;
+    final cancel = showLoading();
     try {
       ApiResponse<User> res =
           await _authRepository.register(state.currentUser!);

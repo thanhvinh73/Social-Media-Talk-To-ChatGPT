@@ -17,10 +17,10 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
       gender: $enumDecodeNullable(_$GenderEnumMap, json['gender']),
       avatar: json['avatar'] == null
           ? null
-          : File.fromJson(json['avatar'] as Map<String, dynamic>),
+          : FileModel.fromJson(json['avatar'] as Map<String, dynamic>),
       coverPhoto: json['coverPhoto'] == null
           ? null
-          : File.fromJson(json['coverPhoto'] as Map<String, dynamic>),
+          : FileModel.fromJson(json['coverPhoto'] as Map<String, dynamic>),
       status: $enumDecodeNullable(_$ProfileStatusEnumMap, json['status']),
     );
 

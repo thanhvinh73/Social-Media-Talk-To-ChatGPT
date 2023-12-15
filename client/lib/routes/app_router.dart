@@ -18,6 +18,7 @@ class Routes {
   static String welcome = "/welcome";
   static String chatBot = "/chat-bot";
   static String home = "/home";
+  static String updateProfile = "/update-profile";
 
   static final Map<String, Widget Function(BuildContext)> routes = {
     splash: (context) => SplashScreen(),

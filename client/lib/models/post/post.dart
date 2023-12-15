@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:social_media_with_chatgpt/models/file/file.dart';
+import 'package:social_media_with_chatgpt/models/file/file_model.dart';
 import 'package:social_media_with_chatgpt/models/user/user.dart';
 import 'package:social_media_with_chatgpt/shared/enum/post_status.dart';
 
@@ -12,7 +12,7 @@ class Post with _$Post {
     String? postId,
     User? authorUser,
     @Default([]) List<User> sharedUser,
-    @Default([]) List<File> images,
+    @Default([]) List<FileModel> images,
     PostStatus? status,
     String? title,
     String? description,

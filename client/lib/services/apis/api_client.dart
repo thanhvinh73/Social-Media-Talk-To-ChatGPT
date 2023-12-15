@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:social_media_with_chatgpt/models/comment/comment.dart';
+import 'package:social_media_with_chatgpt/models/file/file_model.dart';
 import 'package:social_media_with_chatgpt/models/post/post.dart';
 import 'package:social_media_with_chatgpt/models/profile/profile.dart';
 
@@ -69,4 +70,16 @@ abstract class APIClient {
   @POST('/api/comments/{postId}/all')
   Future<ApiResponse<List<Comment>>> getCommentsByPost(
       @Path("postId") String postId, @Body() FormData body);
+
+  ///
+  /// File
+  ///
+  @POST('/api/files/upload')
+  Future<ApiResponse<FileModel>> uploadFile(@Body() FormData body);
+
+  @POST('/api/files/multi-upload')
+  Future<ApiResponse<List<FileModel>>> uploadMultiFile(@Body() FormData body);
+
+  @POST('/api/files/{fileId}/detail')
+  Future<ApiResponse<FileModel>> getDetailFile(@Path("fileId") String postId);
 }

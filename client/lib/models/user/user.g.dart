@@ -15,7 +15,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       createAt: json['createAt'] as int?,
       avatar: json['avatar'] == null
           ? null
-          : File.fromJson(json['avatar'] as Map<String, dynamic>),
+          : FileModel.fromJson(json['avatar'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>

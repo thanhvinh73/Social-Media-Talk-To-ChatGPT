@@ -16,19 +16,28 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AccountScreentState {
+  String? get errorMessage => throw _privateConstructorUsedError;
+  Profile? get profile => throw _privateConstructorUsedError;
+  ScreenStatus get status => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(
+            String? errorMessage, Profile? profile, ScreenStatus status)
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(
+            String? errorMessage, Profile? profile, ScreenStatus status)?
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(
+            String? errorMessage, Profile? profile, ScreenStatus status)?
+        initial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +57,10 @@ mixin _$AccountScreentState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AccountScreentStateCopyWith<AccountScreentState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +68,10 @@ abstract class $AccountScreentStateCopyWith<$Res> {
   factory $AccountScreentStateCopyWith(
           AccountScreentState value, $Res Function(AccountScreentState) then) =
       _$AccountScreentStateCopyWithImpl<$Res, AccountScreentState>;
+  @useResult
+  $Res call({String? errorMessage, Profile? profile, ScreenStatus status});
+
+  $ProfileCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
@@ -66,13 +83,55 @@ class _$AccountScreentStateCopyWithImpl<$Res, $Val extends AccountScreentState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorMessage = freezed,
+    Object? profile = freezed,
+    Object? status = null,
+  }) {
+    return _then(_value.copyWith(
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as Profile?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ScreenStatus,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileCopyWith<$Res>? get profile {
+    if (_value.profile == null) {
+      return null;
+    }
+
+    return $ProfileCopyWith<$Res>(_value.profile!, (value) {
+      return _then(_value.copyWith(profile: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
+abstract class _$$InitialImplCopyWith<$Res>
+    implements $AccountScreentStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? errorMessage, Profile? profile, ScreenStatus status});
+
+  @override
+  $ProfileCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
@@ -82,51 +141,100 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorMessage = freezed,
+    Object? profile = freezed,
+    Object? status = null,
+  }) {
+    return _then(_$InitialImpl(
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as Profile?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ScreenStatus,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+  const _$InitialImpl(
+      {this.errorMessage, this.profile, this.status = ScreenStatus.init});
+
+  @override
+  final String? errorMessage;
+  @override
+  final Profile? profile;
+  @override
+  @JsonKey()
+  final ScreenStatus status;
 
   @override
   String toString() {
-    return 'AccountScreentState.initial()';
+    return 'AccountScreentState.initial(errorMessage: $errorMessage, profile: $profile, status: $status)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$InitialImpl &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage) &&
+            (identical(other.profile, profile) || other.profile == profile) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, errorMessage, profile, status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function(
+            String? errorMessage, Profile? profile, ScreenStatus status)
+        initial,
   }) {
-    return initial();
+    return initial(errorMessage, profile, status);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function(
+            String? errorMessage, Profile? profile, ScreenStatus status)?
+        initial,
   }) {
-    return initial?.call();
+    return initial?.call(errorMessage, profile, status);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function(
+            String? errorMessage, Profile? profile, ScreenStatus status)?
+        initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial();
+      return initial(errorMessage, profile, status);
     }
     return orElse();
   }
@@ -161,5 +269,19 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements AccountScreentState {
-  const factory _Initial() = _$InitialImpl;
+  const factory _Initial(
+      {final String? errorMessage,
+      final Profile? profile,
+      final ScreenStatus status}) = _$InitialImpl;
+
+  @override
+  String? get errorMessage;
+  @override
+  Profile? get profile;
+  @override
+  ScreenStatus get status;
+  @override
+  @JsonKey(ignore: true)
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

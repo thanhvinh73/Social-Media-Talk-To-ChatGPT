@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:social_media_with_chatgpt/generated/assets.gen.dart';
 import 'package:social_media_with_chatgpt/routes/app_router.dart';
-import 'package:social_media_with_chatgpt/screens/account_screen/cubit/account_screent_cubit.dart';
 import 'package:social_media_with_chatgpt/screens/conversation_screen/cubit/conversation_screen_cubit.dart';
 import 'package:social_media_with_chatgpt/screens/notification_screen/cubit/notification_screen_cubit.dart';
 import 'package:social_media_with_chatgpt/shared/enum/main_tabs.dart';
@@ -49,7 +48,6 @@ class _MainScreenState extends State<MainScreen> {
           BlocProvider(create: (context) => MainScreenCubit()),
           BlocProvider(create: (context) => ConversationScreenCubit()),
           BlocProvider(create: (context) => NotificationScreenCubit()),
-          BlocProvider(create: (context) => AccountScreentCubit()),
         ],
         child: MultiBlocListener(
           listeners: [

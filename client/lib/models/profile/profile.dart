@@ -1,5 +1,9 @@
+// ignore_for_file: invalid_annotation_target
+
+import 'dart:io';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:social_media_with_chatgpt/models/file/file.dart';
+import 'package:social_media_with_chatgpt/models/file/file_model.dart';
 import 'package:social_media_with_chatgpt/shared/enum/gender.dart';
 import 'package:social_media_with_chatgpt/shared/enum/profile_status.dart';
 
@@ -16,9 +20,11 @@ class Profile with _$Profile {
     String? email,
     int? dateOfBirth,
     Gender? gender,
-    File? avatar,
-    File? coverPhoto,
+    FileModel? avatar,
+    FileModel? coverPhoto,
     ProfileStatus? status,
+    @JsonKey(includeFromJson: false, includeToJson: false) File? avatarFile,
+    @JsonKey(includeFromJson: false, includeToJson: false) File? coverPhotoFile,
   }) = _Profile;
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
