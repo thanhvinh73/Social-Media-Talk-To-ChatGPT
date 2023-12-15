@@ -4,10 +4,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:social_media_with_chatgpt/shared/extensions/string_ext.dart';
 
 import '../models/credential/credential.dart';
-import '../repositories/auth_repository.dart';
 import '../shared/utils/shared_preference.dart';
-import 'api_response/api_response.dart';
-import 'public_api.dart';
 
 class AppDio with DioMixin implements Dio {
   AppDio() {
@@ -65,14 +62,14 @@ class AppDio with DioMixin implements Dio {
 
 Future<Credential?> _refreshToken(String refreshToken) async {
   try {
-    final AuthRepository authRepository = AuthRepository(apis: PublicApi.apis);
+    // final AuthRepository authRepository = AuthRepository(apis: PublicApi.apis);
     sp.clear();
-    ApiResponse<Credential> res =
-        await authRepository.refreshToken(refreshToken);
-    if (res.data != null) {
-      sp.setToken(res.data!.accessToken, res.data!.refreshToken);
-      return res.data;
-    }
+    // ApiResponse<Credential> res =
+    //     await authRepository.refreshToken(refreshToken);
+    // if (res.data != null) {
+    //   sp.setToken(res.data!.accessToken, res.data!.refreshToken);
+    //   return res.data;
+    // }
     return null;
   } catch (err) {
     return null;

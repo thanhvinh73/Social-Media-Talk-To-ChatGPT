@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -9,6 +8,7 @@ import 'package:social_media_with_chatgpt/screens/account_screen/cubit/account_s
 import 'package:social_media_with_chatgpt/screens/conversation_screen/cubit/conversation_screen_cubit.dart';
 import 'package:social_media_with_chatgpt/screens/notification_screen/cubit/notification_screen_cubit.dart';
 import 'package:social_media_with_chatgpt/shared/enum/main_tabs.dart';
+import 'package:social_media_with_chatgpt/shared/utils/shared_preference.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_container.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_dismiss_keyboard.dart';
 
@@ -88,7 +88,10 @@ class _MainScreenState extends State<MainScreen> {
                   backgroundColor: AppColors.white,
                   elevation: 3,
                   onPressed: () {
-                    Get.toNamed(Routes.chatBot);
+                    // Get.toNamed(Routes.chatBot);
+                    sp.clear().then((value) {
+                      Get.toNamed(Routes.login);
+                    });
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:social_media_with_chatgpt/shared/utils/shared_preference.dart';
 
 import '../../public_providers/app_user_cubit/app_user_cubit.dart';
 import '../../public_providers/page_router_cubit/page_router_cubit.dart';
@@ -22,12 +23,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => PageRouterCubit(),
-        ),
-        BlocProvider(
-          create: (context) => AppUserCubit(),
-        ),
+        BlocProvider(create: (context) => PageRouterCubit()),
+        BlocProvider(create: (context) => AppUserCubit()),
       ],
       child: Builder(builder: (context) {
         return GetMaterialApp(
@@ -36,7 +33,8 @@ class _MyAppState extends State<MyApp> {
           locale: context.locale,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
-          initialRoute: Routes.connectToServer,
+          initialRoute:
+              sp.loggedBefore ? Routes.connectToServer : Routes.welcome,
           routes: Routes.routes,
           builder: (context, child) => botToastBuilder(context, child),
           navigatorObservers: [

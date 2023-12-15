@@ -2,8 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:social_media_with_chatgpt/shared/utils/shared_preference.dart';
-
 import '../../generated/assets.gen.dart';
 import '../../generated/translations.g.dart';
 import '../../public_providers/app_user_cubit/app_user_cubit.dart';
@@ -80,7 +78,7 @@ class ConnectToServerScreen extends StatelessWidget {
               return AppLayout(
                 leading: const SizedBox.shrink(),
                 resizeToAvoidBottomInset: true,
-                title: "Connect to server".toUpperCase(),
+                title: "Kết nối đến hệ thống".toUpperCase(),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: SingleChildScrollView(
@@ -92,37 +90,25 @@ class ConnectToServerScreen extends StatelessWidget {
                         Assets.icons.pcFetchApi
                             .svg(width: MediaQuery.of(context).size.width),
                         AppText(
-                          "Because the product is in the development stage. To be able to use the services, please enter the server link address below.",
+                          "Vì sản phẩm đang trong giai đoạn phát triển. Để có thể sử dụng các dịch vụ, vui lòng nhập địa chỉ liên kết đến máy chủ ở bên dưới.",
                           textAlign: TextAlign.justify,
                           color: AppColors.titleText,
                           fontSize: 16,
                         ),
                         AppTextField(
-                          placeholder: "Enter your url...",
+                          placeholder: "Nhập địa chỉ url của bạn tại đây",
                           controller: _textController,
-                          initValue: "http://10.0.2.2:8080",
+                          initValue: "https://4rmv3lht-8080.asse.devtunnels.ms",
                           onChanged: context
                               .read<ConnectToServerScreenCubit>()
                               .updateBaseUrl,
                         ),
                         AppButton(
                             width: MediaQuery.of(context).size.width,
-                            title: "Confirm",
-                            onPressed: () {
-                              if (sp.loggedBefore) {
-                                Get.toNamed(Routes.login);
-                                return;
-                              }
-                              sp.prefs
-                                  .setBool("logged_before", true)
-                                  .then((value) {
-                                Get.toNamed(Routes.welcome);
-                              });
-
-                              // context
-                              //     .read<ConnectToServerScreenCubit>()
-                              //     .confirmBaseUrl)
-                            })
+                            title: "Xác nhận",
+                            onPressed: context
+                                .read<ConnectToServerScreenCubit>()
+                                .confirmBaseUrl)
                       ],
                     ),
                   ),
