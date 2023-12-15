@@ -6,7 +6,7 @@ class AuthRepository {
   APIClient apis;
   AuthRepository({required this.apis});
 
-  Future<ApiResponse<String>> login(String email, String password) =>
+  Future<ApiResponse> login(String email, String password) =>
       apis.login({"email": email, "password": password});
 
   // Future logout() => apis.logout();

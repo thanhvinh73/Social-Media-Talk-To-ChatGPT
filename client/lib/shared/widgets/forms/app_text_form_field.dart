@@ -25,6 +25,7 @@ class AppTextFormField extends FormField<String> {
   final int? minLines;
   final List<ValidatorCallback> validators;
   final bool isRequired;
+  final double radius;
 
   AppTextFormField(
       {super.key,
@@ -45,6 +46,7 @@ class AppTextFormField extends FormField<String> {
       this.textStyle,
       this.maxLines = 1,
       this.minLines = 1,
+      this.radius = 50,
       this.isRequired = true})
       : super(
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -70,6 +72,7 @@ class AppTextFormField extends FormField<String> {
                 textStyle: textStyle,
                 maxLines: maxLines,
                 minLines: minLines,
+                radius: radius,
                 onChanged: (_) {
                   validator.didChange(_);
                   onchanged.call(_);

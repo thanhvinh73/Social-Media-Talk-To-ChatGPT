@@ -24,7 +24,7 @@ mixin _$User {
   String? get email => throw _privateConstructorUsedError;
   String? get firstname => throw _privateConstructorUsedError;
   String? get lastname => throw _privateConstructorUsedError;
-  Roles? get role => throw _privateConstructorUsedError;
+  Roles get role => throw _privateConstructorUsedError;
   int? get createAt => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? get password => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $UserCopyWith<$Res> {
       String? email,
       String? firstname,
       String? lastname,
-      Roles? role,
+      Roles role,
       int? createAt,
       @JsonKey(includeFromJson: false, includeToJson: false) String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -70,7 +70,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? email = freezed,
     Object? firstname = freezed,
     Object? lastname = freezed,
-    Object? role = freezed,
+    Object? role = null,
     Object? createAt = freezed,
     Object? password = freezed,
     Object? confirmPassword = freezed,
@@ -92,10 +92,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.lastname
           : lastname // ignore: cast_nullable_to_non_nullable
               as String?,
-      role: freezed == role
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as Roles?,
+              as Roles,
       createAt: freezed == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
@@ -124,7 +124,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? email,
       String? firstname,
       String? lastname,
-      Roles? role,
+      Roles role,
       int? createAt,
       @JsonKey(includeFromJson: false, includeToJson: false) String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -145,7 +145,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? email = freezed,
     Object? firstname = freezed,
     Object? lastname = freezed,
-    Object? role = freezed,
+    Object? role = null,
     Object? createAt = freezed,
     Object? password = freezed,
     Object? confirmPassword = freezed,
@@ -167,10 +167,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.lastname
           : lastname // ignore: cast_nullable_to_non_nullable
               as String?,
-      role: freezed == role
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as Roles?,
+              as Roles,
       createAt: freezed == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
@@ -195,7 +195,7 @@ class _$UserImpl implements _User {
       this.email,
       this.firstname,
       this.lastname,
-      this.role,
+      this.role = Roles.USER,
       this.createAt,
       @JsonKey(includeFromJson: false, includeToJson: false) this.password,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -213,7 +213,8 @@ class _$UserImpl implements _User {
   @override
   final String? lastname;
   @override
-  final Roles? role;
+  @JsonKey()
+  final Roles role;
   @override
   final int? createAt;
   @override
@@ -273,7 +274,7 @@ abstract class _User implements User {
       final String? email,
       final String? firstname,
       final String? lastname,
-      final Roles? role,
+      final Roles role,
       final int? createAt,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final String? password,
@@ -291,7 +292,7 @@ abstract class _User implements User {
   @override
   String? get lastname;
   @override
-  Roles? get role;
+  Roles get role;
   @override
   int? get createAt;
   @override

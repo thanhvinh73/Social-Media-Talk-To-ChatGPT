@@ -23,8 +23,8 @@ class Routes {
     splash: (context) => SplashScreen(),
     connectToServer: (context) => ConnectToServerScreen(),
     main: (context) => const MainScreen(),
-    login: (context) => const LoginScreen(),
-    register: (context) => const RegisterScreen(),
+    login: (context) => LoginScreen(),
+    register: (context) => RegisterScreen(),
     welcome: (context) => OnboardingScreen(),
     chatBot: (context) => ChatBotScreen(),
     home: (context) => const HomeScreen()

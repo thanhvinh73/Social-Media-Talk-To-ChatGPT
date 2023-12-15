@@ -13,7 +13,7 @@ class User with _$User {
     String? email,
     String? firstname,
     String? lastname,
-    Roles? role,
+    @Default(Roles.USER) Roles role,
     int? createAt,
     @JsonKey(includeFromJson: false, includeToJson: false) String? password,
     @JsonKey(includeFromJson: false, includeToJson: false)
