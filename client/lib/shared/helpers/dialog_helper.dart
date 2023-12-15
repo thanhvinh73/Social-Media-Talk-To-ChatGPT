@@ -34,6 +34,12 @@ class ErrorDialogWidget extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(16),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
+        const Icon(
+          Icons.error,
+          color: Colors.red,
+          size: 55,
+        ),
+        const SizedBox(height: 8),
         Text(
           title ?? tr(LocaleKeys.Auth_Error),
           textAlign: TextAlign.center,
@@ -105,6 +111,12 @@ class ConfirmDialogWidget extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(16),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
+        const Icon(
+          Icons.check_circle_outline_outlined,
+          color: Colors.green,
+          size: 55,
+        ),
+        const SizedBox(height: 8),
         Text(
           title ?? tr(LocaleKeys.App_Confirm),
           textAlign: TextAlign.center,
@@ -129,8 +141,10 @@ class ConfirmDialogWidget extends StatelessWidget {
           children: [
             Expanded(
               child: AppButton(
-                color: AppColors.green,
+                color: AppColors.white,
+                borderColor: AppColors.green,
                 title: tr(LocaleKeys.App_Cancel),
+                titleColor: AppColors.green,
                 onPressed: () {
                   Navigator.of(context).pop(false);
                   onReject?.call();
@@ -186,6 +200,12 @@ class SuccessDialogWidget extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(16),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
+        const Icon(
+          Icons.check_circle_sharp,
+          color: Colors.green,
+          size: 55,
+        ),
+        const SizedBox(height: 8),
         Text(
           title ?? tr(LocaleKeys.App_Success),
           style: const TextStyle(
