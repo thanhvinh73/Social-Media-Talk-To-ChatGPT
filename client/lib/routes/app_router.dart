@@ -15,7 +15,7 @@ class Routes {
   static String main = "/main";
   static String login = "/login";
   static String register = "/register";
-  static String welcome = "/wecome";
+  static String welcome = "/welcome";
   static String chatBot = "/chat-bot";
   static String home = "/home";
 

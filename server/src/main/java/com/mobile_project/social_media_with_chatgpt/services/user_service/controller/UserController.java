@@ -35,7 +35,7 @@ public class UserController {
         try {
             return ResponseEntity.ok(ApiResponse.success(userService.getUserByToken(token).get()));
         } catch (ExpiredJwtException e) {
-            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.AUTH002", "Token is expired!"), "403"),
+            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.AUTH002", "Token is expired!"), 403),
                     HttpStatus.FORBIDDEN);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(
@@ -52,31 +52,30 @@ public class UserController {
     public ResponseEntity<ApiResponse<Object>> getUserByUserId(@PathVariable("userId") String userId) {
         try {
             return ResponseEntity
-                    .ok(new ApiResponse<Object>(userService.getDataById(UUID.fromString(userId)).get(), "200"));
+                    .ok(new ApiResponse<Object>(userService.getDataById(UUID.fromString(userId)).get(), 200));
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(
-                    new ApiResponse<>(new ErrorResponse("ERR.USER001", "User id not found!"), "400"),
+                    new ApiResponse<>(new ErrorResponse("ERR.USER001", "User id not found!"), 400),
                     HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.COM001", e.toString()), "400"),
+            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.COM001", e.toString()), 400),
                     HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @GetMapping("/profile")
     public ResponseEntity<ApiResponse<Object>> getUserProfile(@RequestHeader("Authorization") String token) {
         try {
-            return ResponseEntity.ok(new ApiResponse<Object>(userService.getProfileByUser(token).get(), "200"));
+            return ResponseEntity.ok(new ApiResponse<Object>(userService.getProfileByUser(token).get(), 200));
         } catch (ExpiredJwtException e) {
-            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.AUTH002", "Token is expired!"), "403"),
+            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.AUTH002", "Token is expired!"), 403),
                     HttpStatus.FORBIDDEN);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(
-                    new ApiResponse<>(new ErrorResponse("ERR.USER003", "Profile is not found!"), "400"),
+                    new ApiResponse<>(new ErrorResponse("ERR.USER003", "Profile is not found!"), 400),
                     HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.COM001", e.toString()), "400"),
+            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.COM001", e.toString()), 400),
                     HttpStatus.BAD_REQUEST);
         }
     }
@@ -86,16 +85,16 @@ public class UserController {
             @RequestBody ProfileResponse body) {
         try {
             return ResponseEntity.ok(
-                    new ApiResponse<Object>(userService.updateProfile(token, body).get(), "200"));
+                    new ApiResponse<Object>(userService.updateProfile(token, body).get(), 200));
         } catch (ExpiredJwtException e) {
-            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.AUTH002", "Token is expired!"), "403"),
+            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.AUTH002", "Token is expired!"), 403),
                     HttpStatus.FORBIDDEN);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(
-                    new ApiResponse<>(new ErrorResponse("ERR.USER003", "Profile is not found!"), "400"),
+                    new ApiResponse<>(new ErrorResponse("ERR.USER003", "Profile is not found!"), 400),
                     HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.COM001", e.toString()), "400"),
+            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.COM001", e.toString()), 400),
                     HttpStatus.BAD_REQUEST);
         }
     }
@@ -106,16 +105,16 @@ public class UserController {
             @RequestParam(name = "cover_photo", required = false) MultipartFile coverPhoto) {
         try {
             return ResponseEntity.ok(
-                    new ApiResponse<Object>(userService.updateProfileImage(token, avatar, coverPhoto).get(), "200"));
+                    new ApiResponse<Object>(userService.updateProfileImage(token, avatar, coverPhoto).get(), 200));
         } catch (ExpiredJwtException e) {
-            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.AUTH002", "Token is expired!"), "403"),
+            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.AUTH002", "Token is expired!"), 403),
                     HttpStatus.FORBIDDEN);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(
-                    new ApiResponse<>(new ErrorResponse("ERR.USER003", "Profile is not found!"), "400"),
+                    new ApiResponse<>(new ErrorResponse("ERR.USER003", "Profile is not found!"), 400),
                     HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.COM001", e.toString()), "400"),
+            return new ResponseEntity<>(new ApiResponse<>(new ErrorResponse("ERR.COM001", e.toString()), 400),
                     HttpStatus.BAD_REQUEST);
         }
     }

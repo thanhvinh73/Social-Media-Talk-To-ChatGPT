@@ -55,7 +55,7 @@ class ErrorDialogWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         AppButton(
-          color: AppColors.primaryColor,
+          color: AppColors.green,
           title: tr(LocaleKeys.App_Close),
           onPressed: () {
             Navigator.of(context).pop();
@@ -129,7 +129,7 @@ class ConfirmDialogWidget extends StatelessWidget {
           children: [
             Expanded(
               child: AppButton(
-                color: AppColors.primaryColor,
+                color: AppColors.green,
                 title: tr(LocaleKeys.App_Cancel),
                 onPressed: () {
                   Navigator.of(context).pop(false);
@@ -140,7 +140,7 @@ class ConfirmDialogWidget extends StatelessWidget {
             const SizedBox(width: 8),
             Expanded(
               child: AppButton(
-                color: AppColors.primaryColor,
+                color: AppColors.green,
                 title: tr(LocaleKeys.App_Ok),
                 onPressed: () {
                   Navigator.of(context).pop(true);
@@ -206,7 +206,7 @@ class SuccessDialogWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         AppButton(
-          color: AppColors.primaryColor,
+          color: AppColors.green,
           title: tr(LocaleKeys.App_Ok),
           onPressed: () {
             Navigator.of(context).pop();

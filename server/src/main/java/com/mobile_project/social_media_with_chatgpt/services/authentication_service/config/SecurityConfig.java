@@ -28,7 +28,7 @@ public class SecurityConfig {
                                                 request -> request
                                                                 .requestMatchers("/api/auth/**", "/api/users/**",
                                                                                 "/api/files/**",
-                                                                                "/api/comments/**")
+                                                                                "/api/comments/**", "/ws")
                                                                 .permitAll()
                                                                 .anyRequest()
                                                                 .authenticated())

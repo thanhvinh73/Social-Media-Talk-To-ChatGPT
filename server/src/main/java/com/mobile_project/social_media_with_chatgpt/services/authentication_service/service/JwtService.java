@@ -1,6 +1,5 @@
 package com.mobile_project.social_media_with_chatgpt.services.authentication_service.service;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -41,16 +40,17 @@ public class JwtService {
         return Jwts.builder()
                 .claims(extraClaims)
                 .subject(userdetails.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 120))
+                // .issuedAt(new Date(System.currentTimeMillis()))
+                // .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 120))
                 .id(UUID.randomUUID().toString())
                 .signWith(getSignInKey(), Jwts.SIG.HS256).compact();
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String userId = extractUserId(token);
-        final boolean isTokenExpired = extractClaim(token, Claims::getExpiration).before(new Date());
-        return (userId.equals(userDetails.getUsername())) && !isTokenExpired;
+        // final boolean isTokenExpired = extractClaim(token,
+        // Claims::getExpiration).before(new Date());
+        return (userId.equals(userDetails.getUsername()));
     }
 
     private Claims extractAllClaims(String token) {

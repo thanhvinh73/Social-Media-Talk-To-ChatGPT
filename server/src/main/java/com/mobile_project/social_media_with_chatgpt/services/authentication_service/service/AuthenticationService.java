@@ -16,6 +16,7 @@ import com.mobile_project.social_media_with_chatgpt.services.authentication_serv
 import com.mobile_project.social_media_with_chatgpt.services.authentication_service.models.AuthenticationResponse;
 import com.mobile_project.social_media_with_chatgpt.services.authentication_service.models.RegisterRequest;
 import com.mobile_project.social_media_with_chatgpt.shared.enums.UserRole;
+import com.mobile_project.social_media_with_chatgpt.shared.exceptions.EmailExistedException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +31,12 @@ public class AuthenticationService implements IAuthenticationService {
         private final AuthenticationManager authenticationManager;
 
         @Override
-        public AuthenticationResponse register(RegisterRequest request) {
+        public AuthenticationResponse register(RegisterRequest request) throws EmailExistedException {
+                UserEntity userEntity = repository.findByEmail(request.getEmail()).orElse(null);
+                if (userEntity != null) {
+                        throw new EmailExistedException();
+                }
+
                 UserEntity user = UserEntity.builder()
                                 .firstname(request.getFirstname())
                                 .lastname(request.getLastname())

@@ -22,7 +22,10 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   String? get id => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  String? get username => throw _privateConstructorUsedError;
+  String? get firstname => throw _privateConstructorUsedError;
+  String? get lastname => throw _privateConstructorUsedError;
+  Roles? get role => throw _privateConstructorUsedError;
+  int? get createAt => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? get password => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -41,7 +44,10 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String? id,
       String? email,
-      String? username,
+      String? firstname,
+      String? lastname,
+      Roles? role,
+      int? createAt,
       @JsonKey(includeFromJson: false, includeToJson: false) String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
       String? confirmPassword});
@@ -62,7 +68,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = freezed,
     Object? email = freezed,
-    Object? username = freezed,
+    Object? firstname = freezed,
+    Object? lastname = freezed,
+    Object? role = freezed,
+    Object? createAt = freezed,
     Object? password = freezed,
     Object? confirmPassword = freezed,
   }) {
@@ -75,10 +84,22 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      username: freezed == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      firstname: freezed == firstname
+          ? _value.firstname
+          : firstname // ignore: cast_nullable_to_non_nullable
               as String?,
+      lastname: freezed == lastname
+          ? _value.lastname
+          : lastname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Roles?,
+      createAt: freezed == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as int?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -101,7 +122,10 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String? id,
       String? email,
-      String? username,
+      String? firstname,
+      String? lastname,
+      Roles? role,
+      int? createAt,
       @JsonKey(includeFromJson: false, includeToJson: false) String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
       String? confirmPassword});
@@ -119,7 +143,10 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? email = freezed,
-    Object? username = freezed,
+    Object? firstname = freezed,
+    Object? lastname = freezed,
+    Object? role = freezed,
+    Object? createAt = freezed,
     Object? password = freezed,
     Object? confirmPassword = freezed,
   }) {
@@ -132,10 +159,22 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      username: freezed == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      firstname: freezed == firstname
+          ? _value.firstname
+          : firstname // ignore: cast_nullable_to_non_nullable
               as String?,
+      lastname: freezed == lastname
+          ? _value.lastname
+          : lastname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Roles?,
+      createAt: freezed == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as int?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -154,7 +193,10 @@ class _$UserImpl implements _User {
   const _$UserImpl(
       {this.id,
       this.email,
-      this.username,
+      this.firstname,
+      this.lastname,
+      this.role,
+      this.createAt,
       @JsonKey(includeFromJson: false, includeToJson: false) this.password,
       @JsonKey(includeFromJson: false, includeToJson: false)
       this.confirmPassword});
@@ -167,7 +209,13 @@ class _$UserImpl implements _User {
   @override
   final String? email;
   @override
-  final String? username;
+  final String? firstname;
+  @override
+  final String? lastname;
+  @override
+  final Roles? role;
+  @override
+  final int? createAt;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   final String? password;
@@ -177,7 +225,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, username: $username, password: $password, confirmPassword: $confirmPassword)';
+    return 'User(id: $id, email: $email, firstname: $firstname, lastname: $lastname, role: $role, createAt: $createAt, password: $password, confirmPassword: $confirmPassword)';
   }
 
   @override
@@ -187,8 +235,13 @@ class _$UserImpl implements _User {
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.username, username) ||
-                other.username == username) &&
+            (identical(other.firstname, firstname) ||
+                other.firstname == firstname) &&
+            (identical(other.lastname, lastname) ||
+                other.lastname == lastname) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.createAt, createAt) ||
+                other.createAt == createAt) &&
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.confirmPassword, confirmPassword) ||
@@ -197,8 +250,8 @@ class _$UserImpl implements _User {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, email, username, password, confirmPassword);
+  int get hashCode => Object.hash(runtimeType, id, email, firstname, lastname,
+      role, createAt, password, confirmPassword);
 
   @JsonKey(ignore: true)
   @override
@@ -218,7 +271,10 @@ abstract class _User implements User {
   const factory _User(
       {final String? id,
       final String? email,
-      final String? username,
+      final String? firstname,
+      final String? lastname,
+      final Roles? role,
+      final int? createAt,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -231,7 +287,13 @@ abstract class _User implements User {
   @override
   String? get email;
   @override
-  String? get username;
+  String? get firstname;
+  @override
+  String? get lastname;
+  @override
+  Roles? get role;
+  @override
+  int? get createAt;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? get password;

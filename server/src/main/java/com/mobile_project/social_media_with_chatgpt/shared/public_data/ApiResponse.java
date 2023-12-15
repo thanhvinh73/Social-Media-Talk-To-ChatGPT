@@ -13,13 +13,13 @@ import lombok.Setter;
 @Builder
 public class ApiResponse<T> {
     private T data;
-    private String statusCode;
+    private Integer status;
 
     public static <T> ApiResponse<T> success(T data) {
-        return new ApiResponse<T>(data, "200");
+        return new ApiResponse<T>(data, 200);
     }
 
     public static <T> ApiResponse<T> fail(T data) {
-        return new ApiResponse<T>(data, "400");
+        return new ApiResponse<T>(data, 400);
     }
 }

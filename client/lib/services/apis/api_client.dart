@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:social_media_with_chatgpt/models/comment/comment.dart';
+import 'package:social_media_with_chatgpt/models/post/post.dart';
+import 'package:social_media_with_chatgpt/models/profile/profile.dart';
 
-import '../../models/credential/credential.dart';
 import '../../models/user/user.dart';
 import '../api_response/api_response.dart';
 
@@ -11,21 +13,60 @@ part 'api_client.g.dart';
 abstract class APIClient {
   factory APIClient(Dio dio, {String baseUrl}) = _APIClient;
 
-  // Auth
+  ///
+  /// Auth
+  ///
   @POST('/api/auth/login')
-  Future<ApiResponse<Credential>> login(@Body() Map<String, dynamic> body);
-
-  @POST('/api/auth/revoke')
-  Future<ApiResponse<dynamic>> logout();
+  Future<ApiResponse<String>> login(@Body() Map<String, dynamic> body);
 
   @POST("/api/auth/register")
   Future<ApiResponse<User>> register(@Body() Map<String, dynamic> body);
 
-  @POST('/api/refresh_token')
-  Future<ApiResponse<Credential>> refreshToken(
-      @Body() Map<String, dynamic> body);
-
-  // User
+  ///
+  /// User & Profile
+  ///
   @GET('/api/users')
   Future<ApiResponse<User>> getUser();
+
+  @GET('/api/users/{userId}')
+  Future<ApiResponse<User>> getUserByUserId(@Path("userId") String userId);
+
+  @GET('/api/users/profile')
+  Future<ApiResponse<Profile>> getUserProfile();
+
+  @PATCH('/api/users/profile')
+  Future<ApiResponse<Profile>> updateProfile(@Body() Map<String, dynamic> body);
+
+  @PATCH('/api/users/profile-image')
+  Future<ApiResponse<Profile>> updateProfileImage(@Body() FormData body);
+
+  ///
+  /// Post
+  ///
+  @POST('/api/posts')
+  Future<ApiResponse<Post>> createPost(@Body() FormData body);
+
+  @GET('/api/posts/{postId}')
+  Future<ApiResponse<Post>> getPostById(@Path("postId") String postId);
+
+  @GET('/api/posts/my-post')
+  Future<ApiResponse<List<Post>>> getMyPost();
+
+  @PATCH('/api/posts/{postId}')
+  Future<ApiResponse<Post>> updatePost(
+      @Path("postId") String postId, @Body() Map<String, dynamic> body);
+
+  @DELETE('/api/posts/{postId}')
+  Future<ApiResponse> deletePost(@Path("postId") String postId);
+
+  ///
+  /// Comment
+  ///
+  @POST('/api/comments/{postId}')
+  Future<ApiResponse<Comment>> createComment(
+      @Path("postId") String postId, @Body() FormData body);
+
+  @POST('/api/comments/{postId}/all')
+  Future<ApiResponse<List<Comment>>> getCommentsByPost(
+      @Path("postId") String postId, @Body() FormData body);
 }

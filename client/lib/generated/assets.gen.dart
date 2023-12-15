@@ -117,6 +117,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/google.png
   AssetGenImage get google => const AssetGenImage('assets/images/google.png');
 
+  /// File path: assets/images/image_loading.png
+  AssetGenImage get imageLoading =>
+      const AssetGenImage('assets/images/image_loading.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -132,8 +136,15 @@ class $AssetsImagesGen {
   AssetGenImage get voice => const AssetGenImage('assets/images/voice.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [emptyConversation, google, logo, microsoft, voiceNoBackground, voice];
+  List<AssetGenImage> get values => [
+        emptyConversation,
+        google,
+        imageLoading,
+        logo,
+        microsoft,
+        voiceNoBackground,
+        voice
+      ];
 }
 
 class $AssetsTranslationsGen {
@@ -149,9 +160,13 @@ class $AssetsTranslationsGen {
 class Assets {
   Assets._();
 
+  static const String comTan5f0885096433 = 'assets/com-tan-5f0885096433.json';
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
+
+  /// List of all assets
+  List<String> get values => [comTan5f0885096433];
 }
 
 class AssetGenImage {
