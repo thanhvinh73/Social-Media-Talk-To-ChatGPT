@@ -1,131 +1,216 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:social_media_with_chatgpt/models/post/post.dart';
-import 'package:social_media_with_chatgpt/shared/utils/app_colors.dart';
-import 'package:social_media_with_chatgpt/shared/widgets/app_container.dart';
-import 'package:social_media_with_chatgpt/shared/widgets/app_image.dart';
-import 'package:social_media_with_chatgpt/shared/widgets/text/app_text.dart';
+import 'package:social_media_with_chatgpt/components/avatar.dart';
+import 'package:social_media_with_chatgpt/shared/widgets/app_dismiss_keyboard.dart';
 
-class HomePostItem extends StatefulWidget {
-  const HomePostItem({
-    super.key,
-    required this.post,
-    this.onTap,
-  });
-  final Post post;
-  final VoidCallback? onTap;
-
-  @override
-  State<HomePostItem> createState() => _HomePostItemState();
-}
-
-class _HomePostItemState extends State<HomePostItem> {
-  bool like = false;
-
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: widget.onTap,
-        child: AppContainer(
-          color: Colors.white,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                child: Column(
-                  children: [
-                    Row(
+    return AppDismissKeyboard(
+      onWillPop: false,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  _BuildHeader(),
+                  SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.all(24.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        AppImage(
-                          backgroundColor: AppColors.white,
-                          height: 50,
-                          width: 50,
-                          borderRadius: BorderRadius.circular(50),
-                          url: "",
-                        ),
-                        SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AppText(
-                              "ilovecat123",
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.titleText,
-                            ),
-                            AppText(
-                              "ilovecat123",
-                              color: AppColors.bodyText,
-                            ),
-                          ],
-                        ),
+                        _PostingContainer(
+                            "https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/plus-512.png"),
                       ],
                     ),
-                    AppText(
-                      "Post content goes here. This can be a long text, an image, or any other content.",
-                      color: AppColors.bodyText,
-                      fontWeight: FontWeight.w500,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    height: 80,
+                    alignment: Alignment.centerLeft,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0), // Add horizontal padding
+                      itemExtent: 100, // Set a fixed width for each child
+                      children: [
+                        _buildStoryCircle(
+                            "https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/plus-512.png",
+                            "Add"),
+                        _buildStoryCircle(
+                            "https://images.theconversation.com/files/232705/original/file-20180820-30593-1nxanpj.jpg?ixlib=rb-1.1.0&q=20&auto=format&w=320&fit=clip&dpr=2&usm=12&cs=strip",
+                            "Duy Minh Truong"),
+                        _buildStoryCircle(
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7wtRL1f_19R_ctRH1udYnDWzZLp-Ad8K6_g&usqp=CAU",
+                            "kaka123"),
+                        _buildStoryCircle(
+                            "https://cdn.pixabay.com/photo/2021/03/13/14/29/capybara-6091872_1280.jpg",
+                            "hello mom"),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              AppImage(
-                url:
-                    "https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg",
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(height: 8),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          like = !like;
-                        });
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    child: ListView.builder(
+                      itemCount:
+                          5, // Change this to the number of posts you want to display
+                      itemBuilder: (context, index) {
+                        return _buildPostContainer();
                       },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          like
-                              ? Icon(Icons.favorite, color: AppColors.red)
-                              : Icon(Icons.favorite_border_rounded),
-                          const SizedBox(width: 4),
-                          AppText(
-                            "Yêu thích",
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          )
-                        ],
-                      ),
                     ),
-                    InkWell(
-                      onTap: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(CupertinoIcons.chat_bubble),
-                          const SizedBox(width: 4),
-                          AppText(
-                            "Bình luận",
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Row _BuildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Image(
+          image: AssetImage("assets/images/logo.png"),
+          height: 60,
+        ),
+        Icon(Icons.search, size: 30),
+      ],
+    );
+  }
+
+  Container _PostingContainer(String url) {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Avatar.big(
+                  imageUrl: url != ""
+                      ? url
+                      : "https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/plus-512.png",
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(width: 10),
+              Expanded(
+                flex: 3,
+                child: TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your text here...',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
             ],
           ),
-        ));
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildIconWithText(Icons.image, "Image"),
+              _buildIconWithText(Icons.video_collection, "Video"),
+              _buildIconWithText(Icons.file_copy, "File"),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStoryCircle(String url, String text) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Avatar.medium(imageUrl: url),
+        Text(
+          text,
+          style: TextStyle(fontSize: 12),
+        )
+      ],
+    );
+  }
+
+  Widget _buildPostContainer() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Avatar.medium(
+                imageUrl:
+                    "https://hips.hearstapps.com/hmg-prod/images/neva-masquerade-royalty-free-image-1674509896.jpg?crop=0.8109xw:1xh;center,top&resize=1200:*", // Replace with the actual avatar URL
+              ),
+              SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "ilovecat123", // Replace with the actual user name
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "11:26PM 12/7/2003", // Replace with the actual date and time
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            "Post content goes here. This can be a long text, an image, or any other content.",
+          ),
+          Image(
+              image: NetworkImage(
+                  "https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg"))
+          // Add any other widgets for post content (e.g., images)
+        ],
+      ),
+    );
+  }
+
+  Widget _buildIconWithText(IconData icon, String text) {
+    return InkWell(
+      onTap: () {
+        print('$text tapped!');
+      },
+      child: Row(
+        children: [
+          Icon(icon),
+          SizedBox(width: 8.0),
+          Text(text),
+        ],
+      ),
+    );
   }
 }
