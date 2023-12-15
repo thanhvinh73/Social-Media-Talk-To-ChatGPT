@@ -1,17 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:social_media_with_chatgpt/routes/app_router.dart';
 
 import '../utils/app_colors.dart';
 import 'app_text.dart';
 
 class AppListImage extends StatelessWidget {
-  const AppListImage(
-      {super.key,
-      required this.imgsUrl,
-      this.amountOfImageShow = 3,
-      this.spaceXY = 4,
-      this.borderRadius = 8,
-      this.onTap});
+  const AppListImage({
+    super.key,
+    required this.imgsUrl,
+    this.amountOfImageShow = 3,
+    this.spaceXY = 4,
+    this.borderRadius = 8,
+    this.onTap,
+  });
   final List<String> imgsUrl;
   final int amountOfImageShow;
   final double borderRadius;
@@ -24,7 +27,7 @@ class AppListImage extends StatelessWidget {
       builder: (context, constraints) {
         final size = constraints.maxWidth / 3.1;
         return Wrap(
-          alignment: WrapAlignment.end,
+          alignment: WrapAlignment.start,
           runSpacing: spaceXY,
           spacing: spaceXY,
           children: [
@@ -35,7 +38,7 @@ class AppListImage extends StatelessWidget {
                     if (onTap != null) {
                       onTap!.call(i);
                     } else {
-                      // Get.toNamed(Routes.photoGallery, arguments: [imgsUrl, i]);
+                      Get.toNamed(Routes.photoGallery, arguments: [imgsUrl, i]);
                     }
                   },
                   child: ClipRRect(
@@ -56,8 +59,8 @@ class AppListImage extends StatelessWidget {
                   if (onTap != null) {
                     onTap!.call(amountOfImageShow - 2);
                   } else {
-                    // Get.toNamed(Routes.photoGallery,
-                    //     arguments: [imgsUrl, amountOfImageShow - 2]);
+                    Get.toNamed(Routes.photoGallery,
+                        arguments: [imgsUrl, amountOfImageShow - 2]);
                   }
                 },
                 child: Container(

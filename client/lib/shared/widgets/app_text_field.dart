@@ -29,6 +29,7 @@ class AppTextField extends StatefulWidget {
   final bool? showCursor;
   final String? initValue;
   final TextStyle? textStyle;
+  final FocusNode? focusNode;
   const AppTextField({
     super.key,
     //
@@ -56,6 +57,7 @@ class AppTextField extends StatefulWidget {
     this.showCursor = true,
     this.initValue,
     this.textStyle,
+    this.focusNode,
     //
   });
 
@@ -109,6 +111,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 color: widget.backgroundColor ?? Colors.white,
                 borderRadius: BorderRadius.circular(widget.radius)),
             child: TextField(
+              focusNode: widget.focusNode,
               decoration: InputDecoration(
                   isDense: true,
                   hintStyle: const TextStyle(
@@ -164,10 +167,10 @@ class _AppTextFieldState extends State<AppTextField> {
                                           .svg(width: 20, height: 20)),
                             )
                           : null),
-                  suffixIconConstraints: const BoxConstraints(
-                    maxHeight: 42,
-                    maxWidth: 56,
-                  ),
+                  // suffixIconConstraints: const BoxConstraints(
+                  //   maxHeight: 42,
+                  //   maxWidth: 56,
+                  // ),
                   prefixIcon: widget.prefixIcon,
                   prefixIconConstraints: widget.prefixIcon != null
                       ? const BoxConstraints(maxHeight: 32)

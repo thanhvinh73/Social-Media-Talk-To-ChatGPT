@@ -18,52 +18,58 @@ class AppImage extends StatelessWidget {
   final File? file;
   final EdgeInsets imagePadding;
   final Color backgroundColor;
-  const AppImage(
-      {this.url,
-      this.assetUrl,
-      this.borderRadius = BorderRadius.zero,
-      this.width,
-      this.height,
-      this.fit = BoxFit.cover,
-      this.file,
-      this.backgroundColor = AppColors.transparent,
-      this.imagePadding = EdgeInsets.zero,
-      super.key});
+  final VoidCallback? onTap;
+  const AppImage({
+    this.url,
+    this.assetUrl,
+    this.borderRadius = BorderRadius.zero,
+    this.width,
+    this.height,
+    this.fit = BoxFit.cover,
+    this.file,
+    this.backgroundColor = AppColors.transparent,
+    this.imagePadding = EdgeInsets.zero,
+    this.onTap,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: borderRadius,
-      child: Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(color: backgroundColor),
-          padding: imagePadding,
-          child: Builder(builder: (context) {
-            if (file != null) {
-              return Image.file(
-                file!,
-                fit: fit,
-              );
-            } else if (url.isNotEmptyOrNull) {
-              return CachedNetworkImage(
-                imageUrl: url!,
-                fit: fit,
-                placeholder: (context, url) => imagePlaceHolder,
-                errorWidget: (context, url, error) => imagePlaceHolder,
-              );
-            } else if (assetUrl.isNotEmptyOrNull) {
-              return SizedBox(
-                width: 200,
-                height: 200,
-                child: Image.asset(
-                  assetUrl!,
+    return InkWell(
+      onTap: onTap,
+      child: ClipRRect(
+        borderRadius: borderRadius,
+        child: Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(color: backgroundColor),
+            padding: imagePadding,
+            child: Builder(builder: (context) {
+              if (file != null) {
+                return Image.file(
+                  file!,
                   fit: fit,
-                ),
-              );
-            }
-            return imagePlaceHolder;
-          })),
+                );
+              } else if (url.isNotEmptyOrNull) {
+                return CachedNetworkImage(
+                  imageUrl: url!,
+                  fit: fit,
+                  placeholder: (context, url) => imagePlaceHolder,
+                  errorWidget: (context, url, error) => imagePlaceHolder,
+                );
+              } else if (assetUrl.isNotEmptyOrNull) {
+                return SizedBox(
+                  width: 200,
+                  height: 200,
+                  child: Image.asset(
+                    assetUrl!,
+                    fit: fit,
+                  ),
+                );
+              }
+              return imagePlaceHolder;
+            })),
+      ),
     );
   }
 }
