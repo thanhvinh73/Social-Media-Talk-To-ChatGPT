@@ -26,6 +26,7 @@ mixin _$User {
   String? get lastname => throw _privateConstructorUsedError;
   Roles get role => throw _privateConstructorUsedError;
   int? get createAt => throw _privateConstructorUsedError;
+  File? get avatar => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? get password => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,9 +49,12 @@ abstract class $UserCopyWith<$Res> {
       String? lastname,
       Roles role,
       int? createAt,
+      File? avatar,
       @JsonKey(includeFromJson: false, includeToJson: false) String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
       String? confirmPassword});
+
+  $FileCopyWith<$Res>? get avatar;
 }
 
 /// @nodoc
@@ -72,6 +76,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? lastname = freezed,
     Object? role = null,
     Object? createAt = freezed,
+    Object? avatar = freezed,
     Object? password = freezed,
     Object? confirmPassword = freezed,
   }) {
@@ -100,6 +105,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as int?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as File?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -109,6 +118,18 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           : confirmPassword // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $FileCopyWith<$Res>? get avatar {
+    if (_value.avatar == null) {
+      return null;
+    }
+
+    return $FileCopyWith<$Res>(_value.avatar!, (value) {
+      return _then(_value.copyWith(avatar: value) as $Val);
+    });
   }
 }
 
@@ -126,9 +147,13 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? lastname,
       Roles role,
       int? createAt,
+      File? avatar,
       @JsonKey(includeFromJson: false, includeToJson: false) String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
       String? confirmPassword});
+
+  @override
+  $FileCopyWith<$Res>? get avatar;
 }
 
 /// @nodoc
@@ -147,6 +172,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? lastname = freezed,
     Object? role = null,
     Object? createAt = freezed,
+    Object? avatar = freezed,
     Object? password = freezed,
     Object? confirmPassword = freezed,
   }) {
@@ -175,6 +201,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as int?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as File?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -197,6 +227,7 @@ class _$UserImpl implements _User {
       this.lastname,
       this.role = Roles.USER,
       this.createAt,
+      this.avatar,
       @JsonKey(includeFromJson: false, includeToJson: false) this.password,
       @JsonKey(includeFromJson: false, includeToJson: false)
       this.confirmPassword});
@@ -218,6 +249,8 @@ class _$UserImpl implements _User {
   @override
   final int? createAt;
   @override
+  final File? avatar;
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   final String? password;
   @override
@@ -226,7 +259,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, firstname: $firstname, lastname: $lastname, role: $role, createAt: $createAt, password: $password, confirmPassword: $confirmPassword)';
+    return 'User(id: $id, email: $email, firstname: $firstname, lastname: $lastname, role: $role, createAt: $createAt, avatar: $avatar, password: $password, confirmPassword: $confirmPassword)';
   }
 
   @override
@@ -243,6 +276,7 @@ class _$UserImpl implements _User {
             (identical(other.role, role) || other.role == role) &&
             (identical(other.createAt, createAt) ||
                 other.createAt == createAt) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.confirmPassword, confirmPassword) ||
@@ -252,7 +286,7 @@ class _$UserImpl implements _User {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, email, firstname, lastname,
-      role, createAt, password, confirmPassword);
+      role, createAt, avatar, password, confirmPassword);
 
   @JsonKey(ignore: true)
   @override
@@ -276,6 +310,7 @@ abstract class _User implements User {
       final String? lastname,
       final Roles role,
       final int? createAt,
+      final File? avatar,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final String? password,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -295,6 +330,8 @@ abstract class _User implements User {
   Roles get role;
   @override
   int? get createAt;
+  @override
+  File? get avatar;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? get password;

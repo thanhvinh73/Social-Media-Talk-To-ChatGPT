@@ -48,7 +48,7 @@ class ConnectToServerScreen extends StatelessWidget {
                       .checkToken()
                       .then((user) {
                     if (user != null) {
-                      context.read<AppUserCubit>().updateUser(state.user);
+                      context.read<AppUserCubit>().updateUser(user);
                       Get.toNamed(Routes.main);
                       return;
                     }

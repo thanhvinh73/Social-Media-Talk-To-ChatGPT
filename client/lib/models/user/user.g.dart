@@ -13,6 +13,9 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       lastname: json['lastname'] as String?,
       role: $enumDecodeNullable(_$RolesEnumMap, json['role']) ?? Roles.USER,
       createAt: json['createAt'] as int?,
+      avatar: json['avatar'] == null
+          ? null
+          : File.fromJson(json['avatar'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
@@ -23,6 +26,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'lastname': instance.lastname,
       'role': _$RolesEnumMap[instance.role]!,
       'createAt': instance.createAt,
+      'avatar': instance.avatar,
     };
 
 const _$RolesEnumMap = {

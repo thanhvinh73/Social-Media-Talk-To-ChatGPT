@@ -17,19 +17,20 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AppUserState {
   User? get user => throw _privateConstructorUsedError;
+  Profile? get profile => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User? user) initial,
+    required TResult Function(User? user, Profile? profile) initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User? user)? initial,
+    TResult? Function(User? user, Profile? profile)? initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User? user)? initial,
+    TResult Function(User? user, Profile? profile)? initial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,9 +62,10 @@ abstract class $AppUserStateCopyWith<$Res> {
           AppUserState value, $Res Function(AppUserState) then) =
       _$AppUserStateCopyWithImpl<$Res, AppUserState>;
   @useResult
-  $Res call({User? user});
+  $Res call({User? user, Profile? profile});
 
   $UserCopyWith<$Res>? get user;
+  $ProfileCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
@@ -80,12 +82,17 @@ class _$AppUserStateCopyWithImpl<$Res, $Val extends AppUserState>
   @override
   $Res call({
     Object? user = freezed,
+    Object? profile = freezed,
   }) {
     return _then(_value.copyWith(
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as Profile?,
     ) as $Val);
   }
 
@@ -100,6 +107,18 @@ class _$AppUserStateCopyWithImpl<$Res, $Val extends AppUserState>
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileCopyWith<$Res>? get profile {
+    if (_value.profile == null) {
+      return null;
+    }
+
+    return $ProfileCopyWith<$Res>(_value.profile!, (value) {
+      return _then(_value.copyWith(profile: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -110,10 +129,12 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User? user});
+  $Res call({User? user, Profile? profile});
 
   @override
   $UserCopyWith<$Res>? get user;
+  @override
+  $ProfileCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
@@ -128,12 +149,17 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = freezed,
+    Object? profile = freezed,
   }) {
     return _then(_$InitialImpl(
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as Profile?,
     ));
   }
 }
@@ -141,14 +167,16 @@ class __$$InitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl({this.user});
+  const _$InitialImpl({this.user, this.profile});
 
   @override
   final User? user;
+  @override
+  final Profile? profile;
 
   @override
   String toString() {
-    return 'AppUserState.initial(user: $user)';
+    return 'AppUserState.initial(user: $user, profile: $profile)';
   }
 
   @override
@@ -156,11 +184,12 @@ class _$InitialImpl implements _Initial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.profile, profile) || other.profile == profile));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode => Object.hash(runtimeType, user, profile);
 
   @JsonKey(ignore: true)
   @override
@@ -171,27 +200,27 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(User? user) initial,
+    required TResult Function(User? user, Profile? profile) initial,
   }) {
-    return initial(user);
+    return initial(user, profile);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(User? user)? initial,
+    TResult? Function(User? user, Profile? profile)? initial,
   }) {
-    return initial?.call(user);
+    return initial?.call(user, profile);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(User? user)? initial,
+    TResult Function(User? user, Profile? profile)? initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(user);
+      return initial(user, profile);
     }
     return orElse();
   }
@@ -226,10 +255,13 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements AppUserState {
-  const factory _Initial({final User? user}) = _$InitialImpl;
+  const factory _Initial({final User? user, final Profile? profile}) =
+      _$InitialImpl;
 
   @override
   User? get user;
+  @override
+  Profile? get profile;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
