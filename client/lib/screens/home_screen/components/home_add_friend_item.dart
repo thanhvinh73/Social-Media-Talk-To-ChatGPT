@@ -23,7 +23,8 @@ class HomeAddFriendItem extends StatelessWidget {
           height: size,
           width: size,
           borderRadius: BorderRadius.circular(size),
-          url: user.avatar?.url,
+          url: user.avatar?.url ??
+              "https://storage.googleapis.com/cms-storage-bucket/d406c736e7c4c57f5f61.png",
         ),
         const SizedBox(height: 8),
         SizedBox(
