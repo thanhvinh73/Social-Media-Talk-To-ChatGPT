@@ -7,7 +7,7 @@ import 'package:social_media_with_chatgpt/generated/assets.gen.dart';
 import 'package:social_media_with_chatgpt/generated/translations.g.dart';
 import 'package:social_media_with_chatgpt/models/file/file_model.dart';
 import 'package:social_media_with_chatgpt/models/post/post.dart';
-import 'package:social_media_with_chatgpt/models/user/user.dart';
+import 'package:social_media_with_chatgpt/models/profile/profile.dart';
 import 'package:social_media_with_chatgpt/public_providers/app_user_cubit/app_user_cubit.dart';
 import 'package:social_media_with_chatgpt/routes/app_router.dart';
 import 'package:social_media_with_chatgpt/screens/account_screen/components/account_container.dart';
@@ -74,6 +74,13 @@ class AccountScreen extends StatelessWidget {
               }
             },
           ),
+          BlocListener<AppUserCubit, AppUserState>(
+              listenWhen: (previous, current) =>
+                  previous.profile != current.profile &&
+                  current.profile != null,
+              listener: (context, state) {
+                context.read<AccountScreentCubit>().getMyPost();
+              }),
         ],
         child: BlocBuilder<AppUserCubit, AppUserState>(
           builder: (context, state) {
@@ -234,7 +241,7 @@ class AccountScreen extends StatelessWidget {
                                 runSpacing: 16,
                                 children: [
                                   AppText(
-                                    state.user.fullname,
+                                    state.profile.fullname,
                                     fontSize: 25,
                                     color: AppColors.titleText,
                                     fontWeight: FontWeight.bold,
@@ -285,18 +292,20 @@ class AccountScreen extends StatelessWidget {
                                   ],
                                 ),
                                 AccountProfileRowItem(
-                                  icon: Icons.phone,
-                                  text: state.profile?.phone,
-                                ),
-                                AccountProfileRowItem(
                                   icon: Icons.email,
                                   text: state.profile?.email,
                                 ),
                                 AccountProfileRowItem(
+                                  icon: Icons.phone,
+                                  text: state.profile?.phone,
+                                ),
+                                AccountProfileRowItem(
                                   icon: Icons.cake,
-                                  text: DateTime.fromMillisecondsSinceEpoch(
-                                          state.profile?.dateOfBirth ?? 0)
-                                      .toDayMonthYear,
+                                  text: state.profile?.dateOfBirth != null
+                                      ? DateTime.fromMillisecondsSinceEpoch(
+                                              state.profile?.dateOfBirth ?? 0)
+                                          .toDayMonthYear
+                                      : null,
                                 ),
                                 AccountProfileRowItem(
                                   icon: state.profile?.gender.icon ??

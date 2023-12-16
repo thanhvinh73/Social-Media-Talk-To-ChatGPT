@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:social_media_with_chatgpt/models/file/file_model.dart';
 import 'package:social_media_with_chatgpt/shared/enum/gender.dart';
 import 'package:social_media_with_chatgpt/shared/enum/profile_status.dart';
+import 'package:social_media_with_chatgpt/shared/extensions/string_ext.dart';
 
 part 'profile.freezed.dart';
 part 'profile.g.dart';
@@ -28,4 +29,11 @@ class Profile with _$Profile {
   }) = _Profile;
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
+}
+
+extension ProfileExt on Profile? {
+  String? get fullname {
+    if (this == null) return null;
+    return "${this!.firstname.isEmptyOrNull ? "" : "${this!.firstname} "}${this!.lastname ?? ""}";
+  }
 }

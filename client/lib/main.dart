@@ -14,7 +14,7 @@ void main() async {
   sp.prefs = await SharedPreferences.getInstance();
   OpenAI.apiKey = AppConstants.OPEN_API_KEY;
   runApp(DevicePreview(
-    enabled: false,
+    enabled: true,
     builder: (context) => EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('vi')],
         startLocale: const Locale('vi'),

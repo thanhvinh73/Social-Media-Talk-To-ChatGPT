@@ -36,7 +36,7 @@ class AppButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: width ?? MediaQuery.of(context).size.width / 3 * 2 - 48,
+        width: width ?? MediaQuery.of(context).size.width,
         height: height,
         decoration: BoxDecoration(
             color: color,
