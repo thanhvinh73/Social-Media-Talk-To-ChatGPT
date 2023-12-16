@@ -27,6 +27,9 @@ mixin _$Comment {
   int? get createAt => throw _privateConstructorUsedError;
   int? get updateAt => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
+  User? get user => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<File> get files => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,9 +48,12 @@ abstract class $CommentCopyWith<$Res> {
       CommentStatus? status,
       int? createAt,
       int? updateAt,
-      String? content});
+      String? content,
+      User? user,
+      @JsonKey(includeFromJson: false, includeToJson: false) List<File> files});
 
   $PostCopyWith<$Res>? get post;
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -70,6 +76,8 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
     Object? createAt = freezed,
     Object? updateAt = freezed,
     Object? content = freezed,
+    Object? user = freezed,
+    Object? files = null,
   }) {
     return _then(_value.copyWith(
       commentId: freezed == commentId
@@ -100,6 +108,14 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
+      files: null == files
+          ? _value.files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<File>,
     ) as $Val);
   }
 
@@ -112,6 +128,18 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
 
     return $PostCopyWith<$Res>(_value.post!, (value) {
       return _then(_value.copyWith(post: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
@@ -130,10 +158,14 @@ abstract class _$$CommentImplCopyWith<$Res> implements $CommentCopyWith<$Res> {
       CommentStatus? status,
       int? createAt,
       int? updateAt,
-      String? content});
+      String? content,
+      User? user,
+      @JsonKey(includeFromJson: false, includeToJson: false) List<File> files});
 
   @override
   $PostCopyWith<$Res>? get post;
+  @override
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -154,6 +186,8 @@ class __$$CommentImplCopyWithImpl<$Res>
     Object? createAt = freezed,
     Object? updateAt = freezed,
     Object? content = freezed,
+    Object? user = freezed,
+    Object? files = null,
   }) {
     return _then(_$CommentImpl(
       commentId: freezed == commentId
@@ -184,6 +218,14 @@ class __$$CommentImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
+      files: null == files
+          ? _value._files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<File>,
     ));
   }
 }
@@ -198,8 +240,12 @@ class _$CommentImpl implements _Comment {
       this.status,
       this.createAt,
       this.updateAt,
-      this.content})
-      : _images = images;
+      this.content,
+      this.user,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final List<File> files = const []})
+      : _images = images,
+        _files = files;
 
   factory _$CommentImpl.fromJson(Map<String, dynamic> json) =>
       _$$CommentImplFromJson(json);
@@ -225,10 +271,20 @@ class _$CommentImpl implements _Comment {
   final int? updateAt;
   @override
   final String? content;
+  @override
+  final User? user;
+  final List<File> _files;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<File> get files {
+    if (_files is EqualUnmodifiableListView) return _files;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_files);
+  }
 
   @override
   String toString() {
-    return 'Comment(commentId: $commentId, images: $images, post: $post, status: $status, createAt: $createAt, updateAt: $updateAt, content: $content)';
+    return 'Comment(commentId: $commentId, images: $images, post: $post, status: $status, createAt: $createAt, updateAt: $updateAt, content: $content, user: $user, files: $files)';
   }
 
   @override
@@ -245,7 +301,9 @@ class _$CommentImpl implements _Comment {
                 other.createAt == createAt) &&
             (identical(other.updateAt, updateAt) ||
                 other.updateAt == updateAt) &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality().equals(other._files, _files));
   }
 
   @JsonKey(ignore: true)
@@ -258,7 +316,9 @@ class _$CommentImpl implements _Comment {
       status,
       createAt,
       updateAt,
-      content);
+      content,
+      user,
+      const DeepCollectionEquality().hash(_files));
 
   @JsonKey(ignore: true)
   @override
@@ -282,7 +342,10 @@ abstract class _Comment implements Comment {
       final CommentStatus? status,
       final int? createAt,
       final int? updateAt,
-      final String? content}) = _$CommentImpl;
+      final String? content,
+      final User? user,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final List<File> files}) = _$CommentImpl;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$CommentImpl.fromJson;
 
@@ -300,6 +363,11 @@ abstract class _Comment implements Comment {
   int? get updateAt;
   @override
   String? get content;
+  @override
+  User? get user;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<File> get files;
   @override
   @JsonKey(ignore: true)
   _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>

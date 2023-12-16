@@ -286,6 +286,36 @@ class _APIClient implements APIClient {
   }
 
   @override
+  Future<ApiResponse<List<Post>>> getAllPost() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<List<Post>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/posts/all',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ApiResponse<List<Post>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<Post>((i) => Post.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
   Future<ApiResponse<Post>> updatePost(
     String postId,
     Map<String, dynamic> body,
@@ -371,17 +401,14 @@ class _APIClient implements APIClient {
   }
 
   @override
-  Future<ApiResponse<List<Comment>>> getCommentsByPost(
-    String postId,
-    FormData body,
-  ) async {
+  Future<ApiResponse<List<Comment>>> getCommentsByPost(String postId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = body;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ApiResponse<List<Comment>>>(Options(
-      method: 'POST',
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )

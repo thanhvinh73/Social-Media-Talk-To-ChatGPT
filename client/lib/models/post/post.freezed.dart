@@ -29,6 +29,9 @@ mixin _$Post {
   String? get description => throw _privateConstructorUsedError;
   int? get createAt => throw _privateConstructorUsedError;
   bool? get updated => throw _privateConstructorUsedError;
+  int? get commentsLength => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<File> get imageFile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +52,10 @@ abstract class $PostCopyWith<$Res> {
       String? title,
       String? description,
       int? createAt,
-      bool? updated});
+      bool? updated,
+      int? commentsLength,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      List<File> imageFile});
 
   $UserCopyWith<$Res>? get authorUser;
 }
@@ -76,6 +82,8 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? description = freezed,
     Object? createAt = freezed,
     Object? updated = freezed,
+    Object? commentsLength = freezed,
+    Object? imageFile = null,
   }) {
     return _then(_value.copyWith(
       postId: freezed == postId
@@ -114,6 +122,14 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as bool?,
+      commentsLength: freezed == commentsLength
+          ? _value.commentsLength
+          : commentsLength // ignore: cast_nullable_to_non_nullable
+              as int?,
+      imageFile: null == imageFile
+          ? _value.imageFile
+          : imageFile // ignore: cast_nullable_to_non_nullable
+              as List<File>,
     ) as $Val);
   }
 
@@ -146,7 +162,10 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       String? title,
       String? description,
       int? createAt,
-      bool? updated});
+      bool? updated,
+      int? commentsLength,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      List<File> imageFile});
 
   @override
   $UserCopyWith<$Res>? get authorUser;
@@ -171,6 +190,8 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? createAt = freezed,
     Object? updated = freezed,
+    Object? commentsLength = freezed,
+    Object? imageFile = null,
   }) {
     return _then(_$PostImpl(
       postId: freezed == postId
@@ -209,6 +230,14 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as bool?,
+      commentsLength: freezed == commentsLength
+          ? _value.commentsLength
+          : commentsLength // ignore: cast_nullable_to_non_nullable
+              as int?,
+      imageFile: null == imageFile
+          ? _value._imageFile
+          : imageFile // ignore: cast_nullable_to_non_nullable
+              as List<File>,
     ));
   }
 }
@@ -225,9 +254,13 @@ class _$PostImpl implements _Post {
       this.title,
       this.description,
       this.createAt,
-      this.updated})
+      this.updated,
+      this.commentsLength,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final List<File> imageFile = const []})
       : _sharedUser = sharedUser,
-        _images = images;
+        _images = images,
+        _imageFile = imageFile;
 
   factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
       _$$PostImplFromJson(json);
@@ -264,10 +297,20 @@ class _$PostImpl implements _Post {
   final int? createAt;
   @override
   final bool? updated;
+  @override
+  final int? commentsLength;
+  final List<File> _imageFile;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<File> get imageFile {
+    if (_imageFile is EqualUnmodifiableListView) return _imageFile;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_imageFile);
+  }
 
   @override
   String toString() {
-    return 'Post(postId: $postId, authorUser: $authorUser, sharedUser: $sharedUser, images: $images, status: $status, title: $title, description: $description, createAt: $createAt, updated: $updated)';
+    return 'Post(postId: $postId, authorUser: $authorUser, sharedUser: $sharedUser, images: $images, status: $status, title: $title, description: $description, createAt: $createAt, updated: $updated, commentsLength: $commentsLength, imageFile: $imageFile)';
   }
 
   @override
@@ -287,7 +330,11 @@ class _$PostImpl implements _Post {
                 other.description == description) &&
             (identical(other.createAt, createAt) ||
                 other.createAt == createAt) &&
-            (identical(other.updated, updated) || other.updated == updated));
+            (identical(other.updated, updated) || other.updated == updated) &&
+            (identical(other.commentsLength, commentsLength) ||
+                other.commentsLength == commentsLength) &&
+            const DeepCollectionEquality()
+                .equals(other._imageFile, _imageFile));
   }
 
   @JsonKey(ignore: true)
@@ -302,7 +349,9 @@ class _$PostImpl implements _Post {
       title,
       description,
       createAt,
-      updated);
+      updated,
+      commentsLength,
+      const DeepCollectionEquality().hash(_imageFile));
 
   @JsonKey(ignore: true)
   @override
@@ -328,7 +377,10 @@ abstract class _Post implements Post {
       final String? title,
       final String? description,
       final int? createAt,
-      final bool? updated}) = _$PostImpl;
+      final bool? updated,
+      final int? commentsLength,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final List<File> imageFile}) = _$PostImpl;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
 
@@ -350,6 +402,11 @@ abstract class _Post implements Post {
   int? get createAt;
   @override
   bool? get updated;
+  @override
+  int? get commentsLength;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<File> get imageFile;
   @override
   @JsonKey(ignore: true)
   _$$PostImplCopyWith<_$PostImpl> get copyWith =>

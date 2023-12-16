@@ -31,6 +31,7 @@ public class PostResponse extends AppResponse<PostResponse, PostEntity> {
         private String description;
         private Long createAt;
         private Boolean updated;
+        private Integer commentsLength;
 
         public static PostResponse emptyInstance() {
                 return new PostResponse();
@@ -53,6 +54,8 @@ public class PostResponse extends AppResponse<PostResponse, PostEntity> {
                 this.description = entity.getDescription();
                 this.createAt = entity.getCreateAt();
                 this.updated = entity.getUpdated();
+                this.commentsLength = (entity.getComments() == null || entity.getComments().isEmpty()) ? 0
+                                : entity.getComments().size();
                 return this;
         }
 

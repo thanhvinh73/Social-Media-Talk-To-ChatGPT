@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:social_media_with_chatgpt/models/post/post.dart';
 import 'package:social_media_with_chatgpt/models/profile/profile.dart';
 import 'package:social_media_with_chatgpt/services/api_response/api_response.dart';
 import 'package:social_media_with_chatgpt/services/public_api.dart';
@@ -63,6 +64,15 @@ class AccountScreentCubit extends Cubit<AccountScreentState> {
     } catch (err) {
       cancel();
       emit(state.copyWith(errorMessage: parseError(err)));
+    }
+  }
+
+  Future getMyPost() async {
+    try {
+      ApiResponse<List<Post>> res = await apis.getMyPost();
+      emit(state.copyWith(myPosts: res.data ?? []));
+    } catch (err) {
+      emit(state.copyWith(errorMessage: null));
     }
   }
 

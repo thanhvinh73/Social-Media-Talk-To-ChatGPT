@@ -3,6 +3,7 @@ package com.mobile_project.social_media_with_chatgpt.services.user_service.model
 import java.util.UUID;
 
 import com.mobile_project.social_media_with_chatgpt.dao.user.UserEntity;
+import com.mobile_project.social_media_with_chatgpt.services.file_service.models.FileResponse;
 import com.mobile_project.social_media_with_chatgpt.shared.enums.UserRole;
 import com.mobile_project.social_media_with_chatgpt.shared.public_data.AppResponse;
 
@@ -22,6 +23,7 @@ public class UserResponse extends AppResponse<UserResponse, UserEntity> {
     private String email;
     private String firstname;
     private String lastname;
+    private FileResponse avatar;
     private UserRole role;
     private Long createAt;
 
@@ -37,6 +39,7 @@ public class UserResponse extends AppResponse<UserResponse, UserEntity> {
         this.createAt = entity.getCreateAt();
         this.firstname = entity.getFirstname();
         this.lastname = entity.getLastname();
+        this.avatar = entity.getAvatar() != null ? FileResponse.emptyInstance().fromEntity(entity.getAvatar()) : null;
         return this;
     }
 
@@ -58,6 +61,7 @@ public class UserResponse extends AppResponse<UserResponse, UserEntity> {
                 .lastname(lastname)
                 .role(role)
                 .createAt(createAt)
+                .avatar(avatar == null ? null : avatar.toEntity())
                 .build();
     }
 }

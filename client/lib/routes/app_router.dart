@@ -9,6 +9,7 @@ import 'package:social_media_with_chatgpt/screens/login_screen/login_screen.dart
 import 'package:social_media_with_chatgpt/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:social_media_with_chatgpt/screens/photo_view_screen/photo_view_screen.dart';
 import 'package:social_media_with_chatgpt/screens/register_screen/register_screen.dart';
+import 'package:social_media_with_chatgpt/screens/update_profile_screen/update_profile_screen.dart';
 
 import '../screens/connect_to_server_screen/connect_to_server_screen.dart';
 import '../screens/main_screen/main_screen.dart';
@@ -39,13 +40,14 @@ class Routes {
     chatBot: (context) => ChatBotScreen(),
     home: (context) => const HomeScreen(),
     account: (context) => const AccountScreen(),
+    updateProfile: (context) => UpdateProfileScreen(),
     photoGallery: (context) {
       List<dynamic> arr =
           ModalRoute.of(context)?.settings.arguments as List<dynamic>;
       return PhotoViewScreen(urls: arr[0], initIndex: arr[1]);
     },
     createPost: (context) {
-      Post post = ModalRoute.of(context)?.settings.arguments as Post;
+      Post? post = ModalRoute.of(context)?.settings.arguments as Post?;
       return CreatePostScreen(post: post);
     },
     comment: (context) {

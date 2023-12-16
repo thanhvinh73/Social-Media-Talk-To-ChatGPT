@@ -104,6 +104,9 @@ public class UserService implements IUserService {
                 if (avatarResponse != null) {
                     profileEntity.setAvatar(avatarResponse.toEntity());
                     profileEntity = profileRepository.save(profileEntity);
+                    UserEntity userEntity = profileEntity.getUser();
+                    userEntity.setAvatar(profileEntity.getAvatar());
+                    userRepository.save(userEntity);
                 }
                 if (file != null)
                     fileService.deleteData(file.getFileId());

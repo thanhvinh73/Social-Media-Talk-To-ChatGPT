@@ -45,7 +45,7 @@ public class PostService implements IPostService {
         }
 
         postEntity = post.toUpdatedEntity(postEntity);
-        postRepository.save(postEntity);
+        postEntity = postRepository.save(postEntity);
         return Optional.of(PostResponse.emptyInstance().fromEntity(postEntity));
     }
 

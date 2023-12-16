@@ -1,23 +1,30 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:social_media_with_chatgpt/generated/assets.gen.dart';
 import 'package:social_media_with_chatgpt/generated/translations.g.dart';
 import 'package:social_media_with_chatgpt/models/file/file_model.dart';
+import 'package:social_media_with_chatgpt/models/post/post.dart';
 import 'package:social_media_with_chatgpt/models/user/user.dart';
 import 'package:social_media_with_chatgpt/public_providers/app_user_cubit/app_user_cubit.dart';
+import 'package:social_media_with_chatgpt/routes/app_router.dart';
 import 'package:social_media_with_chatgpt/screens/account_screen/components/account_container.dart';
 import 'package:social_media_with_chatgpt/screens/account_screen/components/account_profile_row_item.dart';
 import 'package:social_media_with_chatgpt/screens/account_screen/cubit/account_screent_cubit.dart';
+import 'package:social_media_with_chatgpt/screens/home_screen/components/home_post_item.dart';
 import 'package:social_media_with_chatgpt/shared/enum/gender.dart';
 import 'package:social_media_with_chatgpt/shared/enum/screen_status.dart';
 import 'package:social_media_with_chatgpt/shared/extensions/date_ext.dart';
+import 'package:social_media_with_chatgpt/shared/extensions/list_ext.dart';
 import 'package:social_media_with_chatgpt/shared/helpers/bot_toast_helper.dart';
 import 'package:social_media_with_chatgpt/shared/helpers/dialog_helper.dart';
 import 'package:social_media_with_chatgpt/shared/utils/app_colors.dart';
 import 'package:social_media_with_chatgpt/shared/utils/image_picker.dart';
-import 'package:social_media_with_chatgpt/shared/widgets/app_button.dart';
+import 'package:social_media_with_chatgpt/shared/utils/shared_preference.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_container.dart';
+import 'package:social_media_with_chatgpt/shared/widgets/app_icon_button.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_layout.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_network_image.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/text/app_text.dart';
@@ -29,7 +36,7 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double maxWidth = MediaQuery.of(context).size.width;
     return BlocProvider(
-      create: (context) => AccountScreentCubit(),
+      create: (context) => AccountScreentCubit()..getMyPost(),
       child: MultiBlocListener(
         listeners: [
           BlocListener<AccountScreentCubit, AccountScreentState>(
@@ -76,7 +83,6 @@ class AccountScreen extends StatelessWidget {
               useSafeArea: true,
               child: LayoutBuilder(
                 builder: (context, constraints) => ListView(
-                  padding: EdgeInsets.zero,
                   children: [
                     Stack(
                       alignment: Alignment.topLeft,
@@ -90,6 +96,15 @@ class AccountScreen extends StatelessWidget {
                               height: maxWidth / 2.3,
                               fit: BoxFit.cover,
                             )),
+                        Positioned(
+                            top: 8,
+                            left: 16,
+                            child: AppIconButton(
+                                icon: Icons.arrow_back_ios,
+                                color: AppColors.white,
+                                onTap: () {
+                                  Get.back();
+                                })),
                         Positioned(
                           bottom: 8,
                           right: 8,
@@ -224,11 +239,25 @@ class AccountScreen extends StatelessWidget {
                                     color: AppColors.titleText,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                  AppButton(
-                                      title: "Cập nhật hồ sơ",
-                                      width: maxWidth,
-                                      borderRadius: 4,
-                                      onPressed: () {}),
+                                  GestureDetector(
+                                    onTap: () {
+                                      sp.clear().then((value) {
+                                        Get.toNamed(Routes.login);
+                                      });
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Assets.icons.icLogout.svg(),
+                                        AppText("Đăng xuất",
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8)),
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -236,11 +265,24 @@ class AccountScreen extends StatelessWidget {
                                 child: Wrap(
                               runSpacing: 8,
                               children: [
-                                AppText(
-                                  "Hồ sơ",
-                                  fontSize: 20,
-                                  color: AppColors.titleText,
-                                  fontWeight: FontWeight.bold,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AppText(
+                                      "Hồ sơ",
+                                      fontSize: 20,
+                                      color: AppColors.titleText,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    AppIconButton(
+                                      onTap: () {
+                                        Get.toNamed(Routes.updateProfile);
+                                      },
+                                      icon: Icons.edit,
+                                      color: AppColors.darkgreen,
+                                    )
+                                  ],
                                 ),
                                 AccountProfileRowItem(
                                   icon: Icons.phone,
@@ -260,19 +302,40 @@ class AccountScreen extends StatelessWidget {
                                   icon: state.profile?.gender.icon ??
                                       Icons.person,
                                   text: state.profile?.gender.label,
-                                )
+                                ),
                               ],
                             )),
-                            AccountContainer(
-                                child: Wrap(runSpacing: 8, children: [
-                              AppText(
-                                "Bài đăng",
-                                fontSize: 20,
-                                color: AppColors.titleText,
-                                fontWeight: FontWeight.bold,
+                            Wrap(runSpacing: 8, children: [
+                              BlocSelector<AccountScreentCubit,
+                                  AccountScreentState, List<Post>>(
+                                selector: (state) => state.myPosts,
+                                builder: (context, myPosts) {
+                                  return myPosts.isNotNullOrEmpty
+                                      ? Wrap(
+                                          runSpacing: 12,
+                                          children: myPosts
+                                              .map((e) => HomePostItem(post: e))
+                                              .toList(),
+                                        )
+                                      : const AccountContainer(
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              AppText(
+                                                "Bạn chưa có bài đăng nào!",
+                                                color: AppColors.titleText,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500,
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                },
                               ),
-                              Row()
-                            ]))
+                            ])
                           ],
                         ),
                       ),

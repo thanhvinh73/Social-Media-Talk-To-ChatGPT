@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.mobile_project.social_media_with_chatgpt.dao.comment.CommentEntity;
 import com.mobile_project.social_media_with_chatgpt.services.file_service.models.FileResponse;
 import com.mobile_project.social_media_with_chatgpt.services.post_service.models.PostResponse;
+import com.mobile_project.social_media_with_chatgpt.services.user_service.models.UserResponse;
 import com.mobile_project.social_media_with_chatgpt.shared.enums.CommentStatus;
 import com.mobile_project.social_media_with_chatgpt.shared.public_data.AppResponse;
 
@@ -28,6 +29,7 @@ public class CommentResponse extends AppResponse<CommentResponse, CommentEntity>
     private Long createAt;
     private Long updateAt;
     private String content;
+    private UserResponse user;
 
     public static CommentResponse emptyInstance() {
         return new CommentResponse();
@@ -43,6 +45,7 @@ public class CommentResponse extends AppResponse<CommentResponse, CommentEntity>
         this.updateAt = entity.getUpdateAt();
         this.createAt = entity.getCreateAt();
         this.content = entity.getContent();
+        this.user = entity.getUser() == null ? null : UserResponse.emptyInstance().fromEntity(entity.getUser());
         return this;
     }
 
@@ -65,6 +68,7 @@ public class CommentResponse extends AppResponse<CommentResponse, CommentEntity>
                 .createAt(createAt)
                 .updateAt(updateAt)
                 .content(content)
+                .user(user != null ? user.toEntity() : null)
                 .build();
     }
 }

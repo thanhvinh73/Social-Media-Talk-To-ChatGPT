@@ -1,21 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:social_media_with_chatgpt/generated/assets.gen.dart';
-import 'package:social_media_with_chatgpt/routes/app_router.dart';
 import 'package:social_media_with_chatgpt/screens/conversation_screen/cubit/conversation_screen_cubit.dart';
 import 'package:social_media_with_chatgpt/screens/notification_screen/cubit/notification_screen_cubit.dart';
 import 'package:social_media_with_chatgpt/shared/enum/main_tabs.dart';
-import 'package:social_media_with_chatgpt/shared/utils/shared_preference.dart';
-import 'package:social_media_with_chatgpt/shared/widgets/app_container.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_dismiss_keyboard.dart';
 
 import '../../generated/translations.g.dart';
 import '../../shared/helpers/dialog_helper.dart';
 import '../../shared/utils/app_colors.dart';
 import '../../shared/widgets/app_layout.dart';
-import '../../shared/widgets/bottom_tab_bar_item.dart';
 import 'cubit/main_screen_cubit.dart';
 
 class MainScreen extends StatefulWidget {
@@ -89,9 +84,6 @@ class _MainScreenState extends State<MainScreen> {
                   elevation: 3,
                   onPressed: () {
                     // Get.toNamed(Routes.chatBot);
-                    sp.clear().then((value) {
-                      Get.toNamed(Routes.login);
-                    });
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -99,43 +91,44 @@ class _MainScreenState extends State<MainScreen> {
                         Assets.icons.icChatBot.svg(color: AppColors.darkgreen),
                   ),
                 ),
-                bottomNavigationBar: BottomNavigationBar(
-                  currentIndex: state.currentTab.index,
-                  unselectedItemColor: AppColors.bodyText,
-                  selectedItemColor: AppColors.darkgreen,
-                  selectedFontSize: 12,
-                  backgroundColor: AppColors.white,
-                  elevation: 0,
-                  showUnselectedLabels: true,
-                  type: BottomNavigationBarType.fixed,
-                  landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-                  items: MainTabs.values
-                      .map((e) => BottomTabBarItem(
-                            icon: Column(
-                              children: [
-                                const SizedBox(height: 6),
-                                Icon(e.icon),
-                              ],
-                            ),
-                            label: e.label,
-                            activeIcon: Column(
-                              children: [
-                                SizedBox(
-                                    width: 32,
-                                    height: 2,
-                                    child: AppContainer(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: AppColors.darkgreen,
-                                    )),
-                                const SizedBox(height: 4),
-                                Icon(e.icon),
-                              ],
-                            ),
-                          ))
-                      .toList(),
-                  onTap: (index) => context.read<MainScreenCubit>().updateState(
-                      (p0) => p0.copyWith(currentTab: MainTabs.values[index])),
-                ),
+                // bottomNavigationBar: BottomNavigationBar(
+                //   currentIndex: state.currentTab.index,
+                //   unselectedItemColor: AppColors.bodyText,
+                //   selectedItemColor: AppColors.darkgreen,
+                //   selectedFontSize: 12,
+                //   backgroundColor: AppColors.white,
+                //   elevation: 0,
+                //   showUnselectedLabels: true,
+                //   type: BottomNavigationBarType.fixed,
+                //   landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+                //   items: MainTabs.values
+                //       .map((e) => BottomTabBarItem(
+                //             icon: Column(
+                //               children: [
+                //                 const SizedBox(height: 6),
+                //                 Icon(e.icon),
+                //               ],
+                //             ),
+                //             label: e.label,
+                //             activeIcon: Column(
+                //               children: [
+                //                 SizedBox(
+                //                     width: 32,
+                //                     height: 2,
+                //                     child: AppContainer(
+                //                       borderRadius: BorderRadius.circular(10),
+                //                       color: AppColors.darkgreen,
+                //                     )),
+                //                 const SizedBox(height: 4),
+                //                 Icon(e.icon),
+                //               ],
+                //             ),
+                //           ))
+                //       .toList(),
+                //   onTap: (index) => context.read<MainScreenCubit>().updateState(
+                //       (p0) => p0.copyWith(currentTab: MainTabs.values[index])),
+                // ),
+
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: pageController,

@@ -88,6 +88,16 @@ public class PostController {
         }
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<ApiResponse<Object>> getAll() {
+        try {
+            return ResponseEntity.ok(ApiResponse.success(postService.getAll()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.fail(new ErrorResponse("ERR.COM001", e.toString())));
+        }
+    }
+
     @PatchMapping("/{postId}")
     public ResponseEntity<ApiResponse<Object>> updatePost(
             @RequestHeader("Authorization") String token, @PathVariable(name = "postId") String postId,
@@ -106,6 +116,7 @@ public class PostController {
             return ResponseEntity.badRequest()
                     .body(ApiResponse.fail(new ErrorResponse("ERR.POST001", "User is not found!")));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest()
                     .body(ApiResponse.fail(new ErrorResponse("ERR.COM001", e.toString())));
         }

@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.mobile_project.social_media_with_chatgpt.dao.file.FileEntity;
 import com.mobile_project.social_media_with_chatgpt.dao.post.PostEntity;
 import com.mobile_project.social_media_with_chatgpt.dao.profile.ProfileEntity;
 import com.mobile_project.social_media_with_chatgpt.shared.enums.UserRole;
@@ -55,6 +56,8 @@ public class UserEntity implements UserDetails, AppEntity {
     private String firstname;
     private String lastname;
 
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private FileEntity avatar;
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<PostEntity> posts;
     @OneToOne(cascade = CascadeType.REMOVE)

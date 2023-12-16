@@ -20,6 +20,9 @@ _$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
       createAt: json['createAt'] as int?,
       updateAt: json['updateAt'] as int?,
       content: json['content'] as String?,
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CommentImplToJson(_$CommentImpl instance) =>
@@ -31,6 +34,7 @@ Map<String, dynamic> _$$CommentImplToJson(_$CommentImpl instance) =>
       'createAt': instance.createAt,
       'updateAt': instance.updateAt,
       'content': instance.content,
+      'user': instance.user,
     };
 
 const _$CommentStatusEnumMap = {

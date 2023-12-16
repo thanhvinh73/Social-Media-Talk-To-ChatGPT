@@ -6,5 +6,6 @@ class AccountScreentState with _$AccountScreentState {
     String? errorMessage,
     Profile? profile,
     @Default(ScreenStatus.init) ScreenStatus status,
+    @Default([]) List<Post> myPosts,
   }) = _Initial;
 }

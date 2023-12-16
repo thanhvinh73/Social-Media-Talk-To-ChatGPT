@@ -24,6 +24,7 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       description: json['description'] as String?,
       createAt: json['createAt'] as int?,
       updated: json['updated'] as bool?,
+      commentsLength: json['commentsLength'] as int?,
     );
 
 Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
@@ -37,6 +38,7 @@ Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
       'description': instance.description,
       'createAt': instance.createAt,
       'updated': instance.updated,
+      'commentsLength': instance.commentsLength,
     };
 
 const _$PostStatusEnumMap = {

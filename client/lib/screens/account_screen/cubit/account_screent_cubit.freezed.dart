@@ -19,24 +19,25 @@ mixin _$AccountScreentState {
   String? get errorMessage => throw _privateConstructorUsedError;
   Profile? get profile => throw _privateConstructorUsedError;
   ScreenStatus get status => throw _privateConstructorUsedError;
+  List<Post> get myPosts => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String? errorMessage, Profile? profile, ScreenStatus status)
+    required TResult Function(String? errorMessage, Profile? profile,
+            ScreenStatus status, List<Post> myPosts)
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String? errorMessage, Profile? profile, ScreenStatus status)?
+    TResult? Function(String? errorMessage, Profile? profile,
+            ScreenStatus status, List<Post> myPosts)?
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String? errorMessage, Profile? profile, ScreenStatus status)?
+    TResult Function(String? errorMessage, Profile? profile,
+            ScreenStatus status, List<Post> myPosts)?
         initial,
     required TResult orElse(),
   }) =>
@@ -69,7 +70,11 @@ abstract class $AccountScreentStateCopyWith<$Res> {
           AccountScreentState value, $Res Function(AccountScreentState) then) =
       _$AccountScreentStateCopyWithImpl<$Res, AccountScreentState>;
   @useResult
-  $Res call({String? errorMessage, Profile? profile, ScreenStatus status});
+  $Res call(
+      {String? errorMessage,
+      Profile? profile,
+      ScreenStatus status,
+      List<Post> myPosts});
 
   $ProfileCopyWith<$Res>? get profile;
 }
@@ -90,6 +95,7 @@ class _$AccountScreentStateCopyWithImpl<$Res, $Val extends AccountScreentState>
     Object? errorMessage = freezed,
     Object? profile = freezed,
     Object? status = null,
+    Object? myPosts = null,
   }) {
     return _then(_value.copyWith(
       errorMessage: freezed == errorMessage
@@ -104,6 +110,10 @@ class _$AccountScreentStateCopyWithImpl<$Res, $Val extends AccountScreentState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ScreenStatus,
+      myPosts: null == myPosts
+          ? _value.myPosts
+          : myPosts // ignore: cast_nullable_to_non_nullable
+              as List<Post>,
     ) as $Val);
   }
 
@@ -128,7 +138,11 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? errorMessage, Profile? profile, ScreenStatus status});
+  $Res call(
+      {String? errorMessage,
+      Profile? profile,
+      ScreenStatus status,
+      List<Post> myPosts});
 
   @override
   $ProfileCopyWith<$Res>? get profile;
@@ -148,6 +162,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? profile = freezed,
     Object? status = null,
+    Object? myPosts = null,
   }) {
     return _then(_$InitialImpl(
       errorMessage: freezed == errorMessage
@@ -162,6 +177,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ScreenStatus,
+      myPosts: null == myPosts
+          ? _value._myPosts
+          : myPosts // ignore: cast_nullable_to_non_nullable
+              as List<Post>,
     ));
   }
 }
@@ -170,7 +189,11 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
-      {this.errorMessage, this.profile, this.status = ScreenStatus.init});
+      {this.errorMessage,
+      this.profile,
+      this.status = ScreenStatus.init,
+      final List<Post> myPosts = const []})
+      : _myPosts = myPosts;
 
   @override
   final String? errorMessage;
@@ -179,10 +202,18 @@ class _$InitialImpl implements _Initial {
   @override
   @JsonKey()
   final ScreenStatus status;
+  final List<Post> _myPosts;
+  @override
+  @JsonKey()
+  List<Post> get myPosts {
+    if (_myPosts is EqualUnmodifiableListView) return _myPosts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_myPosts);
+  }
 
   @override
   String toString() {
-    return 'AccountScreentState.initial(errorMessage: $errorMessage, profile: $profile, status: $status)';
+    return 'AccountScreentState.initial(errorMessage: $errorMessage, profile: $profile, status: $status, myPosts: $myPosts)';
   }
 
   @override
@@ -193,11 +224,13 @@ class _$InitialImpl implements _Initial {
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
             (identical(other.profile, profile) || other.profile == profile) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality().equals(other._myPosts, _myPosts));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage, profile, status);
+  int get hashCode => Object.hash(runtimeType, errorMessage, profile, status,
+      const DeepCollectionEquality().hash(_myPosts));
 
   @JsonKey(ignore: true)
   @override
@@ -208,33 +241,33 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String? errorMessage, Profile? profile, ScreenStatus status)
+    required TResult Function(String? errorMessage, Profile? profile,
+            ScreenStatus status, List<Post> myPosts)
         initial,
   }) {
-    return initial(errorMessage, profile, status);
+    return initial(errorMessage, profile, status, myPosts);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String? errorMessage, Profile? profile, ScreenStatus status)?
+    TResult? Function(String? errorMessage, Profile? profile,
+            ScreenStatus status, List<Post> myPosts)?
         initial,
   }) {
-    return initial?.call(errorMessage, profile, status);
+    return initial?.call(errorMessage, profile, status, myPosts);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String? errorMessage, Profile? profile, ScreenStatus status)?
+    TResult Function(String? errorMessage, Profile? profile,
+            ScreenStatus status, List<Post> myPosts)?
         initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(errorMessage, profile, status);
+      return initial(errorMessage, profile, status, myPosts);
     }
     return orElse();
   }
@@ -272,7 +305,8 @@ abstract class _Initial implements AccountScreentState {
   const factory _Initial(
       {final String? errorMessage,
       final Profile? profile,
-      final ScreenStatus status}) = _$InitialImpl;
+      final ScreenStatus status,
+      final List<Post> myPosts}) = _$InitialImpl;
 
   @override
   String? get errorMessage;
@@ -280,6 +314,8 @@ abstract class _Initial implements AccountScreentState {
   Profile? get profile;
   @override
   ScreenStatus get status;
+  @override
+  List<Post> get myPosts;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
