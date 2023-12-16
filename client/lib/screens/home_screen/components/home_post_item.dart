@@ -10,7 +10,6 @@ import 'package:social_media_with_chatgpt/routes/app_router.dart';
 import 'package:social_media_with_chatgpt/screens/home_screen/cubit/home_screen_cubit.dart';
 import 'package:social_media_with_chatgpt/shared/extensions/date_ext.dart';
 import 'package:social_media_with_chatgpt/shared/extensions/list_ext.dart';
-import 'package:social_media_with_chatgpt/shared/helpers/dialog_helper.dart';
 import 'package:social_media_with_chatgpt/shared/utils/app_colors.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_container.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_icon_button.dart';
@@ -23,9 +22,11 @@ class HomePostItem extends StatefulWidget {
     super.key,
     required this.post,
     this.onCommentTap,
+    this.onDeletePost,
   });
   final Post post;
   final VoidCallback? onCommentTap;
+  final VoidCallback? onDeletePost;
 
   @override
   State<HomePostItem> createState() => _HomePostItemState();
@@ -91,33 +92,19 @@ class _HomePostItemState extends State<HomePostItem> {
                         if (currentUser?.id == post.authorUser?.id)
                           AppIconButton(
                               onTap: () {
-                                showConfirmDialog(context,
-                                    title: "Xóa bài đăng",
-                                    content:
-                                        "Bạn có chắc chắn muốn xóa bài đăng này!",
-                                    onAccept: () {
-                                  Get.toNamed(Routes.createPost,
-                                          arguments: post)
-                                      ?.then((value) {
-                                    if (value is Post) {
-                                      context
-                                          .read<HomeScreenCubit>()
-                                          .updateState((p0) => p0.copyWith(
-                                              posts: p0.posts.update(
-                                                  (item) => value,
-                                                  (item) =>
-                                                      item.postId ==
-                                                      value.postId)));
-                                    } else if (value is bool && value) {
-                                      context
-                                          .read<HomeScreenCubit>()
-                                          .updateState((p0) => p0.copyWith(
-                                              posts: p0.posts.removeElement(
-                                                  (item) =>
-                                                      item.postId ==
-                                                      post.postId)));
-                                    }
-                                  });
+                                Get.toNamed(Routes.createPost, arguments: post)
+                                    ?.then((value) {
+                                  if (value is Post) {
+                                    context.read<HomeScreenCubit>().updateState(
+                                        (p0) => p0.copyWith(
+                                            posts: p0.posts.update(
+                                                (item) => value,
+                                                (item) =>
+                                                    item.postId ==
+                                                    value.postId)));
+                                  } else if (value is bool && value) {
+                                    widget.onDeletePost?.call();
+                                  }
                                 });
                               },
                               icon: Icons.edit,

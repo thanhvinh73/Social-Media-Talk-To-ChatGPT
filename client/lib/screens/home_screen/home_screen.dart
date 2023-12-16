@@ -120,7 +120,20 @@ class HomeScreen extends StatelessWidget {
                                       ? Wrap(
                                           runSpacing: 10,
                                           children: posts
-                                              .map((e) => HomePostItem(post: e))
+                                              .map((e) => HomePostItem(
+                                                    post: e,
+                                                    onDeletePost: () {
+                                                      context
+                                                          .read<
+                                                              HomeScreenCubit>()
+                                                          .updateState((p0) => p0.copyWith(
+                                                              posts: p0.posts
+                                                                  .removeElement(
+                                                                      (item) =>
+                                                                          item.postId ==
+                                                                          e.postId)));
+                                                    },
+                                                  ))
                                               .toList(),
                                         )
                                       : const SizedBox.shrink();

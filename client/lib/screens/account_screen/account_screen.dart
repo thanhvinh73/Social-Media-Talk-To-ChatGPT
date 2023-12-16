@@ -27,6 +27,7 @@ import 'package:social_media_with_chatgpt/shared/widgets/app_container.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_icon_button.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_layout.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/app_network_image.dart';
+import 'package:social_media_with_chatgpt/shared/widgets/app_refresh_indicator.dart';
 import 'package:social_media_with_chatgpt/shared/widgets/text/app_text.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -89,33 +90,74 @@ class AccountScreen extends StatelessWidget {
               backgroundColor: AppColors.white,
               useSafeArea: true,
               child: LayoutBuilder(
-                builder: (context, constraints) => ListView(
-                  children: [
-                    Stack(
-                      alignment: Alignment.topLeft,
-                      clipBehavior: Clip.none,
-                      children: [
-                        Container(
-                            color: Colors.grey,
-                            child: AppNetworkImage(
-                              url: state.profile?.coverPhoto?.getFileUrl,
-                              width: maxWidth,
-                              height: maxWidth / 2.3,
-                              fit: BoxFit.cover,
-                            )),
-                        Positioned(
-                            top: 8,
-                            left: 16,
-                            child: AppIconButton(
-                                icon: Icons.arrow_back_ios,
-                                color: AppColors.white,
-                                onTap: () {
-                                  Get.back();
-                                })),
-                        Positioned(
-                          bottom: 8,
-                          right: 8,
-                          child: GestureDetector(
+                builder: (context, constraints) => AppRefreshIndicator(
+                  onRefresh: () =>
+                      context.read<AccountScreentCubit>().getMyPost(),
+                  child: ListView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    children: [
+                      Stack(
+                        alignment: Alignment.topLeft,
+                        clipBehavior: Clip.none,
+                        children: [
+                          Container(
+                              color: Colors.grey,
+                              child: AppNetworkImage(
+                                url: state.profile?.coverPhoto?.getFileUrl,
+                                width: maxWidth,
+                                height: maxWidth / 2.3,
+                                fit: BoxFit.cover,
+                              )),
+                          Positioned(
+                            bottom: 8 + (maxWidth / 2.3) - 90,
+                            right: 8,
+                            child: GestureDetector(
+                              onTap: () {
+                                showImagePickerDialog(
+                                    onSelectOption1: () {
+                                      ImagePickerUtils.selectPhoto(
+                                              context, ImageSource.camera)
+                                          .then((value) {
+                                        if (value != null) {
+                                          context
+                                              .read<AccountScreentCubit>()
+                                              .updateCurrentProfile((p0) =>
+                                                  p0.copyWith(
+                                                      coverPhotoFile: value));
+                                          context
+                                              .read<AccountScreentCubit>()
+                                              .updateImage();
+                                        }
+                                      });
+                                    },
+                                    onSelectOption2: () {
+                                      ImagePickerUtils.selectPhoto(
+                                              context, ImageSource.gallery)
+                                          .then((value) {
+                                        if (value != null) {
+                                          context
+                                              .read<AccountScreentCubit>()
+                                              .updateCurrentProfile((p0) =>
+                                                  p0.copyWith(
+                                                      coverPhotoFile: value));
+                                          context
+                                              .read<AccountScreentCubit>()
+                                              .updateImage();
+                                        }
+                                      });
+                                    },
+                                    option1Label: "Chụp ảnh",
+                                    option2Label: "Chọn ảnh từ thư viện");
+                              },
+                              child: AppContainer(
+                                  color: AppColors.background,
+                                  padding: const EdgeInsets.all(4),
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Icon(Icons.camera_alt,
+                                      size: 28, color: AppColors.green)),
+                            ),
+                          ),
+                          InkWell(
                             onTap: () {
                               showImagePickerDialog(
                                   onSelectOption1: () {
@@ -126,8 +168,7 @@ class AccountScreen extends StatelessWidget {
                                         context
                                             .read<AccountScreentCubit>()
                                             .updateCurrentProfile((p0) =>
-                                                p0.copyWith(
-                                                    coverPhotoFile: value));
+                                                p0.copyWith(avatarFile: value));
                                         context
                                             .read<AccountScreentCubit>()
                                             .updateImage();
@@ -142,8 +183,7 @@ class AccountScreen extends StatelessWidget {
                                         context
                                             .read<AccountScreentCubit>()
                                             .updateCurrentProfile((p0) =>
-                                                p0.copyWith(
-                                                    coverPhotoFile: value));
+                                                p0.copyWith(avatarFile: value));
                                         context
                                             .read<AccountScreentCubit>()
                                             .updateImage();
@@ -154,67 +194,24 @@ class AccountScreen extends StatelessWidget {
                                   option2Label: "Chọn ảnh từ thư viện");
                             },
                             child: AppContainer(
-                                color: AppColors.background,
-                                padding: const EdgeInsets.all(4),
-                                borderRadius: BorderRadius.circular(100),
-                                child: Icon(Icons.camera_alt,
-                                    size: 28, color: AppColors.green)),
-                          ),
-                        ),
-                        Positioned(
-                            top: (maxWidth / 2.3) - 67,
-                            child: InkWell(
-                              onTap: () {
-                                showImagePickerDialog(
-                                    onSelectOption1: () {
-                                      ImagePickerUtils.selectPhoto(
-                                              context, ImageSource.camera)
-                                          .then((value) {
-                                        if (value != null) {
-                                          context
-                                              .read<AccountScreentCubit>()
-                                              .updateCurrentProfile((p0) => p0
-                                                  .copyWith(avatarFile: value));
-                                          context
-                                              .read<AccountScreentCubit>()
-                                              .updateImage();
-                                        }
-                                      });
-                                    },
-                                    onSelectOption2: () {
-                                      ImagePickerUtils.selectPhoto(
-                                              context, ImageSource.gallery)
-                                          .then((value) {
-                                        if (value != null) {
-                                          context
-                                              .read<AccountScreentCubit>()
-                                              .updateCurrentProfile((p0) => p0
-                                                  .copyWith(avatarFile: value));
-                                          context
-                                              .read<AccountScreentCubit>()
-                                              .updateImage();
-                                        }
-                                      });
-                                    },
-                                    option1Label: "Chụp ảnh",
-                                    option2Label: "Chọn ảnh từ thư viện");
-                              },
-                              child: AppContainer(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 8),
-                                  child: Stack(
-                                    children: [
-                                      AppNetworkImage(
-                                        url: state.profile?.avatar?.getFileUrl,
-                                        height: 120,
-                                        width: 120,
-                                        fit: BoxFit.cover,
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                      Positioned(
-                                          bottom: 0,
-                                          right: 0,
+                                padding: EdgeInsets.fromLTRB(
+                                    16, 8 + (maxWidth / 2.3) - 67, 16, 8),
+                                child: Stack(
+                                  children: [
+                                    AppNetworkImage(
+                                      url: state.profile?.avatar?.getFileUrl,
+                                      height: 120,
+                                      width: 120,
+                                      fit: BoxFit.cover,
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    Positioned(
+                                        bottom: 0,
+                                        right: 0,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            print("check");
+                                          },
                                           child: AppContainer(
                                               color: AppColors.background,
                                               padding: const EdgeInsets.all(4),
@@ -222,15 +219,23 @@ class AccountScreen extends StatelessWidget {
                                                   BorderRadius.circular(100),
                                               child: Icon(Icons.camera_alt,
                                                   size: 28,
-                                                  color: AppColors.green)))
-                                    ],
-                                  )),
-                            )),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 67),
-                      child: AppContainer(
+                                                  color: AppColors.green)),
+                                        ))
+                                  ],
+                                )),
+                          ),
+                          Positioned(
+                              top: 8,
+                              left: 16,
+                              child: AppIconButton(
+                                  icon: Icons.arrow_back_ios,
+                                  color: AppColors.white,
+                                  onTap: () {
+                                    Get.back();
+                                  })),
+                        ],
+                      ),
+                      AppContainer(
                         color: AppColors.background,
                         child: Wrap(
                           runSpacing: 12,
@@ -328,16 +333,15 @@ class AccountScreen extends StatelessWidget {
                                         )
                                       : const AccountContainer(
                                           child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
                                             children: [
-                                              AppText(
-                                                "Bạn chưa có bài đăng nào!",
-                                                color: AppColors.titleText,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
+                                              Expanded(
+                                                child: AppText(
+                                                  "Bạn chưa có bài đăng nào!",
+                                                  textAlign: TextAlign.center,
+                                                  color: AppColors.titleText,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               )
                                             ],
                                           ),
@@ -347,9 +351,9 @@ class AccountScreen extends StatelessWidget {
                             ])
                           ],
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             );

@@ -298,14 +298,21 @@ class CreatePostScreen extends StatelessWidget {
                                     borderColor: AppColors.red,
                                     titleColor: AppColors.red,
                                     onPressed: () {
-                                      context
-                                          .read<CreatePostScreenCubit>()
-                                          .deleteCurrentPost()
-                                          .then((value) {
-                                        Get.back(result: true);
-                                        showSuccessBanner(
-                                            content: "Xóa bài viết thành công",
-                                            delayDurationInMilliseconds: 100);
+                                      showConfirmDialog(context,
+                                          title: "Xóa bài đăng",
+                                          content:
+                                              "Bạn có chắc chắn muốn xóa bài đăng này!",
+                                          onAccept: () {
+                                        context
+                                            .read<CreatePostScreenCubit>()
+                                            .deleteCurrentPost()
+                                            .then((value) {
+                                          Get.back(result: true);
+                                          showSuccessBanner(
+                                              content:
+                                                  "Xóa bài viết thành công",
+                                              delayDurationInMilliseconds: 100);
+                                        });
                                       });
                                     })
                             ],
