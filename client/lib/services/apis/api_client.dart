@@ -53,6 +53,9 @@ abstract class APIClient {
   @GET('/api/posts/my-post')
   Future<ApiResponse<List<Post>>> getMyPost();
 
+  @GET('/api/posts/all')
+  Future<ApiResponse<List<Post>>> getAllPost();
+
   @PATCH('/api/posts/{postId}')
   Future<ApiResponse<Post>> updatePost(
       @Path("postId") String postId, @Body() Map<String, dynamic> body);
@@ -67,9 +70,9 @@ abstract class APIClient {
   Future<ApiResponse<Comment>> createComment(
       @Path("postId") String postId, @Body() FormData body);
 
-  @POST('/api/comments/{postId}/all')
+  @GET('/api/comments/{postId}/all')
   Future<ApiResponse<List<Comment>>> getCommentsByPost(
-      @Path("postId") String postId, @Body() FormData body);
+      @Path("postId") String postId);
 
   ///
   /// File

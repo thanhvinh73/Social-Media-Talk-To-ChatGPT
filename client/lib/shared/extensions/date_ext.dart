@@ -12,7 +12,7 @@ extension DateTimeExt on DateTime {
     return "";
   }
 
-  String get toDayMonthYear {
-    return DateFormat("dd/MM/yyyy").format(this);
-  }
+  String get toDayMonthYear => DateFormat("dd/MM/yyyy").format(this);
+  String get toDayMonthYearTime => DateFormat("dd/MM/yyyy HH:mm").format(this);
+  String get toHourMinute => DateFormat("HH:mm").format(this);
 }
